@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Page Not Found — Sangam.ai</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Head back to Sangam.ai to explore our AI automation services." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0512" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236c3bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <style>
+  /* ---------- 1. DESIGN TOKENS ---------- */
+  :root {
+    --brand-300: #c4b5fd;
+    --brand-400: #a78bfa;
+    --brand-500: #8b5cf6;
+    --brand-600: #7c3aed;
+    --brand-700: #6c3bff;
+    --brand-800: #5b21b6;
+
+    --accent-pink: #ec4899;
+    --accent-green: #10b981;
+
+    --bg: #0a0512;
+    --bg-2: #100820;
+
+    --surface-1: rgba(255, 255, 255, 0.04);
+    --surface-2: rgba(255, 255, 255, 0.06);
+
+    --border-1: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --border-3: rgba(255, 255, 255, 0.22);
+    --border-brand: rgba(139, 92, 246, 0.4);
+
+    --text-1: #ffffff;
+    --text-2: rgba(255, 255, 255, 0.72);
+    --text-3: rgba(255, 255, 255, 0.5);
+    --text-4: rgba(255, 255, 255, 0.32);
+
+    --grad-primary: linear-gradient(135deg, #a78bfa 0%, #6c3bff 50%, #5b21b6 100%);
+    --grad-pink: linear-gradient(135deg, #ec4899 0%, #a78bfa 100%);
+    --grad-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+
+    --glow-sm: 0 0 24px rgba(139, 92, 246, 0.35);
+    --glow-md: 0 0 60px rgba(139, 92, 246, 0.4), 0 0 120px rgba(108, 59, 255, 0.15);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+    --r-sm: 10px;
+    --r-md: 16px;
+    --r-lg: 22px;
+    --r-xl: 32px;
+    --r-full: 999px;
+
+    --container: 1240px;
+    --nav-height: 76px;
+
+    --t-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* ---------- 2. RESET & BASE ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-1);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  img, svg, video { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; transition: all var(--t-base); }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  ::selection { background: rgba(139, 92, 246, 0.5); color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.4);
+    border-radius: var(--r-full);
+    border: 2px solid var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-400);
+    outline-offset: 3px;
+    border-radius: var(--r-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ---------- 3. LAYOUT ---------- */
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+  /* ---------- 4. BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 26px;
+    border-radius: var(--r-full);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--t-base);
+    white-space: nowrap;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .btn svg { width: 17px; height: 17px; transition: transform var(--t-base); flex-shrink: 0; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-lg { padding: 16px 32px; font-size: 16px; }
+
+  .btn-primary {
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 6px 20px rgba(108, 59, 255, 0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 10px 40px rgba(139, 92, 246, 0.6),
+      0 0 80px rgba(108, 59, 255, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-1);
+    border-color: var(--border-3);
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- 5. NAVBAR ---------- */
+  .navbar {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: calc(100% - 32px);
+    max-width: 1320px;
+    transition: all var(--t-base);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 12px 12px 20px;
+    background: rgba(15, 10, 25, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+  }
+
+  .navbar.scrolled .navbar-inner {
+    background: rgba(10, 5, 18, 0.9);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(108, 59, 255, 0.1);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 12px;
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow: var(--glow-sm);
+    transition: all var(--t-base);
+  }
+  .logo-mark svg { width: 17px; height: 17px; }
+  .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
+  .logo-dot { color: var(--brand-400); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0 auto;
+  }
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-3);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+  }
+  .nav-links a:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .nav-login {
+    font-size: 13.5px;
+    color: var(--text-4);
+    padding: 8px 12px;
+    border-radius: var(--r-full);
+  }
+  .nav-login:hover { color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
+
+  .nav-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--text-1);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+    transform-origin: center;
+  }
+  .nav-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 900px) {
+    .navbar { top: 12px; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 92px;
+      left: 16px; right: 16px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 16px;
+      background: rgba(10, 5, 18, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r-lg);
+      transform: translateY(-20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--t-base);
+    }
+    .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .nav-links a { padding: 12px 16px; font-size: 15px; }
+    .nav-login { display: none; }
+  }
+
+  /* ---------- 6. BACKGROUND (orbs + grid + particles) ---------- */
+  .error-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .error-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at center, black 25%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at center, black 25%, transparent 70%);
+  }
+
+  .error-bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .error-bg-orb-1 {
+    top: 15%;
+    left: 20%;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.55), transparent 70%);
+    animation: errorFloat1 12s ease-in-out infinite;
+  }
+
+  .error-bg-orb-2 {
+    bottom: 15%;
+    right: 20%;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.35), transparent 70%);
+    animation: errorFloat2 14s ease-in-out infinite;
+  }
+
+  @keyframes errorFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(40px, -30px) scale(1.08); }
+  }
+  @keyframes errorFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-40px, 30px) scale(1.06); }
+  }
+
+  .error-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .error-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(196, 181, 253, 0.7);
+    box-shadow: 0 0 10px rgba(196, 181, 253, 0.8);
+    animation: particleRise linear infinite;
+  }
+  @keyframes particleRise {
+    0% {
+      transform: translateY(20vh) translateX(0);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+      transform: translateY(-90vh) translateX(30px);
+      opacity: 0;
+    }
+  }
+
+  /* ---------- 7. MAIN ---------- */
+  .error-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 24px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .error-wrap {
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  /* ---------- 8. 404 GRAPHIC ---------- */
+  .error-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 36px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .error-digit {
+    font-size: clamp(80px, 15vw, 170px);
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.05em;
+    filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
+  }
+
+  .error-zero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(80px, 15vw, 170px);
+    height: clamp(80px, 15vw, 170px);
+    position: relative;
+  }
+
+  .error-zero-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: clamp(6px, 1.2vw, 12px) solid transparent;
+    background:
+      linear-gradient(#0a0512, #0a0512) padding-box,
+      var(--grad-primary) border-box;
+    animation: errorSpin 8s linear infinite;
+  }
+
+  .error-zero-core {
+    position: relative;
+    width: 38%;
+    height: 38%;
+    border-radius: 50%;
+    background: var(--grad-primary);
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.7),
+      0 0 60px rgba(108, 59, 255, 0.4);
+    animation: errorPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes errorSpin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes errorPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50%      { transform: scale(1.15); opacity: 1; }
+  }
+
+  .error-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 18px;
+    color: #fff;
+  }
+
+  .error-subtitle {
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: var(--text-2);
+    max-width: 520px;
+    margin: 0 auto 44px;
+    line-height: 1.65;
+  }
+
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+
+  .error-links-title {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-4);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+
+  .error-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+
+  .error-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-1);
+    background: var(--surface-1);
+    color: var(--text-1);
+    text-decoration: none;
+    transition: all var(--t-base);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .error-link::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.6), transparent);
+    opacity: 0;
+    transition: opacity var(--t-base);
+  }
+  .error-link:hover {
+    border-color: var(--border-brand);
+    background: rgba(139, 92, 246, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), var(--glow-sm);
+  }
+  .error-link:hover::before { opacity: 1; }
+
+  .error-link-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(108, 59, 255, 0.1));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--brand-300);
+  }
+  .error-link-icon svg { width: 20px; height: 20px; }
+
+  .error-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .error-link-text strong {
+    font-weight: 600;
+    color: #fff;
+    font-size: 14.5px;
+  }
+  .error-link-text span {
+    font-size: 12.5px;
+    color: var(--text-3);
+  }
+
+  /* ---------- 9. FOOTER ---------- */
+  .footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border-1);
+    padding: 28px 0;
+  }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-bottom p { font-size: 12.5px; color: var(--text-4); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12.5px; color: var(--text-4); }
+  .footer-legal a:hover { color: var(--brand-400); }
+
+  /* ---------- 10. RESPONSIVE ---------- */
+  @media (max-width: 640px) {
+    .error-actions { flex-direction: column; }
+    .error-actions .btn { width: 100%; }
+    .error-links { grid-template-columns: 1fr; }
+    .error-bg-orb-1,
+    .error-bg-orb-2 { width: 260px; height: 260px; }
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== BACKGROUND ==================== -->
+  <div class="error-bg" aria-hidden="true">
+    <div class="error-bg-grid"></div>
+    <div class="error-bg-orb error-bg-orb-1"></div>
+    <div class="error-bg-orb error-bg-orb-2"></div>
+    <div class="error-particles" id="particles"></div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo" aria-label="Sangam.ai home">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span>Sangam<span class="logo-dot">.ai</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="request.html" class="btn btn-primary" style="padding: 9px 18px; font-size: 13.5px;">
+          Build My AI Employee
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="error-main">
+    <div class="error-wrap">
+
+      <!-- 404 graphic -->
+      <div class="error-code" aria-label="Error 404">
+        <span class="error-digit">4</span>
+        <span class="error-zero" aria-hidden="true">
+          <span class="error-zero-ring"></span>
+          <span class="error-zero-core"></span>
+        </span>
+        <span class="error-digit">4</span>
+      </div>
+
+      <h1 class="error-title">Looks like this page took a wrong turn.</h1>
+
+      <p class="error-subtitle">
+        The page you're looking for doesn't exist or may have been moved.
+        Let's get you back on track.
+      </p>
+
+      <div class="error-actions">
+        <a href="index.html" class="btn btn-primary btn-lg">
+          Back to Home
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">
+          Contact Support
+        </a>
+      </div>
+
+      <p class="error-links-title">Or explore these pages</p>
+
+      <nav class="error-links" aria-label="Helpful links">
+        <a href="services.html" class="error-link">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Services</strong>
+            <span>What we build</span>
+          </span>
+        </a>
+
+        <a href="pricing.html" class="error-link">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Pricing</strong>
+            <span>Plans &amp; costs</span>
+          </span>
+        </a>
+
+        <a href="request.html" class="error-link">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Request Automation</strong>
+            <span>Start a project</span>
+          </span>
+        </a>
+
+        <a href="contact.html" class="error-link">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Contact</strong>
+            <span>Talk to us</span>
+          </span>
+        </a>
+      </nav>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Sangam.ai — All rights reserved. Built with AI. Designed for humans.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+  (function () {
+    'use strict';
+
+    function $(sel) { return document.querySelector(sel); }
+
+    /* ---------- Navbar ---------- */
+    function initNavbar() {
+      var navbar = $('#navbar');
+      if (navbar) {
+        var onScroll = function () {
+          if (window.scrollY > 20) navbar.classList.add('scrolled');
+          else navbar.classList.remove('scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      var navToggle = $('#navToggle');
+      var navLinks = $('#navLinks');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+          var open = navLinks.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+    }
+
+    /* ---------- Floating particles ---------- */
+    function spawnParticles() {
+      var container = $('#particles');
+      if (!container) return;
+
+      /* Respect reduced motion */
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      /* Skip on small screens to save battery */
+      if (window.innerWidth < 480) return;
+
+      var COUNT = 18;
+      var frag = document.createDocumentFragment();
+
+      for (var i = 0; i < COUNT; i++) {
+        var p = document.createElement('span');
+        p.className = 'error-particle';
+
+        var left = Math.random() * 100;
+        var duration = 12 + Math.random() * 14;
+        var delay = Math.random() * -duration;
+        var scale = 0.6 + Math.random() * 1.2;
+
+        p.style.left = left + '%';
+        p.style.bottom = '-10px';
+        p.style.animationDuration = duration + 's';
+        p.style.animationDelay = delay + 's';
+        p.style.transform = 'scale(' + scale.toFixed(2) + ')';
+
+        frag.appendChild(p);
+      }
+
+      container.appendChild(frag);
+    }
+
+    /* ---------- Year ---------- */
+    function initYear() {
+      var el = $('#year');
+      if (el) el.textContent = String(new Date().getFullYear());
+    }
+
+    /* ---------- Log missing path (dev) ---------- */
+    function logMissingUrl() {
+      try {
+        if (window.console && typeof console.info === 'function') {
+          console.info('[Sangam.ai 404] Requested:', window.location.pathname);
+        }
+      } catch (e) { /* silent */ }
+    }
+
+    /* ---------- Boot ---------- */
+    function init() {
+      initNavbar();
+      spawnParticles();
+      initYear();
+      logMissingUrl();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+
+  <!-- Emergency fallback -->
+  <script>
+  setTimeout(function () {
+    var y = document.getElementById('year');
+    if (y && !y.textContent) y.textContent = new Date().getFullYear();
+  }, 2000);
+  </script>
+</body>
+</html>

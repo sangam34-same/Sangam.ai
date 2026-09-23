@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard — Sangam.ai</title>
+  <meta name="description" content="Sangam.ai admin console. Manage orders, leads and analytics." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0512" />
+  <link rel="canonical" href="https://sangam.ai/admin.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236c3bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <style>
+  /* ---------- 1. DESIGN TOKENS ---------- */
+  :root {
+    --brand-300: #c4b5fd;
+    --brand-400: #a78bfa;
+    --brand-500: #8b5cf6;
+    --brand-600: #7c3aed;
+    --brand-700: #6c3bff;
+    --brand-800: #5b21b6;
+
+    --accent-pink: #ec4899;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-cyan: #06b6d4;
+
+    --bg: #0a0512;
+    --bg-2: #100820;
+
+    --surface-1: rgba(255, 255, 255, 0.04);
+    --surface-2: rgba(255, 255, 255, 0.06);
+
+    --border-1: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --border-3: rgba(255, 255, 255, 0.22);
+    --border-brand: rgba(139, 92, 246, 0.4);
+
+    --text-1: #ffffff;
+    --text-2: rgba(255, 255, 255, 0.72);
+    --text-3: rgba(255, 255, 255, 0.5);
+    --text-4: rgba(255, 255, 255, 0.32);
+
+    --grad-primary: linear-gradient(135deg, #a78bfa 0%, #6c3bff 50%, #5b21b6 100%);
+    --grad-pink: linear-gradient(135deg, #ec4899 0%, #a78bfa 100%);
+    --grad-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --grad-cyan: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+
+    --glow-sm: 0 0 24px rgba(139, 92, 246, 0.35);
+    --glow-md: 0 0 60px rgba(139, 92, 246, 0.4), 0 0 120px rgba(108, 59, 255, 0.15);
+    --glow-pink: 0 0 30px rgba(236, 72, 153, 0.5);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 25px 80px rgba(0, 0, 0, 0.5);
+
+    --r-sm: 10px;
+    --r-md: 16px;
+    --r-lg: 22px;
+    --r-xl: 32px;
+    --r-full: 999px;
+
+    --container: 1280px;
+    --nav-height: 76px;
+
+    --t-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* ---------- 2. RESET & BASE ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 120px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-1);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  img, svg, video { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; transition: all var(--t-base); }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+  ul, ol { list-style: none; }
+  ::selection { background: rgba(139, 92, 246, 0.5); color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.4);
+    border-radius: var(--r-full);
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(139, 92, 246, 0.7); }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-400);
+    outline-offset: 3px;
+    border-radius: var(--r-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ---------- 3. LAYOUT ---------- */
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section { padding: 24px 0; }
+
+  @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+  /* ---------- 4. TYPOGRAPHY ---------- */
+  .gradient-text {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  /* ---------- 5. BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--r-full);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--t-base);
+    white-space: nowrap;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .btn svg { width: 17px; height: 17px; transition: transform var(--t-base); flex-shrink: 0; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-sm { padding: 9px 18px; font-size: 13.5px; }
+  .btn-sm svg { width: 15px; height: 15px; }
+  .btn-lg { padding: 16px 32px; font-size: 16px; }
+  .btn-block { width: 100%; }
+
+  .btn-primary {
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 6px 20px rgba(108, 59, 255, 0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 10px 40px rgba(139, 92, 246, 0.6),
+      0 0 80px rgba(108, 59, 255, 0.4);
+  }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-1);
+    border-color: var(--border-3);
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- 6. NAVBAR ---------- */
+  .navbar {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: calc(100% - 32px);
+    max-width: 1400px;
+    transition: all var(--t-base);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 12px 12px 20px;
+    background: rgba(15, 10, 25, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+  }
+
+  .navbar.scrolled .navbar-inner {
+    background: rgba(10, 5, 18, 0.9);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(108, 59, 255, 0.1);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 12px;
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow: var(--glow-sm);
+    transition: all var(--t-base);
+  }
+  .logo-mark svg { width: 17px; height: 17px; }
+  .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
+  .logo-dot { color: var(--brand-400); }
+
+  .admin-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--grad-pink);
+    border-radius: var(--r-full);
+    margin-left: 6px;
+    box-shadow: var(--glow-pink);
+  }
+
+  .gpu-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 10px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-1);
+    font-size: 11.5px;
+    color: var(--text-3);
+    max-width: 300px;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all var(--t-base);
+  }
+  .gpu-status:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    background: rgba(139, 92, 246, 0.06);
+    max-width: 400px;
+  }
+  .gpu-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    flex-shrink: 0;
+    animation: gpuPulse 2s ease-in-out infinite;
+  }
+  @keyframes gpuPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.8); }
+    50%      { box-shadow: 0 0 20px rgba(34, 197, 94, 1); }
+  }
+  .gpu-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gpu-text strong { color: var(--brand-300); font-weight: 600; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0 auto;
+  }
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-3);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
+  .nav-links a.active { color: var(--text-1); }
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    left: 14px; right: 14px; bottom: 3px;
+    height: 2px;
+    border-radius: var(--r-full);
+    background: var(--grad-primary);
+  }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+  .user-menu { position: relative; }
+  .user-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 12px 5px 5px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-1);
+    color: var(--text-1);
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: all var(--t-base);
+  }
+  .user-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-2);
+  }
+  .user-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--grad-pink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    box-shadow: var(--glow-pink);
+  }
+  .user-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .user-btn svg { width: 13px; height: 13px; color: var(--text-3); }
+
+  .user-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 220px;
+    background: rgba(11, 6, 22, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-2);
+    border-radius: var(--r-md);
+    padding: 8px;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+  }
+  .user-dropdown a,
+  .user-dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--text-2);
+    border-radius: var(--r-sm);
+    transition: all var(--t-base);
+  }
+  .user-dropdown a:hover,
+  .user-dropdown button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-1);
+  }
+  .user-dropdown-divider { height: 1px; background: var(--border-1); margin: 6px 0; }
+  .user-logout { color: #f87171 !important; }
+  .user-logout:hover { background: rgba(248, 113, 113, 0.1) !important; }
+
+  .nav-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    transition: background var(--t-base);
+  }
+  .nav-toggle:hover { background: rgba(255, 255, 255, 0.05); }
+  .nav-toggle span {
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--text-1);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+    transform-origin: center;
+  }
+  .nav-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 1200px) { .gpu-status { display: none; } }
+
+  @media (max-width: 900px) {
+    .navbar { top: 12px; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 92px;
+      left: 16px; right: 16px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 16px;
+      background: rgba(10, 5, 18, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r-lg);
+      transform: translateY(-20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--t-base);
+    }
+    .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .nav-links a { padding: 12px 16px; font-size: 15px; }
+    .nav-links a.active::after { display: none; }
+    .nav-links a.active { background: rgba(139, 92, 246, 0.12); }
+    .user-name { display: none; }
+  }
+
+  /* ---------- 7. MAIN ---------- */
+  .dashboard-main { flex: 1; padding-top: 0; }
+
+  /* ---------- 8. ADMIN HERO ---------- */
+  .dashboard-hero {
+    position: relative;
+    padding: 160px 0 40px;
+    overflow: hidden;
+  }
+
+  .dashboard-hero::before {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%; height: 70%;
+    background: radial-gradient(ellipse at center bottom,
+      rgba(236, 72, 153, 0.25) 0%,
+      rgba(139, 92, 246, 0.15) 30%,
+      transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dashboard-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 30% 40%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 30% 40%, black 20%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dashboard-hero .container { position: relative; z-index: 1; }
+
+  .dashboard-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-welcome-eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-pink);
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dashboard-welcome-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-pink);
+    box-shadow: 0 0 12px var(--accent-pink);
+  }
+
+  .dashboard-welcome-name {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+  }
+
+  .dashboard-welcome-sub {
+    font-size: 15.5px;
+    color: var(--text-3);
+  }
+
+  /* ---------- 9. STATS ---------- */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+
+  .stat-card {
+    padding: 24px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-1);
+    background: rgba(255, 255, 255, 0.025);
+    transition: all var(--t-base);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.6), transparent);
+    opacity: 0;
+    transition: opacity var(--t-base);
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-brand);
+    background: rgba(139, 92, 246, 0.04);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  .stat-card:hover::before { opacity: 1; }
+
+  .stat-icon {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: #fff;
+  }
+  .stat-icon svg { width: 22px; height: 22px; }
+  .stat-icon-purple { background: linear-gradient(135deg, #a78bfa, #6c3bff); }
+  .stat-icon-blue   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .stat-icon-green  { background: linear-gradient(135deg, #10b981, #059669); }
+  .stat-icon-pink   { background: linear-gradient(135deg, #ec4899, #a78bfa); }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13.5px; color: var(--text-3); }
+
+  /* ---------- 10. DASHBOARD BLOCK ---------- */
+  .dashboard-block {
+    padding: 32px;
+    border-radius: var(--r-xl);
+    border: 1px solid var(--border-1);
+    background: rgba(15, 10, 25, 0.55);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+      0 25px 80px rgba(0, 0, 0, 0.4),
+      0 0 60px rgba(108, 59, 255, 0.05);
+    position: relative;
+  }
+  .dashboard-block::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.5), transparent);
+  }
+  @media (max-width: 640px) { .dashboard-block { padding: 24px 20px; } }
+
+  .dashboard-block-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .dashboard-block-head h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
+  .dashboard-block-sub { font-size: 13.5px; color: var(--text-3); }
+
+  .dashboard-block-tools {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .input-field-sm {
+    padding: 10px 14px !important;
+    font-size: 13.5px !important;
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--border-1) !important;
+    border-radius: var(--r-sm) !important;
+    color: var(--text-1) !important;
+    outline: none;
+    transition: all var(--t-base);
+  }
+  .input-field-sm:focus {
+    border-color: var(--brand-500) !important;
+    background: rgba(139, 92, 246, 0.05) !important;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12) !important;
+  }
+  .input-field-sm::placeholder { color: var(--text-4); }
+
+  select.input-field-sm {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 14px !important;
+    padding-right: 36px !important;
+    cursor: pointer;
+  }
+  select.input-field-sm option { background: var(--bg-2); color: var(--text-1); }
+
+  /* ---------- 11. ANALYTICS BARS ---------- */
+  .analytics-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .analytics-bar-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 60px;
+    gap: 16px;
+    align-items: center;
+    font-size: 13.5px;
+  }
+  .analytics-bar-label { color: var(--text-2); font-weight: 500; }
+  .analytics-bar-track {
+    height: 8px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+  .analytics-bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 2px;
+  }
+  .analytics-bar-fill.status-pending {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+  }
+  .analytics-bar-fill.status-progress {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  }
+  .analytics-bar-fill.status-live {
+    background: linear-gradient(90deg, #10b981, #34d399);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+  }
+  .analytics-bar-fill.status-cancelled {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+  }
+  .analytics-bar-value {
+    color: var(--text-3);
+    font-weight: 600;
+    text-align: right;
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 640px) {
+    .analytics-bar-row { grid-template-columns: 1fr; gap: 6px; }
+    .analytics-bar-value { text-align: left; }
+  }
+
+  /* ---------- 12. ORDER CARDS ---------- */
+  .order-card {
+    padding: 28px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-1);
+    background: var(--surface-1);
+    margin-bottom: 16px;
+    transition: all var(--t-base);
+    position: relative;
+  }
+  .order-card:hover {
+    border-color: var(--border-brand);
+    background: var(--surface-2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .order-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .order-number {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-1);
+    margin-bottom: 4px;
+  }
+  .order-meta { font-size: 13.5px; color: var(--text-3); }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: var(--r-full);
+    white-space: nowrap;
+  }
+  .status-pending   { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+  .status-progress  { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+  .status-live      { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+  .status-cancelled { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+
+  .order-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 24px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 768px) { .order-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .order-grid { grid-template-columns: 1fr; } }
+
+  .order-field { display: flex; flex-direction: column; gap: 3px; }
+  .order-field-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-4);
+    font-weight: 600;
+  }
+  .order-field-value {
+    font-size: 14px;
+    color: var(--text-1);
+    word-break: break-word;
+  }
+
+  .order-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .order-service-chip {
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: var(--r-full);
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    color: var(--brand-300);
+  }
+
+  .order-details {
+    margin: 12px 0 18px;
+    padding: 14px 18px;
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-1);
+  }
+  .order-details summary {
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--brand-400);
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .order-details summary::-webkit-details-marker { display: none; }
+  .order-details summary::before {
+    content: '+';
+    font-weight: 800;
+    transition: transform var(--t-base);
+    display: inline-block;
+  }
+  .order-details[open] summary::before { transform: rotate(45deg); }
+  .order-details p {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+    white-space: pre-wrap;
+  }
+
+  .order-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-1);
+    flex-wrap: wrap;
+  }
+  .order-action-label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-3);
+  }
+  .order-status-select { min-width: 180px; }
+
+  /* Skeleton */
+  .order-skeleton {
+    height: 200px;
+    border-radius: var(--r-lg);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+    border: 1px solid var(--border-1);
+    margin-bottom: 16px;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 56px 24px;
+  }
+  .empty-state h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .empty-state p {
+    color: var(--text-3);
+    margin-bottom: 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ---------- 13. DATA TABLE ---------- */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-1);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--border-1);
+    vertical-align: top;
+  }
+  .data-table thead th {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    background: rgba(255, 255, 255, 0.02);
+    position: sticky;
+    top: 0;
+  }
+  .data-table tbody tr { transition: background var(--t-base); }
+  .data-table tbody tr:hover { background: rgba(139, 92, 246, 0.04); }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+
+  .table-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-2);
+    border: 1px solid var(--border-1);
+  }
+  .table-tag-new       { background: rgba(139, 92, 246, 0.12); color: var(--brand-300); border-color: rgba(139, 92, 246, 0.3); }
+  .table-tag-contacted { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+  .table-tag-qualified { background: rgba(6, 182, 212, 0.12); color: #22d3ee; border-color: rgba(6, 182, 212, 0.3); }
+  .table-tag-won       { background: rgba(16, 185, 129, 0.12); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+  .table-tag-lost      { background: rgba(248, 113, 113, 0.12); color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
+
+  .table-empty {
+    text-align: center;
+    padding: 40px 20px !important;
+    color: var(--text-3);
+    font-size: 14px;
+  }
+
+  /* ---------- 14. FOOTER ---------- */
+  .footer {
+    border-top: 1px solid var(--border-1);
+    padding: 32px 0 32px;
+    margin-top: 80px;
+    background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02));
+  }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-bottom p { font-size: 12.5px; color: var(--text-4); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12.5px; color: var(--text-4); }
+  .footer-legal a:hover { color: var(--brand-400); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo" aria-label="Sangam.ai home">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span>Sangam<span class="logo-dot">.ai</span></span>
+        <span class="admin-badge">ADMIN</span>
+      </a>
+
+      <div class="gpu-status" title="Live infrastructure status">
+        <span class="gpu-dot"></span>
+        <span class="gpu-text">
+          <strong>AI/INFRA</strong> Deploying NVIDIA H100s &amp; L40S for 47 edge regions…
+        </span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="admin.html" class="active">Overview</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#leads">Leads</a></li>
+        <li><a href="#analytics">Analytics</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="refreshBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+          Refresh
+        </button>
+        <div class="user-menu" id="userMenu">
+          <button class="user-btn" id="userBtn" aria-haspopup="true" aria-expanded="false">
+            <span class="user-avatar" id="userAvatar">A</span>
+            <span class="user-name" id="userName">Admin</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="user-dropdown" id="userDropdown" hidden>
+            <a href="dashboard.html">My Dashboard</a>
+            <a href="admin.html">Admin Console</a>
+            <a href="index.html">Public Site</a>
+            <div class="user-dropdown-divider"></div>
+            <button type="button" class="user-logout" id="logoutBtn">Sign out</button>
+          </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="dashboard-hero">
+      <div class="container">
+        <div class="dashboard-welcome">
+          <div>
+            <p class="dashboard-welcome-eyebrow">Admin Control Center</p>
+            <h1 class="dashboard-welcome-name">Sangam.ai Operations</h1>
+            <p class="dashboard-welcome-sub">
+              Manage incoming orders, leads and business performance in real time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STATS ==================== -->
+    <section class="section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/></svg>
+            </div>
+            <div class="stat-value" id="statOrders">—</div>
+            <div class="stat-label">Total Orders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-value" id="statLeads">—</div>
+            <div class="stat-label">Total Leads</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div class="stat-value" id="statLive">—</div>
+            <div class="stat-label">Live Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="stat-value" id="statMessages">—</div>
+            <div class="stat-label">Contact Messages</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ANALYTICS ==================== -->
+    <section class="section" id="analytics">
+      <div class="container">
+        <div class="dashboard-block">
+          <div class="dashboard-block-head">
+            <div>
+              <h2>Project Pipeline Breakdown</h2>
+              <span class="dashboard-block-sub">Distribution of orders by status</span>
+            </div>
+          </div>
+
+          <div class="analytics-bars" id="analyticsBars">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ORDERS ==================== -->
+    <section class="section" id="orders">
+      <div class="container">
+        <div class="dashboard-block">
+          <div class="dashboard-block-head">
+            <div>
+              <h2>Orders</h2>
+              <span class="dashboard-block-sub" id="ordersSub">Loading…</span>
+            </div>
+            <div class="dashboard-block-tools">
+              <input
+                type="search"
+                id="ordersSearch"
+                class="input-field-sm"
+                placeholder="Search order #, name, email…"
+                aria-label="Search orders"
+              />
+              <select id="ordersFilter" class="input-field-sm" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                <option value="REQUEST_RECEIVED">Requested</option>
+                <option value="DISCOVERY">Discovery</option>
+                <option value="DEVELOPMENT">Development</option>
+                <option value="TESTING">Testing</option>
+                <option value="DEPLOYMENT">Deployment</option>
+                <option value="LIVE">Live</option>
+                <option value="CANCELLED">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="ordersContainer">
+            <div class="order-skeleton"></div>
+            <div class="order-skeleton"></div>
+          </div>
+
+          <div class="empty-state" id="ordersEmpty" hidden>
+            <h3>No orders found</h3>
+            <p>Try adjusting your search or filter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== LEADS ==================== -->
+    <section class="section" id="leads">
+      <div class="container">
+        <div class="dashboard-block">
+          <div class="dashboard-block-head">
+            <div>
+              <h2>Leads</h2>
+              <span class="dashboard-block-sub" id="leadsSub">Loading…</span>
+            </div>
+            <div class="dashboard-block-tools">
+              <input
+                type="search"
+                id="leadsSearch"
+                class="input-field-sm"
+                placeholder="Search name, email, company…"
+                aria-label="Search leads"
+              />
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table" aria-label="Leads">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody">
+                <tr><td colspan="7" class="table-empty">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="leadsEmpty" hidden>
+            <h3>No leads yet</h3>
+            <p>Leads from the contact form will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Sangam.ai — Admin Console. Built with AI. Designed for humans.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+  (function () {
+    'use strict';
+
+    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+    function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    var TOKEN_KEY = 'sangam_token';
+    var USER_KEY = 'sangam_user';
+
+    var STATUS_LIST = [
+      'REQUEST_RECEIVED',
+      'DISCOVERY',
+      'DEVELOPMENT',
+      'TESTING',
+      'DEPLOYMENT',
+      'LIVE',
+      'CANCELLED'
+    ];
+
+    var STATUS_LABELS = {
+      REQUEST_RECEIVED: 'Requested',
+      DISCOVERY: 'Discovery',
+      DEVELOPMENT: 'Development',
+      TESTING: 'Testing',
+      DEPLOYMENT: 'Deployment',
+      LIVE: 'Live',
+      CANCELLED: 'Cancelled'
+    };
+
+    var STATUS_CLASSES = {
+      REQUEST_RECEIVED: 'status-pending',
+      DISCOVERY: 'status-progress',
+      DEVELOPMENT: 'status-progress',
+      TESTING: 'status-progress',
+      DEPLOYMENT: 'status-progress',
+      LIVE: 'status-live',
+      CANCELLED: 'status-cancelled'
+    };
+
+    var orders = [];
+    var leads = [];
+    var ordersQuery = '';
+    var ordersStatus = '';
+    var leadsQuery = '';
+
+    /* ---------- Storage ---------- */
+    function getToken() {
+      try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
+    }
+    function getUser() {
+      try {
+        var raw = localStorage.getItem(USER_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) { return null; }
+    }
+    function clearAuth() {
+      try {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
+      } catch (e) { /* ignore */ }
+    }
+
+    function formatDate(iso) {
+      try {
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return '—';
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch (e) { return '—'; }
+    }
+
+    function truncate(str, n) {
+      var s = String(str == null ? '' : str);
+      return s.length > n ? s.slice(0, n) + '…' : s;
+    }
+
+    /* ---------- Admin guard ---------- */
+    function requireAdmin() {
+      var token = getToken();
+      var user = getUser();
+
+      /* Demo mode: if there is no session at all, seed a demo admin session
+         so the page can be previewed locally. */
+      if (!token || !user) {
+        try {
+          localStorage.setItem(TOKEN_KEY, 'demo-admin-token');
+          localStorage.setItem(USER_KEY, JSON.stringify({
+            name: 'Demo Admin',
+            email: 'admin@sangam.ai',
+            role: 'ADMIN'
+          }));
+        } catch (e) { /* ignore */ }
+        return true;
+      }
+
+      if (user.role !== 'ADMIN') {
+        window.location.href = 'dashboard.html';
+        return false;
+      }
+      return true;
+    }
+
+    /* ---------- User display ---------- */
+    function renderUser() {
+      var user = getUser();
+      var displayName = (user && user.name) ? user.name : 'Admin';
+      var nameEl = $('#userName');
+      var avatarEl = $('#userAvatar');
+      if (nameEl) nameEl.textContent = displayName;
+      if (avatarEl) avatarEl.textContent = displayName.charAt(0).toUpperCase();
+    }
+
+    /* ---------- Analytics ---------- */
+    function renderAnalytics() {
+      var wrap = $('#analyticsBars');
+      if (!wrap) return;
+
+      var counts = {};
+      STATUS_LIST.forEach(function (s) { counts[s] = 0; });
+      orders.forEach(function (o) {
+        if (counts[o.status] != null) counts[o.status] += 1;
+      });
+
+      var max = Math.max.apply(null, STATUS_LIST.map(function (s) { return counts[s]; })) || 1;
+
+      wrap.innerHTML = STATUS_LIST.map(function (s) {
+        var c = counts[s];
+        var pct = Math.round((c / max) * 100);
+        var label = STATUS_LABELS[s] || s;
+        var cls = STATUS_CLASSES[s] || 'status-pending';
+        return (
+          '<div class="analytics-bar-row">' +
+            '<span class="analytics-bar-label">' + escapeHtml(label) + '</span>' +
+            '<div class="analytics-bar-track">' +
+              '<div class="analytics-bar-fill ' + cls + '" style="width:' + pct + '%"></div>' +
+            '</div>' +
+            '<span class="analytics-bar-value">' + c + '</span>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    /* ---------- Orders ---------- */
+    function matchesOrderQuery(o, q) {
+      if (!q) return true;
+      var hay = [
+        o.order_number, o.full_name, o.email, o.phone,
+        o.business_name, o.industry, o.location
+      ].join(' ').toLowerCase();
+      return hay.indexOf(q.toLowerCase()) !== -1;
+    }
+
+    function renderOrders() {
+      var container = $('#ordersContainer');
+      var empty = $('#ordersEmpty');
+      var sub = $('#ordersSub');
+      if (!container) return;
+
+      var filtered = orders.filter(function (o) {
+        if (ordersStatus && o.status !== ordersStatus) return false;
+        return matchesOrderQuery(o, ordersQuery);
+      });
+
+      if (sub) {
+        sub.textContent = filtered.length + ' of ' + orders.length + ' orders';
+      }
+
+      if (!filtered.length) {
+        container.innerHTML = '';
+        if (empty) empty.hidden = false;
+        return;
+      }
+      if (empty) empty.hidden = true;
+
+      container.innerHTML = filtered.map(function (o) {
+        var statusCls = STATUS_CLASSES[o.status] || 'status-pending';
+        var statusLabel = STATUS_LABELS[o.status] || o.status;
+        var services = Array.isArray(o.services) ? o.services : [];
+
+        var optionsHtml = STATUS_LIST.map(function (s) {
+          return '<option value="' + s + '"' +
+            (s === o.status ? ' selected' : '') +
+            '>' + STATUS_LABELS[s] + '</option>';
+        }).join('');
+
+        return (
+          '<article class="order-card" data-order-id="' + escapeHtml(o.id) + '">' +
+            '<div class="order-card-head">' +
+              '<div>' +
+                '<div class="order-number">' + escapeHtml(o.order_number || '—') + '</div>' +
+                '<div class="order-meta">' + escapeHtml(o.business_name || '—') + ' · ' + escapeHtml(o.industry || '—') + '</div>' +
+              '</div>' +
+              '<span class="status-pill ' + statusCls + '">' + escapeHtml(statusLabel) + '</span>' +
+            '</div>' +
+
+            '<div class="order-grid">' +
+              '<div class="order-field"><span class="order-field-label">Contact</span><span class="order-field-value">' + escapeHtml(o.full_name || '—') + '</span></div>' +
+              '<div class="order-field"><span class="order-field-label">Email</span><span class="order-field-value">' + escapeHtml(o.email || '—') + '</span></div>' +
+              '<div class="order-field"><span class="order-field-label">Phone</span><span class="order-field-value">' + escapeHtml(o.phone || '—') + '</span></div>' +
+              '<div class="order-field"><span class="order-field-label">Location</span><span class="order-field-value">' + escapeHtml(o.location || '—') + '</span></div>' +
+              '<div class="order-field"><span class="order-field-label">Preferred contact</span><span class="order-field-value">' + escapeHtml(o.contact_method || '—') + '</span></div>' +
+              '<div class="order-field"><span class="order-field-label">Submitted</span><span class="order-field-value">' + escapeHtml(formatDate(o.created_at)) + '</span></div>' +
+            '</div>' +
+
+            (services.length
+              ? '<div class="order-services">' +
+                  services.map(function (s) {
+                    return '<span class="order-service-chip">' + escapeHtml(s) + '</span>';
+                  }).join('') +
+                '</div>'
+              : '') +
+
+            (o.requirements
+              ? '<details class="order-details">' +
+                  '<summary>View requirements</summary>' +
+                  '<p>' + escapeHtml(o.requirements) + '</p>' +
+                '</details>'
+              : '') +
+
+            '<div class="order-actions">' +
+              '<label class="order-action-label">' +
+                '<span>Update status</span>' +
+                '<select class="input-field-sm order-status-select" data-order-id="' + escapeHtml(o.id) + '">' +
+                  optionsHtml +
+                '</select>' +
+              '</label>' +
+              '<button type="button" class="btn btn-primary btn-sm order-save-btn" data-order-id="' + escapeHtml(o.id) + '">' +
+                'Save' +
+              '</button>' +
+            '</div>' +
+          '</article>'
+        );
+      }).join('');
+
+      /* Wire save buttons */
+      $$('.order-save-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var oid = btn.getAttribute('data-order-id');
+          var sel = document.querySelector('.order-status-select[data-order-id="' + oid + '"]');
+          if (!sel) return;
+          updateOrderStatus(oid, sel.value, btn);
+        });
+      });
+    }
+
+    function updateOrderStatus(orderId, status, btn) {
+      if (!orderId || !status) return;
+      var originalLabel = btn ? btn.textContent : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+      }
+
+      fetch('/api/admin/orders/' + orderId, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + getToken()
+        },
+        body: JSON.stringify({ status: status })
+      })
+        .then(function (r) {
+          if (r.status === 401) {
+            clearAuth();
+            window.location.href = 'login.html';
+            return null;
+          }
+          if (r.status === 403) {
+            window.location.href = 'dashboard.html';
+            return null;
+          }
+          return r.json().then(function (data) {
+            return { ok: r.ok, data: data };
+          });
+        })
+        .then(function (res) {
+          if (!res) return;
+
+          /* Demo mode fallback: update local state anyway */
+          var updated = (res.ok && res.data) ? res.data : null;
+
+          if (!updated) {
+            /* local update */
+            orders = orders.map(function (o) {
+              return String(o.id) === String(orderId) ? Object.assign({}, o, { status: status }) : o;
+            });
+          } else {
+            orders = orders.map(function (o) {
+              return String(o.id) === String(updated.id) ? updated : o;
+            });
+          }
+
+          renderOrders();
+          renderAnalytics();
+          updateStats();
+        })
+        .catch(function () {
+          /* Demo fallback even on network failure */
+          orders = orders.map(function (o) {
+            return String(o.id) === String(orderId) ? Object.assign({}, o, { status: status }) : o;
+          });
+          renderOrders();
+          renderAnalytics();
+          updateStats();
+        })
+        .finally(function () {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalLabel || 'Save';
+          }
+        });
+    }
+
+    /* ---------- Leads ---------- */
+    function matchesLeadQuery(l, q) {
+      if (!q) return true;
+      var hay = [
+        l.name, l.email, l.phone, l.company, l.service, l.source, l.status
+      ].join(' ').toLowerCase();
+      return hay.indexOf(q.toLowerCase()) !== -1;
+    }
+
+    function renderLeads() {
+      var tbody = $('#leadsTableBody');
+      var empty = $('#leadsEmpty');
+      var sub = $('#leadsSub');
+      if (!tbody) return;
+
+      var filtered = leads.filter(function (l) {
+        return matchesLeadQuery(l, leadsQuery);
+      });
+
+      if (sub) sub.textContent = filtered.length + ' of ' + leads.length + ' leads';
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="table-empty">No leads match your search.</td></tr>';
+        if (empty) empty.hidden = leads.length > 0;
+        return;
+      }
+      if (empty) empty.hidden = true;
+
+      tbody.innerHTML = filtered.map(function (l) {
+        return (
+          '<tr>' +
+            '<td><strong>' + escapeHtml(truncate(l.name, 40)) + '</strong></td>' +
+            '<td>' + escapeHtml(truncate(l.email, 40)) + '</td>' +
+            '<td>' + escapeHtml(l.phone || '—') + '</td>' +
+            '<td>' + escapeHtml(truncate(l.company || '—', 30)) + '</td>' +
+            '<td><span class="table-tag">' + escapeHtml(l.source || 'website') + '</span></td>' +
+            '<td><span class="table-tag table-tag-' + escapeHtml((l.status || 'new').toLowerCase()) + '">' +
+              escapeHtml(l.status || 'new') + '</span></td>' +
+            '<td>' + escapeHtml(formatDate(l.created_at)) + '</td>' +
+          '</tr>'
+        );
+      }).join('');
+    }
+
+    /* ---------- Stats ---------- */
+    function updateStats() {
+      var setText = function (id, v) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = v;
+      };
+
+      var liveCount = orders.filter(function (o) { return o.status === 'LIVE'; }).length;
+
+      setText('statOrders', orders.length);
+      setText('statLeads', leads.length);
+      setText('statLive', liveCount);
+      setText('statMessages', 0);
+    }
+
+    /* ---------- Demo data ---------- */
+    function demoOrders() {
+      return [
+        {
+          id: 1,
+          order_number: 'SGM-10482',
+          full_name: 'Rita Sharma',
+          email: 'rita@brightsmile.com',
+          phone: '+977 98XXXXXXXX',
+          business_name: 'Bright Smile Dental',
+          industry: 'Healthcare',
+          location: 'Kathmandu, Nepal',
+          status: 'DEVELOPMENT',
+          contact_method: 'WHATSAPP',
+          services: ['whatsapp-ai', 'booking', 'crm'],
+          requirements: 'We want to automate WhatsApp enquiries, book appointments in Google Calendar, and sync every new lead to our CRM.',
+          created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        {
+          id: 2,
+          order_number: 'SGM-10591',
+          full_name: 'Anish Thapa',
+          email: 'anish@himalayatravels.com',
+          phone: '+977 98XXXXXXXX',
+          business_name: 'Himalaya Travels',
+          industry: 'Travel',
+          location: 'Pokhara, Nepal',
+          status: 'LIVE',
+          contact_method: 'EMAIL',
+          services: ['voice-receptionist', 'lead-gen'],
+          requirements: 'AI receptionist to handle inbound calls 24/7 plus outbound lead qualification for tour packages.',
+          created_at: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        {
+          id: 3,
+          order_number: 'SGM-10703',
+          full_name: 'Priya Gurung',
+          email: 'priya@vertexrealty.com',
+          phone: '+977 98XXXXXXXX',
+          business_name: 'Vertex Realty',
+          industry: 'Real Estate',
+          location: 'Lalitpur, Nepal',
+          status: 'DISCOVERY',
+          contact_method: 'PHONE',
+          services: ['chatbot', 'crm'],
+          requirements: 'Website chatbot for property listings + automated CRM updates on every enquiry.',
+          created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+        }
+      ];
+    }
+
+    function demoLeads() {
+      return [
+        { id: 1, name: 'Rita Sharma', email: 'rita@brightsmile.com', phone: '+977 98XXXXXXXX', company: 'Bright Smile Dental', source: 'contact_form', status: 'qualified', created_at: new Date(Date.now() - 3 * 86400000).toISOString() },
+        { id: 2, name: 'Anish Thapa', email: 'anish@himalayatravels.com', phone: '+977 98XXXXXXXX', company: 'Himalaya Travels', source: 'request_form', status: 'won', created_at: new Date(Date.now() - 14 * 86400000).toISOString() },
+        { id: 3, name: 'Priya Gurung', email: 'priya@vertexrealty.com', phone: '+977 98XXXXXXXX', company: 'Vertex Realty', source: 'contact_form', status: 'new', created_at: new Date(Date.now() - 1 * 86400000).toISOString() },
+        { id: 4, name: 'Bikash Rai', email: 'bikash@sagarmathafoods.com', phone: '+977 98XXXXXXXX', company: 'Sagarmatha Foods', source: 'website', status: 'contacted', created_at: new Date(Date.now() - 5 * 86400000).toISOString() }
+      ];
+    }
+
+    /* ---------- Load ---------- */
+    function loadOrders() {
+      return fetch('/api/admin/orders', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + getToken()
+        }
+      })
+        .then(function (r) {
+          if (r.status === 401) {
+            /* Demo mode fallback */
+            orders = demoOrders();
+            renderOrders();
+            renderAnalytics();
+            updateStats();
+            return null;
+          }
+          return r.json().then(function (data) {
+            return { ok: r.ok, data: data };
+          });
+        })
+        .then(function (res) {
+          if (!res) return;
+          orders = (res.ok && Array.isArray(res.data)) ? res.data : demoOrders();
+          renderOrders();
+          renderAnalytics();
+          updateStats();
+        })
+        .catch(function () {
+          orders = demoOrders();
+          renderOrders();
+          renderAnalytics();
+          updateStats();
+        });
+    }
+
+    function loadLeads() {
+      return fetch('/api/admin/leads', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + getToken()
+        }
+      })
+        .then(function (r) {
+          if (r.status === 401) {
+            leads = demoLeads();
+            renderLeads();
+            updateStats();
+            return null;
+          }
+          return r.json().then(function (data) {
+            return { ok: r.ok, data: data };
+          });
+        })
+        .then(function (res) {
+          if (!res) return;
+          leads = (res.ok && Array.isArray(res.data)) ? res.data : demoLeads();
+          renderLeads();
+          updateStats();
+        })
+        .catch(function () {
+          leads = demoLeads();
+          renderLeads();
+          updateStats();
+        });
+    }
+
+    function loadAll() {
+      return Promise.all([loadOrders(), loadLeads()]);
+    }
+
+    /* ---------- Wiring ---------- */
+    function wireNavbar() {
+      var navbar = $('#navbar');
+      if (navbar) {
+        var onScroll = function () {
+          if (window.scrollY > 20) navbar.classList.add('scrolled');
+          else navbar.classList.remove('scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      var navToggle = $('#navToggle');
+      var navLinks = $('#navLinks');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+          var open = navLinks.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+    }
+
+    function wireUserMenu() {
+      var userBtn = $('#userBtn');
+      var userDropdown = $('#userDropdown');
+
+      if (userBtn && userDropdown) {
+        userBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = userDropdown.hidden;
+          userDropdown.hidden = !open;
+          userBtn.setAttribute('aria-expanded', String(open));
+        });
+
+        document.addEventListener('click', function (e) {
+          if (userDropdown.hidden) return;
+          if (!userDropdown.contains(e.target) && e.target !== userBtn) {
+            userDropdown.hidden = true;
+            userBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            userDropdown.hidden = true;
+            userBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      var logoutBtn = $('#logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+          clearAuth();
+          window.location.href = 'login.html';
+        });
+      }
+
+      var refreshBtn = $('#refreshBtn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+          refreshBtn.disabled = true;
+          var original = refreshBtn.innerHTML;
+          refreshBtn.innerHTML = 'Refreshing…';
+          loadAll().finally(function () {
+            refreshBtn.disabled = false;
+            refreshBtn.innerHTML = original;
+          });
+        });
+      }
+    }
+
+    function wireFilters() {
+      var ordersSearch = $('#ordersSearch');
+      if (ordersSearch) {
+        ordersSearch.addEventListener('input', function () {
+          ordersQuery = ordersSearch.value.trim();
+          renderOrders();
+        });
+      }
+
+      var ordersFilter = $('#ordersFilter');
+      if (ordersFilter) {
+        ordersFilter.addEventListener('change', function () {
+          ordersStatus = ordersFilter.value;
+          renderOrders();
+        });
+      }
+
+      var leadsSearch = $('#leadsSearch');
+      if (leadsSearch) {
+        leadsSearch.addEventListener('input', function () {
+          leadsQuery = leadsSearch.value.trim();
+          renderLeads();
+        });
+      }
+    }
+
+    function wireSmoothNav() {
+      $$('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href');
+          if (id.length < 2) return;
+          var target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          var y = target.getBoundingClientRect().top + window.pageYOffset - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        });
+      });
+    }
+
+    /* ---------- Year ---------- */
+    function initYear() {
+      var el = $('#year');
+      if (el) el.textContent = String(new Date().getFullYear());
+    }
+
+    /* ---------- Boot ---------- */
+    function init() {
+      wireNavbar();
+      wireUserMenu();
+
+      if (!requireAdmin()) return;
+
+      renderUser();
+      wireFilters();
+      wireSmoothNav();
+      initYear();
+      loadAll();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+
+  <!-- Emergency fallback -->
+  <script>
+  setTimeout(function () {
+    var y = document.getElementById('year');
+    if (y && !y.textContent) y.textContent = new Date().getFullYear();
+    var wrap = document.getElementById('analyticsBars');
+    if (wrap && !wrap.children.length) {
+      wrap.innerHTML = '<p style="color:rgba(255,255,255,0.5);font-size:14px">Analytics loading — refresh to retry.</p>';
+    }
+  }, 3000);
+  </script>
+</body>
+</html>
