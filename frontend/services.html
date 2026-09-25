@@ -22,9 +22,6 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236c3bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
 
-  <!-- ============================================================
-       SANGAM.AI — SERVICES PAGE STYLES (self-contained)
-       ============================================================ -->
   <style>
   /* ---------- 1. DESIGN TOKENS ---------- */
   :root {
@@ -263,7 +260,7 @@
     transform: translateY(-2px);
   }
 
-  /* ---------- 6. FLOATING GLASS NAVBAR ---------- */
+  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM) ---------- */
   .navbar {
     position: fixed;
     top: 16px;
@@ -322,41 +319,6 @@
   .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
   .logo-dot { color: var(--brand-400); }
 
-  .gpu-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px 6px 10px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-1);
-    font-size: 11.5px;
-    color: var(--text-3);
-    max-width: 320px;
-    overflow: hidden;
-    flex-shrink: 0;
-    transition: all var(--t-base);
-  }
-  .gpu-status:hover {
-    border-color: rgba(139, 92, 246, 0.4);
-    background: rgba(139, 92, 246, 0.06);
-    max-width: 400px;
-  }
-  .gpu-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    flex-shrink: 0;
-    animation: gpuPulse 2s ease-in-out infinite;
-  }
-  @keyframes gpuPulse {
-    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.8); }
-    50%      { box-shadow: 0 0 20px rgba(34, 197, 94, 1); }
-  }
-  .gpu-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .gpu-text strong { color: var(--brand-300); font-weight: 600; }
-
   .nav-links {
     display: flex;
     align-items: center;
@@ -396,20 +358,6 @@
   }
   .nav-link-muted:hover { color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
 
-  .lang-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 12px;
-    font-size: 13px;
-    color: var(--text-3);
-    border-radius: var(--r-full);
-    border: 1px solid var(--border-1);
-    transition: all var(--t-base);
-  }
-  .lang-btn:hover { color: var(--text-1); border-color: var(--border-2); }
-  .lang-btn svg { width: 13px; height: 13px; }
-
   .nav-toggle {
     display: none;
     width: 40px; height: 40px;
@@ -432,8 +380,6 @@
   .nav-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-  @media (max-width: 1100px) { .gpu-status { display: none; } }
 
   @media (max-width: 900px) {
     .navbar { top: 12px; }
@@ -460,10 +406,43 @@
     .nav-links a { padding: 12px 16px; font-size: 15px; }
     .nav-links a.active::after { display: none; }
     .nav-links a.active { background: rgba(139, 92, 246, 0.12); }
-    .nav-link-muted, .lang-btn { display: none; }
+    .nav-link-muted { display: none; }
   }
 
-  /* ---------- 7. HERO ---------- */
+  /* ---------- 7. PAGE BACK BUTTON ---------- */
+  .page-back {
+    position: fixed;
+    top: 96px;
+    left: 24px;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    border-radius: var(--r-full);
+    border: 1px solid var(--border-1);
+    background: rgba(15, 10, 25, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all var(--t-base);
+  }
+  .page-back:hover {
+    color: var(--text-1);
+    border-color: var(--border-brand);
+    background: rgba(139, 92, 246, 0.1);
+    transform: translateX(-3px);
+  }
+  .page-back svg { width: 16px; height: 16px; }
+
+  @media (max-width: 900px) {
+    .page-back { top: 84px; left: 16px; padding: 8px 14px; font-size: 12.5px; }
+    .page-back span { display: none; }
+  }
+
+  /* ---------- 8. HERO ---------- */
   .services-hero {
     position: relative;
     padding: 180px 0 60px;
@@ -537,7 +516,7 @@
     box-shadow: var(--glow-sm);
   }
 
-  /* ---------- 8. SERVICES GRID ---------- */
+  /* ---------- 9. SERVICES GRID ---------- */
   .services-section { padding-top: 40px; }
 
   .services-grid-large {
@@ -730,7 +709,7 @@
     margin-right: auto;
   }
 
-  /* ---------- 9. FEATURE GRID (Under the Hood) ---------- */
+  /* ---------- 10. FEATURE GRID (Under the Hood) ---------- */
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -794,7 +773,7 @@
     line-height: 1.6;
   }
 
-  /* ---------- 10. STEPS ---------- */
+  /* ---------- 11. STEPS ---------- */
   .steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -852,7 +831,7 @@
   }
   .step p { font-size: 13.5px; color: var(--text-3); line-height: 1.55; }
 
-  /* ---------- 11. CTA ---------- */
+  /* ---------- 12. CTA ---------- */
   .cta-box {
     position: relative;
     padding: 80px 40px;
@@ -927,129 +906,47 @@
     .cta-buttons .btn { width: 100%; }
   }
 
-  /* ---------- 12. FOOTER ---------- */
+  /* ---------- 13. FOOTER (SLIM) ---------- */
   .footer {
     border-top: 1px solid var(--border-1);
-    padding: 64px 0 40px;
+    padding: 32px 0;
     margin-top: 100px;
     background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02));
   }
 
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
-    gap: 40px;
-    margin-bottom: 48px;
-  }
-  @media (max-width: 1000px) { .footer-top { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
-
-  .footer-brand .logo { margin-bottom: 18px; }
-  .footer-brand p {
-    font-size: 13.5px;
-    color: var(--text-3);
-    line-height: 1.65;
-    max-width: 320px;
-    margin-bottom: 20px;
-  }
-
-  .footer-socials { display: flex; gap: 10px; }
-  .footer-social {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-1);
-    color: var(--text-3);
-    transition: all var(--t-base);
-  }
-  .footer-social:hover {
-    color: var(--text-1);
-    border-color: var(--brand-500);
-    background: rgba(139, 92, 246, 0.1);
-    transform: translateY(-2px);
-  }
-  .footer-social svg { width: 16px; height: 16px; }
-
-  .footer-col h4 {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-1);
-    margin-bottom: 20px;
-  }
-  .footer-col a {
-    display: block;
-    font-size: 13.5px;
-    color: var(--text-3);
-    padding: 6px 0;
-    transition: color var(--t-base);
-  }
-  .footer-col a:hover { color: var(--brand-400); }
-
-  .footer-newsletter p {
-    font-size: 13.5px;
-    color: var(--text-3);
-    margin-bottom: 16px;
-  }
-
-  .newsletter-form {
-    display: flex;
-    gap: 8px;
-    padding: 6px 6px 6px 16px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-1);
-    transition: all var(--t-base);
-  }
-  .newsletter-form:focus-within {
-    border-color: var(--brand-500);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
-  }
-  .newsletter-form input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    color: var(--text-1);
-    padding: 10px 0;
-    min-width: 0;
-  }
-  .newsletter-form input::placeholder { color: var(--text-4); }
-  .newsletter-submit {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: var(--grad-primary);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all var(--t-base);
-  }
-  .newsletter-submit:hover { transform: scale(1.06); box-shadow: var(--glow-sm); }
-  .newsletter-submit svg { width: 16px; height: 16px; }
-
-  .footer-bottom {
+  .footer-slim {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border-1);
+    gap: 24px;
     flex-wrap: wrap;
   }
-  .footer-bottom p { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal a:hover { color: var(--brand-400); }
 
-  /* ---------- 13. REVEAL ANIMATION ---------- */
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-nav a {
+    font-size: 13.5px;
+    color: var(--text-3);
+  }
+  .footer-nav a:hover { color: var(--brand-400); }
+
+  .footer-copy {
+    font-size: 12.5px;
+    color: var(--text-4);
+  }
+
+  @media (max-width: 640px) {
+    .footer-slim {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-nav { justify-content: center; }
+  }
+
+  /* ---------- 14. REVEAL ANIMATION ---------- */
   html:not(.js-ready) .reveal { opacity: 1; transform: none; }
 
   html.js-ready .reveal {
@@ -1067,7 +964,7 @@
 
 <body>
 
-  <!-- ==================== FLOATING GLASS NAVBAR ==================== -->
+  <!-- ==================== FLOATING GLASS NAVBAR (SLIM) ==================== -->
   <header class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="logo" aria-label="Sangam.ai home">
@@ -1080,30 +977,17 @@
         <span>Sangam<span class="logo-dot">.ai</span></span>
       </a>
 
-      <div class="gpu-status" title="Live infrastructure status">
-        <span class="gpu-dot"></span>
-        <span class="gpu-text">
-          <strong>AI/INFRA</strong> Deploying NVIDIA H100s &amp; L40S for 47 edge regions…
-        </span>
-      </div>
-
       <ul class="nav-links" id="navLinks">
-        <li><a href="services.html" class="active">Products</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="services.html">Resources</a></li>
-        <li><a href="contact.html">Partners</a></li>
-        <li><a href="index.html#why">Why Sangam</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="request.html">Get Started</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="contact.html" class="nav-link-muted">Under attack?</a>
         <a href="login.html" class="nav-link-muted">Login</a>
-        <button type="button" class="lang-btn" aria-label="Language selector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          EN
-        </button>
         <a href="register.html" class="btn btn-primary btn-sm">
-          Sign up for free
+          Sign up
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -1112,6 +996,14 @@
       </div>
     </div>
   </header>
+
+  <!-- ==================== BACK BUTTON ==================== -->
+  <a href="index.html" class="page-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    <span>Back</span>
+  </a>
 
   <main>
 
@@ -1287,83 +1179,29 @@
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ==================== FOOTER (SLIM) ==================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="index.html" class="logo">
-            <span class="logo-mark">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
-                <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
-            <span>Sangam<span class="logo-dot">.ai</span></span>
-          </a>
-          <p>AI employees for modern businesses. Automate conversations, bookings, support and workflows — 24/7.</p>
-          <div class="footer-socials">
-            <a href="#" class="footer-social" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
-            </a>
-            <a href="#" class="footer-social" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
-            </a>
-            <a href="#" class="footer-social" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-            </a>
-            <a href="#" class="footer-social" aria-label="X">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.6l5.24 6.93zm-1.29 19.5h2.04L6.48 3.24H4.3z"/></svg>
-            </a>
-          </div>
-        </div>
+      <div class="footer-slim">
+        <a href="index.html" class="logo" aria-label="Sangam.ai home">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span>Sangam<span class="logo-dot">.ai</span></span>
+        </a>
 
-        <div class="footer-col">
-          <h4>Products</h4>
-          <a href="services.html">AI Agents</a>
-          <a href="services.html">Voice AI</a>
-          <a href="services.html">CRM Automation</a>
-          <a href="services.html">Workflow Automation</a>
-          <a href="services.html">Edge Inference</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="#">Status Page</a>
-          <a href="#">API Docs</a>
-          <a href="#">Looking Glass</a>
-          <a href="#">Security</a>
-          <a href="#">Blog</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>Company</h4>
+        <nav class="footer-nav" aria-label="Footer">
           <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="request.html">Get Started</a>
           <a href="contact.html">Contact</a>
           <a href="pricing.html">Pricing</a>
-          <a href="request.html">Get Started</a>
-          <a href="#">Careers</a>
-        </div>
+        </nav>
 
-        <div class="footer-newsletter">
-          <h4 style="font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; color: var(--text-1);">Stay in the loop</h4>
-          <p>AI automation tips, product updates &amp; case studies. No spam.</p>
-          <form class="newsletter-form" onsubmit="event.preventDefault(); this.reset();">
-            <input type="email" placeholder="Enter your email" aria-label="Email" />
-            <button type="submit" class="newsletter-submit" aria-label="Subscribe">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© <span id="year"></span> Sangam.ai — All rights reserved. Built with AI. Designed for humans.</p>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookies</a>
-        </div>
+        <p class="footer-copy">© <span id="year"></span> Sangam.ai</p>
       </div>
     </div>
   </footer>

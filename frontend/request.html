@@ -277,7 +277,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ---------- 6. FLOATING GLASS NAVBAR ---------- */
+  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM) ---------- */
   .navbar {
     position: fixed;
     top: 16px;
@@ -336,48 +336,12 @@
   .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
   .logo-dot { color: var(--brand-400); }
 
-  .gpu-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px 6px 10px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-1);
-    font-size: 11.5px;
-    color: var(--text-3);
-    max-width: 320px;
-    overflow: hidden;
-    flex-shrink: 0;
-    transition: all var(--t-base);
-  }
-  .gpu-status:hover {
-    border-color: rgba(139, 92, 246, 0.4);
-    background: rgba(139, 92, 246, 0.06);
-    max-width: 400px;
-  }
-  .gpu-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    flex-shrink: 0;
-    animation: gpuPulse 2s ease-in-out infinite;
-  }
-  @keyframes gpuPulse {
-    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.8); }
-    50%      { box-shadow: 0 0 20px rgba(34, 197, 94, 1); }
-  }
-  .gpu-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .gpu-text strong { color: var(--brand-300); font-weight: 600; }
-
   .nav-links {
     display: flex;
     align-items: center;
     gap: 2px;
     margin: 0 auto;
   }
-
   .nav-links a {
     display: inline-flex;
     align-items: center;
@@ -388,8 +352,18 @@
     color: var(--text-3);
     border-radius: var(--r-full);
     transition: all var(--t-base);
+    position: relative;
   }
   .nav-links a:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
+  .nav-links a.active { color: var(--text-1); }
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    left: 14px; right: 14px; bottom: 3px;
+    height: 2px;
+    border-radius: var(--r-full);
+    background: var(--grad-primary);
+  }
 
   .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .nav-link-muted {
@@ -399,20 +373,6 @@
     border-radius: var(--r-full);
   }
   .nav-link-muted:hover { color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
-
-  .lang-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 12px;
-    font-size: 13px;
-    color: var(--text-3);
-    border-radius: var(--r-full);
-    border: 1px solid var(--border-1);
-    transition: all var(--t-base);
-  }
-  .lang-btn:hover { color: var(--text-1); border-color: var(--border-2); }
-  .lang-btn svg { width: 13px; height: 13px; }
 
   .nav-toggle {
     display: none;
@@ -437,8 +397,6 @@
   .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 1100px) { .gpu-status { display: none; } }
-
   @media (max-width: 900px) {
     .navbar { top: 12px; }
     .nav-toggle { display: flex; }
@@ -462,10 +420,45 @@
     }
     .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
     .nav-links a { padding: 12px 16px; font-size: 15px; }
-    .nav-link-muted, .lang-btn { display: none; }
+    .nav-links a.active::after { display: none; }
+    .nav-links a.active { background: rgba(139, 92, 246, 0.12); }
+    .nav-link-muted { display: none; }
   }
 
-  /* ---------- 7. REQUEST HERO ---------- */
+  /* ---------- 7. PAGE BACK BUTTON ---------- */
+  .page-back {
+    position: fixed;
+    top: 96px;
+    left: 24px;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    border-radius: var(--r-full);
+    border: 1px solid var(--border-1);
+    background: rgba(15, 10, 25, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all var(--t-base);
+  }
+  .page-back:hover {
+    color: var(--text-1);
+    border-color: var(--border-brand);
+    background: rgba(139, 92, 246, 0.1);
+    transform: translateX(-3px);
+  }
+  .page-back svg { width: 16px; height: 16px; }
+
+  @media (max-width: 900px) {
+    .page-back { top: 84px; left: 16px; padding: 8px 14px; font-size: 12.5px; }
+    .page-back span { display: none; }
+  }
+
+  /* ---------- 8. REQUEST HERO ---------- */
   .request-hero {
     position: relative;
     padding: 160px 0 40px;
@@ -504,7 +497,7 @@
 
   .request-hero .container { position: relative; z-index: 1; }
 
-  /* ---------- 8. STEPPER ---------- */
+  /* ---------- 9. STEPPER ---------- */
   .stepper {
     position: relative;
     margin-bottom: 48px;
@@ -602,7 +595,7 @@
     .stepper-line { top: 16px; }
   }
 
-  /* ---------- 9. REQUEST FORM ---------- */
+  /* ---------- 10. REQUEST FORM ---------- */
   .request-section { padding-top: 20px; }
 
   .request-form {
@@ -676,7 +669,7 @@
     line-height: 1.6;
   }
 
-  /* ---------- 10. FORM ELEMENTS ---------- */
+  /* ---------- 11. FORM ELEMENTS ---------- */
   .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -765,7 +758,7 @@
     margin-top: 4px;
   }
 
-  /* ---------- 11. SERVICES PICKER ---------- */
+  /* ---------- 12. SERVICES PICKER ---------- */
   .services-picker {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -837,7 +830,7 @@
     transform: scale(1);
   }
 
-  /* ---------- 12. CHIP GROUP ---------- */
+  /* ---------- 13. CHIP GROUP ---------- */
   .chip-group { display: flex; flex-wrap: wrap; gap: 10px; }
 
   .chip { cursor: pointer; display: inline-block; position: relative; }
@@ -865,7 +858,7 @@
     box-shadow: var(--glow-sm);
   }
 
-  /* ---------- 13. CONTACT METHOD ---------- */
+  /* ---------- 14. CONTACT METHOD ---------- */
   .contact-method-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -912,7 +905,7 @@
     margin-top: 2px;
   }
 
-  /* ---------- 14. FORM NAV ---------- */
+  /* ---------- 15. FORM NAV ---------- */
   .form-nav {
     display: flex;
     align-items: center;
@@ -923,7 +916,7 @@
     flex-wrap: wrap;
   }
 
-  /* ---------- 15. REVIEW ---------- */
+  /* ---------- 16. REVIEW ---------- */
   .review {
     display: flex;
     flex-direction: column;
@@ -976,7 +969,7 @@
     word-break: break-word;
   }
 
-  /* ---------- 16. SUCCESS CARD ---------- */
+  /* ---------- 17. SUCCESS CARD ---------- */
   .request-success { padding-top: 60px; }
 
   .success-card {
@@ -1079,7 +1072,7 @@
     justify-content: center;
   }
 
-  /* ---------- 17. ALERT ---------- */
+  /* ---------- 18. ALERT ---------- */
   .auth-alert {
     padding: 14px 18px;
     border-radius: var(--r-md);
@@ -1104,31 +1097,64 @@
     color: #6ee7b7;
   }
 
-  /* ---------- 18. FOOTER ---------- */
+  /* ---------- 19. FOOTER (SLIM) ---------- */
   .footer {
     border-top: 1px solid var(--border-1);
-    padding: 40px 0 32px;
+    padding: 32px 0;
     margin-top: 80px;
     background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02));
   }
 
-  .footer-bottom {
+  .footer-slim {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
   }
-  .footer-bottom p { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal a:hover { color: var(--brand-400); }
+
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-nav a {
+    font-size: 13.5px;
+    color: var(--text-3);
+  }
+  .footer-nav a:hover { color: var(--brand-400); }
+
+  .footer-copy {
+    font-size: 12.5px;
+    color: var(--text-4);
+  }
+
+  @media (max-width: 640px) {
+    .footer-slim {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-nav { justify-content: center; }
+  }
+
+  /* ---------- 20. SKELETON ---------- */
+  .service-skeleton {
+    height: 60px;
+    border-radius: var(--r-md);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
   </style>
 </head>
 
 <body>
 
-  <!-- ==================== FLOATING GLASS NAVBAR ==================== -->
+  <!-- ==================== NAVBAR (SLIM) ==================== -->
   <header class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="logo" aria-label="Sangam.ai home">
@@ -1141,30 +1167,18 @@
         <span>Sangam<span class="logo-dot">.ai</span></span>
       </a>
 
-      <div class="gpu-status" title="Live infrastructure status">
-        <span class="gpu-dot"></span>
-        <span class="gpu-text">
-          <strong>AI/INFRA</strong> Deploying NVIDIA H100s &amp; L40S for 47 edge regions…
-        </span>
-      </div>
-
       <ul class="nav-links" id="navLinks">
-        <li><a href="services.html">Products</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
         <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="services.html">Resources</a></li>
-        <li><a href="contact.html">Partners</a></li>
-        <li><a href="index.html#why">Why Sangam</a></li>
+        <li><a href="request.html" class="active">Get Started</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="contact.html" class="nav-link-muted">Under attack?</a>
         <a href="login.html" class="nav-link-muted">Login</a>
-        <button type="button" class="lang-btn" aria-label="Language selector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          EN
-        </button>
         <a href="register.html" class="btn btn-primary btn-sm">
-          Sign up for free
+          Sign up
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -1173,6 +1187,14 @@
       </div>
     </div>
   </header>
+
+  <!-- ==================== BACK BUTTON ==================== -->
+  <a href="index.html" class="page-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    <span>Back</span>
+  </a>
 
   <main>
 
@@ -1322,10 +1344,10 @@
             <p class="form-step-hint">Select one or more. You can add more later.</p>
 
             <div class="services-picker" id="servicesPicker">
-              <div class="service-skeleton" style="height:60px;border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.06),rgba(255,255,255,0.02));background-size:200% 100%;animation:shimmer 1.6s linear infinite;"></div>
-              <div class="service-skeleton" style="height:60px;border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.06),rgba(255,255,255,0.02));background-size:200% 100%;animation:shimmer 1.6s linear infinite;"></div>
-              <div class="service-skeleton" style="height:60px;border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.06),rgba(255,255,255,0.02));background-size:200% 100%;animation:shimmer 1.6s linear infinite;"></div>
-              <div class="service-skeleton" style="height:60px;border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.06),rgba(255,255,255,0.02));background-size:200% 100%;animation:shimmer 1.6s linear infinite;"></div>
+              <div class="service-skeleton"></div>
+              <div class="service-skeleton"></div>
+              <div class="service-skeleton"></div>
+              <div class="service-skeleton"></div>
             </div>
             <span class="form-error" data-error-for="services"></span>
 
@@ -1556,16 +1578,29 @@
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ==================== FOOTER (SLIM) ==================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-bottom">
-        <p>© <span id="year"></span> Sangam.ai — All rights reserved. Built with AI. Designed for humans.</p>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookies</a>
-        </div>
+      <div class="footer-slim">
+        <a href="index.html" class="logo" aria-label="Sangam.ai home">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span>Sangam<span class="logo-dot">.ai</span></span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="request.html">Get Started</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <p class="footer-copy">© <span id="year"></span> Sangam.ai</p>
       </div>
     </div>
   </footer>
@@ -1891,9 +1926,14 @@
         body: JSON.stringify(payload)
       })
         .then(function (r) {
-          return r.json().then(function (data) {
-            return { ok: r.ok, status: r.status, data: data };
-          });
+          return r.json().then(
+            function (data) {
+              return { ok: r.ok, status: r.status, data: data };
+            },
+            function () {
+              return { ok: r.ok, status: r.status, data: null };
+            }
+          );
         })
         .then(function (res) {
           if (!res.ok) {
@@ -1988,6 +2028,16 @@
         navToggle.addEventListener('click', function () {
           var open = navLinks.classList.toggle('open');
           navToggle.setAttribute('aria-expanded', String(open));
+        });
+
+        // Close mobile menu when a link is clicked
+        $$('a', navLinks).forEach(function (a) {
+          a.addEventListener('click', function () {
+            if (window.innerWidth < 900) {
+              navLinks.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
         });
       }
     }
