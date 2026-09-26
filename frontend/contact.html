@@ -22,6 +22,20 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236c3bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
 
+  <script>
+    window.SANGAM_CONFIG = {
+      API_BASE: window.location.origin,
+      APP_NAME: 'Sangam.ai',
+      CONTACT: {
+        EMAIL: 'sangamxettry001@gmail.com',
+        PHONE: '9766461718',
+        PHONE_INTL: '+9779766461718',
+        WHATSAPP: '9779766461718',
+        LOCATION: 'Kathmandu, Nepal'
+      }
+    };
+  </script>
+
   <style>
   /* ---------- 1. DESIGN TOKENS ---------- */
   :root {
@@ -74,7 +88,6 @@
 
     --container: 1240px;
     --container-tight: 960px;
-    --nav-height: 76px;
 
     --t-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --t-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -273,7 +286,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM) ---------- */
+  /* ---------- 6. NAVBAR (SLIM - MATCHING INDEX) ---------- */
   .navbar {
     position: fixed;
     top: 16px;
@@ -281,27 +294,46 @@
     transform: translateX(-50%);
     z-index: 1000;
     width: calc(100% - 32px);
-    max-width: 1320px;
+    max-width: 1200px;
     transition: all var(--t-base);
   }
 
   .navbar-inner {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 12px 12px 12px 20px;
-    background: rgba(15, 10, 25, 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    gap: 16px;
+    padding: 10px 10px 10px 16px;
+    background: rgba(15, 10, 25, 0.72);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
   }
 
+  .navbar-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent,
+      rgba(167, 139, 250, 0.6),
+      rgba(236, 72, 153, 0.4),
+      transparent);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
   .navbar.scrolled .navbar-inner {
-    background: rgba(10, 5, 18, 0.9);
-    border-color: rgba(139, 92, 246, 0.2);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(108, 59, 255, 0.1);
+    background: rgba(10, 5, 18, 0.92);
+    border-color: rgba(139, 92, 246, 0.25);
+    box-shadow:
+      0 12px 44px rgba(0, 0, 0, 0.45),
+      0 0 80px rgba(108, 59, 255, 0.12);
   }
 
   .logo {
@@ -319,71 +351,114 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px; height: 34px;
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     background: var(--grad-primary);
     color: #fff;
     box-shadow: var(--glow-sm);
     transition: all var(--t-base);
   }
   .logo-mark svg { width: 17px; height: 17px; }
-  .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
+  .logo:hover .logo-mark { transform: rotate(-6deg) scale(1.06); box-shadow: var(--glow-md); }
   .logo-dot { color: var(--brand-400); }
 
   .nav-links {
     display: flex;
     align-items: center;
     gap: 2px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: 12px;
   }
+
   .nav-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 9px 14px;
+    position: relative;
+    padding: 9px 16px;
     font-size: 14px;
     font-weight: 500;
     color: var(--text-3);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
-    position: relative;
-  }
-  .nav-links a:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
-  .nav-links a.active { color: var(--text-1); }
-  .nav-links a.active::after {
-    content: '';
-    position: absolute;
-    left: 14px; right: 14px; bottom: 3px;
-    height: 2px;
-    border-radius: var(--r-full);
-    background: var(--grad-primary);
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
   }
 
-  .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .nav-link-muted {
-    font-size: 13.5px;
-    color: var(--text-4);
-    padding: 8px 12px;
-    border-radius: var(--r-full);
+  .nav-links a:hover { color: var(--text-1); background: rgba(139, 92, 246, 0.1); }
+  .nav-links a.active { color: var(--text-1); background: rgba(139, 92, 246, 0.12); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
   }
-  .nav-link-muted:hover { color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
+
+  .nav-login {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-3);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: all var(--t-base);
+  }
+  .nav-login:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
+
+  .nav-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 45%, #06b6d4 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    overflow: hidden;
+    isolation: isolate;
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 6px 20px rgba(108, 59, 255, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+  .nav-cta:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 12px 34px rgba(139, 92, 246, 0.6),
+      0 0 60px rgba(6, 182, 212, 0.4);
+  }
+  .nav-cta svg { width: 14px; height: 14px; transition: transform var(--t-base); }
+  .nav-cta:hover svg { transform: translateX(4px); }
 
   .nav-toggle {
     display: none;
-    width: 40px; height: 40px;
-    border-radius: var(--r-full);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 4px;
     transition: background var(--t-base);
+    flex-shrink: 0;
   }
   .nav-toggle:hover { background: rgba(255, 255, 255, 0.05); }
   .nav-toggle span {
     display: block;
-    width: 18px; height: 2px;
+    width: 18px;
+    height: 2px;
     background: var(--text-1);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
     transform-origin: center;
   }
@@ -391,13 +466,14 @@
   .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     .navbar { top: 12px; }
     .nav-toggle { display: flex; }
     .nav-links {
       position: fixed;
-      top: 92px;
-      left: 16px; right: 16px;
+      top: 76px;
+      left: 16px;
+      right: 16px;
       flex-direction: column;
       align-items: stretch;
       gap: 4px;
@@ -406,17 +482,24 @@
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--border-1);
-      border-radius: var(--r-lg);
+      border-radius: 22px;
       transform: translateY(-20px);
       opacity: 0;
       pointer-events: none;
       transition: all var(--t-base);
+      z-index: 1001;
+      margin: 0;
     }
     .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .nav-links a { padding: 12px 16px; font-size: 15px; }
-    .nav-links a.active::after { display: none; }
-    .nav-links a.active { background: rgba(139, 92, 246, 0.12); }
-    .nav-link-muted { display: none; }
+    .nav-links a { padding: 14px 18px; font-size: 15px; border-radius: 14px; }
+    .nav-login { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .navbar-inner { padding: 8px 8px 8px 12px; gap: 10px; }
+    .logo span:last-child { display: none; }
+    .nav-cta span { display: none; }
+    .nav-cta { padding: 10px; }
   }
 
   /* ---------- 7. PAGE BACK BUTTON ---------- */
@@ -556,6 +639,7 @@
   .contact-info-card p {
     font-size: 13.5px;
     color: var(--text-3);
+    word-break: break-all;
   }
 
   /* ---------- 10. MAIN LAYOUT ---------- */
@@ -852,6 +936,7 @@
   .contact-side-list span {
     font-size: 13px;
     color: var(--text-3);
+    word-break: break-word;
   }
 
   .contact-hours {
@@ -1061,6 +1146,37 @@
     will-change: opacity, transform;
   }
   html.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- 18. TOAST ---------- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 14px 24px;
+    border-radius: var(--r-full);
+    background: rgba(10, 5, 18, 0.98);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-2);
+    color: var(--text-1);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 48px);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.success { border-color: rgba(16, 185, 129, 0.4); }
+  .toast.success svg { color: #10b981; }
+  .toast.error { border-color: rgba(248, 113, 113, 0.4); }
+  .toast.error svg { color: #f87171; }
+  .toast svg { width: 18px; height: 18px; flex-shrink: 0; }
   </style>
 </head>
 
@@ -1079,19 +1195,21 @@
         <span>Sangam<span class="logo-dot">.ai</span></span>
       </a>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="request.html">Get Started</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="request.html">Get Started</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="nav-link-muted">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">
-          Sign up
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="register.html" class="nav-cta">
+          <span>Sign up free</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -1131,35 +1249,35 @@
     <section class="contact-info-section">
       <div class="container">
         <div class="contact-info-grid">
-          <a href="mailto:hello@sangam.ai" class="contact-info-card">
+          <a href="mailto:sangamxettry001@gmail.com" class="contact-info-card">
             <div class="contact-info-icon contact-info-icon-purple">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
             </div>
             <div>
               <h3>Email us</h3>
-              <p>hello@sangam.ai</p>
+              <p>sangamxettry001@gmail.com</p>
             </div>
           </a>
 
-          <a href="https://wa.me/9770000000000" class="contact-info-card" rel="noopener" target="_blank">
+          <a href="https://wa.me/9779766461718?text=Hi%20Sangam.ai%2C%20I%27d%20like%20to%20learn%20more" class="contact-info-card" rel="noopener" target="_blank">
             <div class="contact-info-icon contact-info-icon-green">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.6 5.94L.06 24l6.3-1.65a11.86 11.86 0 0 0 5.7 1.45c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.16-3.44-8.42z"/></svg>
             </div>
             <div>
               <h3>WhatsApp</h3>
-              <p>Chat with us instantly</p>
+              <p>+977 9766461718</p>
             </div>
           </a>
 
-          <div class="contact-info-card">
+          <a href="tel:+9779766461718" class="contact-info-card">
             <div class="contact-info-icon contact-info-icon-blue">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
             <div>
-              <h3>Based in</h3>
-              <p>Kathmandu, Nepal</p>
+              <h3>Call us</h3>
+              <p>+977 9766461718</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1171,7 +1289,7 @@
 
           <!-- FORM -->
           <div class="contact-form-wrap">
-            <div class="contact-form-head">
+            <div class="contact-form-head" id="contactFormHead">
               <h2>Send us a message</h2>
               <p>Fill in the form and we'll get back to you within 24 hours.</p>
             </div>
@@ -1276,14 +1394,14 @@
                   <span class="contact-side-dot contact-side-dot-green"></span>
                   <div>
                     <strong>WhatsApp</strong>
-                    <span>Replies in minutes</span>
+                    <span>Replies in minutes · +977 9766461718</span>
                   </div>
                 </li>
                 <li>
                   <span class="contact-side-dot contact-side-dot-purple"></span>
                   <div>
                     <strong>Email</strong>
-                    <span>Within 24 hours</span>
+                    <span>Within 24 hours · sangamxettry001@gmail.com</span>
                   </div>
                 </li>
                 <li>
@@ -1414,15 +1532,60 @@
     </div>
   </footer>
 
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg id="toastIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+    <span id="toastMessage">Notification</span>
+  </div>
+
   <!-- ==================== SCRIPTS ==================== -->
+  <script src="js/api.js"></script>
   <script>
   (function () {
     'use strict';
 
-    function $(sel) { return document.querySelector(sel); }
-    function $$(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+    /* ----------------------------------------------------------
+       CONFIG
+       ---------------------------------------------------------- */
+    var API_BASE = (window.SANGAM_CONFIG && window.SANGAM_CONFIG.API_BASE) || '';
+    var CONTACT = (window.SANGAM_CONFIG && window.SANGAM_CONFIG.CONTACT) || {};
 
-    /* ---------- Helpers ---------- */
+    /* ----------------------------------------------------------
+       DOM HELPERS
+       ---------------------------------------------------------- */
+    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+    function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+    /* ----------------------------------------------------------
+       TOAST
+       ---------------------------------------------------------- */
+    var toastTimer = null;
+    function showToast(message, type) {
+      var toast = $('#toast');
+      var toastIcon = $('#toastIcon');
+      var toastMessage = $('#toastMessage');
+      if (!toast || !toastMessage) return;
+
+      toastMessage.textContent = message;
+      toast.className = 'toast show ' + (type || 'success');
+
+      if (toastIcon) {
+        toastIcon.innerHTML = type === 'error'
+          ? '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'
+          : '<path d="M20 6 9 17l-5-5"/>';
+      }
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    /* ----------------------------------------------------------
+       ALERT HANDLERS
+       ---------------------------------------------------------- */
     function setError(field, msg) {
       var el = document.querySelector('[data-error-for="' + field + '"]');
       if (el) el.textContent = msg || '';
@@ -1449,7 +1612,9 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || ''));
     }
 
-    /* ---------- Validation ---------- */
+    /* ----------------------------------------------------------
+       FORM VALIDATION
+       ---------------------------------------------------------- */
     function validateForm() {
       clearAllErrors();
       var ok = true;
@@ -1479,13 +1644,16 @@
       return ok;
     }
 
-    /* ---------- Submit ---------- */
+    /* ----------------------------------------------------------
+       SUBMIT FORM
+       ---------------------------------------------------------- */
     function submitForm(e) {
       e.preventDefault();
       hideAlert();
 
       if (!validateForm()) {
         showAlert('Please fix the highlighted fields and try again.', 'error');
+        showToast('Please fix the highlighted fields.', 'error');
         return;
       }
 
@@ -1505,41 +1673,52 @@
         phone: ($('#phone') || {}).value.trim(),
         business: ($('#business') || {}).value.trim(),
         service: ($('#service') || {}).value,
-        message: ($('#message') || {}).value.trim()
+        message: ($('#message') || {}).value.trim(),
+        source: 'contact_form',
+        submitted_at: new Date().toISOString()
       };
 
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-        .then(function (r) {
+      // Prefer api.js wrapper, fallback to fetch
+      var promise;
+
+      if (window.api && typeof window.api.submitContact === 'function') {
+        promise = window.api.submitContact(payload);
+      } else {
+        promise = fetch(API_BASE + '/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (r) {
           return r.json().then(
-            function (data) {
-              return { ok: r.ok, status: r.status, data: data };
-            },
-            function () {
-              return { ok: r.ok, status: r.status, data: null };
-            }
+            function (data) { return { ok: r.ok, status: r.status, data: data }; },
+            function () { return { ok: r.ok, status: r.status, data: null }; }
           );
-        })
+        }).catch(function (err) {
+          return { ok: false, status: 0, data: null, networkError: true, error: err };
+        });
+      }
+
+      promise
         .then(function (res) {
           if (!res.ok) {
             throw new Error((res.data && res.data.error) || 'Submission failed.');
           }
           showSuccess();
+          showToast('Message sent successfully!', 'success');
         })
         .catch(function (err) {
-          var msg = err && err.message ? err.message : '';
+          var msg = (err && err.message) ? err.message : '';
           var isNetwork = /Failed to fetch|NetworkError|Load failed/i.test(msg);
 
-          /* Demo mode when backend isn't running */
+          // Demo fallback when backend isn't running
           if (isNetwork) {
             showSuccess();
+            showToast('Demo mode: message sent.', 'success');
             return;
           }
 
           showAlert(msg || 'Something went wrong. Please try again.', 'error');
+          showToast(msg || 'Submission failed.', 'error');
           resetSubmitButton(btn, label, spinner, arrow);
         });
     }
@@ -1554,7 +1733,7 @@
     function showSuccess() {
       var form = $('#contactForm');
       var success = $('#contactSuccess');
-      var head = document.querySelector('.contact-form-head');
+      var head = $('#contactFormHead');
       if (form) form.hidden = true;
       if (head) head.hidden = true;
       if (success) {
@@ -1569,7 +1748,7 @@
     function resetToForm() {
       var form = $('#contactForm');
       var success = $('#contactSuccess');
-      var head = document.querySelector('.contact-form-head');
+      var head = $('#contactFormHead');
       var btn = $('#submitBtn');
       var label = btn ? btn.querySelector('.btn-label') : null;
       var spinner = btn ? btn.querySelector('.btn-spinner') : null;
@@ -1589,7 +1768,9 @@
       if (msgCount) msgCount.textContent = '0';
     }
 
-    /* ---------- Char counter ---------- */
+    /* ----------------------------------------------------------
+       CHAR COUNTER
+       ---------------------------------------------------------- */
     function wireCharCounter() {
       var ta = $('#message');
       var counter = $('#msgCount');
@@ -1599,7 +1780,9 @@
       });
     }
 
-    /* ---------- FAQ ---------- */
+    /* ----------------------------------------------------------
+       FAQ
+       ---------------------------------------------------------- */
     function wireFaq() {
       var items = $$('.faq-item');
       items.forEach(function (item) {
@@ -1620,7 +1803,9 @@
       });
     }
 
-    /* ---------- Navbar ---------- */
+    /* ----------------------------------------------------------
+       NAVBAR
+       ---------------------------------------------------------- */
     function wireNavbar() {
       var navbar = $('#navbar');
       if (navbar) {
@@ -1640,10 +1825,9 @@
           navToggle.setAttribute('aria-expanded', String(open));
         });
 
-        // Close mobile menu when a link is clicked
         $$('a', navLinks).forEach(function (a) {
           a.addEventListener('click', function () {
-            if (window.innerWidth < 900) {
+            if (window.innerWidth < 960) {
               navLinks.classList.remove('open');
               navToggle.setAttribute('aria-expanded', 'false');
             }
@@ -1652,7 +1836,9 @@
       }
     }
 
-    /* ---------- Reveal ---------- */
+    /* ----------------------------------------------------------
+       REVEAL
+       ---------------------------------------------------------- */
     function initReveal() {
       var items = $$('.reveal');
       if (!items.length) return;
@@ -1680,7 +1866,9 @@
       }, 2500);
     }
 
-    /* ---------- URL Params ---------- */
+    /* ----------------------------------------------------------
+       URL PARAMS
+       ---------------------------------------------------------- */
     function applyUrlParams() {
       try {
         var params = new URLSearchParams(window.location.search);
@@ -1709,13 +1897,17 @@
       } catch (e) { /* silent */ }
     }
 
-    /* ---------- Year ---------- */
+    /* ----------------------------------------------------------
+       YEAR
+       ---------------------------------------------------------- */
     function initYear() {
       var el = $('#year');
       if (el) el.textContent = String(new Date().getFullYear());
     }
 
-    /* ---------- Boot ---------- */
+    /* ----------------------------------------------------------
+       BOOT
+       ---------------------------------------------------------- */
     function init() {
       document.documentElement.classList.add('js-ready');
       wireNavbar();
@@ -1754,7 +1946,7 @@
     });
     var y = document.getElementById('year');
     if (y && !y.textContent) y.textContent = new Date().getFullYear();
-  }, 3000);
+  }, 4000);
   </script>
 </body>
 </html>

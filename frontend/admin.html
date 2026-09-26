@@ -204,7 +204,7 @@
     transform: translateY(-2px);
   }
 
-  /* ---------- 6. NAVBAR ---------- */
+  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM) ---------- */
   .navbar {
     position: fixed;
     top: 16px;
@@ -274,41 +274,6 @@
     margin-left: 6px;
     box-shadow: var(--glow-pink);
   }
-
-  .gpu-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px 6px 10px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-1);
-    font-size: 11.5px;
-    color: var(--text-3);
-    max-width: 300px;
-    overflow: hidden;
-    flex-shrink: 0;
-    transition: all var(--t-base);
-  }
-  .gpu-status:hover {
-    border-color: rgba(139, 92, 246, 0.4);
-    background: rgba(139, 92, 246, 0.06);
-    max-width: 400px;
-  }
-  .gpu-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    flex-shrink: 0;
-    animation: gpuPulse 2s ease-in-out infinite;
-  }
-  @keyframes gpuPulse {
-    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.8); }
-    50%      { box-shadow: 0 0 20px rgba(34, 197, 94, 1); }
-  }
-  .gpu-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .gpu-text strong { color: var(--brand-300); font-weight: 600; }
 
   .nav-links {
     display: flex;
@@ -430,8 +395,6 @@
   .nav-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-  @media (max-width: 1200px) { .gpu-status { display: none; } }
 
   @media (max-width: 900px) {
     .navbar { top: 12px; }
@@ -962,30 +925,51 @@
     font-size: 14px;
   }
 
-  /* ---------- 14. FOOTER ---------- */
+  /* ---------- 14. FOOTER (SLIM) ---------- */
   .footer {
     border-top: 1px solid var(--border-1);
-    padding: 32px 0 32px;
+    padding: 32px 0;
     margin-top: 80px;
     background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02));
   }
-  .footer-bottom {
+
+  .footer-slim {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
   }
-  .footer-bottom p { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12.5px; color: var(--text-4); }
-  .footer-legal a:hover { color: var(--brand-400); }
+
+  .footer-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-nav a {
+    font-size: 13.5px;
+    color: var(--text-3);
+  }
+  .footer-nav a:hover { color: var(--brand-400); }
+
+  .footer-copy {
+    font-size: 12.5px;
+    color: var(--text-4);
+  }
+
+  @media (max-width: 640px) {
+    .footer-slim {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-nav { justify-content: center; }
+  }
   </style>
 </head>
 
 <body>
 
-  <!-- ==================== NAVBAR ==================== -->
+  <!-- ==================== NAVBAR (SLIM) ==================== -->
   <header class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="logo" aria-label="Sangam.ai home">
@@ -998,13 +982,6 @@
         <span>Sangam<span class="logo-dot">.ai</span></span>
         <span class="admin-badge">ADMIN</span>
       </a>
-
-      <div class="gpu-status" title="Live infrastructure status">
-        <span class="gpu-dot"></span>
-        <span class="gpu-text">
-          <strong>AI/INFRA</strong> Deploying NVIDIA H100s &amp; L40S for 47 edge regions…
-        </span>
-      </div>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="admin.html" class="active">Overview</a></li>
@@ -1202,16 +1179,30 @@
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ==================== FOOTER (SLIM) ==================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-bottom">
-        <p>© <span id="year"></span> Sangam.ai — Admin Console. Built with AI. Designed for humans.</p>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookies</a>
-        </div>
+      <div class="footer-slim">
+        <a href="index.html" class="logo" aria-label="Sangam.ai home">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span>Sangam<span class="logo-dot">.ai</span></span>
+          <span class="admin-badge">ADMIN</span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="request.html">Get Started</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <p class="footer-copy">© <span id="year"></span> Sangam.ai — Admin Console</p>
       </div>
     </div>
   </footer>
@@ -1346,7 +1337,8 @@
         if (counts[o.status] != null) counts[o.status] += 1;
       });
 
-      var max = Math.max.apply(null, STATUS_LIST.map(function (s) { return counts[s]; })) || 1;
+      var values = STATUS_LIST.map(function (s) { return counts[s]; });
+      var max = Math.max.apply(null, values) || 1;
 
       wrap.innerHTML = STATUS_LIST.map(function (s) {
         var c = counts[s];
@@ -1408,6 +1400,21 @@
             '>' + STATUS_LABELS[s] + '</option>';
         }).join('');
 
+        var servicesHtml = services.length
+          ? '<div class="order-services">' +
+              services.map(function (s) {
+                return '<span class="order-service-chip">' + escapeHtml(s) + '</span>';
+              }).join('') +
+            '</div>'
+          : '';
+
+        var requirementsHtml = o.requirements
+          ? '<details class="order-details">' +
+              '<summary>View requirements</summary>' +
+              '<p>' + escapeHtml(o.requirements) + '</p>' +
+            '</details>'
+          : '';
+
         return (
           '<article class="order-card" data-order-id="' + escapeHtml(o.id) + '">' +
             '<div class="order-card-head">' +
@@ -1427,20 +1434,8 @@
               '<div class="order-field"><span class="order-field-label">Submitted</span><span class="order-field-value">' + escapeHtml(formatDate(o.created_at)) + '</span></div>' +
             '</div>' +
 
-            (services.length
-              ? '<div class="order-services">' +
-                  services.map(function (s) {
-                    return '<span class="order-service-chip">' + escapeHtml(s) + '</span>';
-                  }).join('') +
-                '</div>'
-              : '') +
-
-            (o.requirements
-              ? '<details class="order-details">' +
-                  '<summary>View requirements</summary>' +
-                  '<p>' + escapeHtml(o.requirements) + '</p>' +
-                '</details>'
-              : '') +
+            servicesHtml +
+            requirementsHtml +
 
             '<div class="order-actions">' +
               '<label class="order-action-label">' +
@@ -1494,9 +1489,14 @@
             window.location.href = 'dashboard.html';
             return null;
           }
-          return r.json().then(function (data) {
-            return { ok: r.ok, data: data };
-          });
+          return r.json().then(
+            function (data) {
+              return { ok: r.ok, data: data };
+            },
+            function () {
+              return { ok: r.ok, data: null };
+            }
+          );
         })
         .then(function (res) {
           if (!res) return;
@@ -1565,6 +1565,9 @@
       if (empty) empty.hidden = true;
 
       tbody.innerHTML = filtered.map(function (l) {
+        var status = String(l.status || 'new').toLowerCase();
+        var statusSafe = status.replace(/[^a-z0-9-]/g, '');
+
         return (
           '<tr>' +
             '<td><strong>' + escapeHtml(truncate(l.name, 40)) + '</strong></td>' +
@@ -1572,7 +1575,7 @@
             '<td>' + escapeHtml(l.phone || '—') + '</td>' +
             '<td>' + escapeHtml(truncate(l.company || '—', 30)) + '</td>' +
             '<td><span class="table-tag">' + escapeHtml(l.source || 'website') + '</span></td>' +
-            '<td><span class="table-tag table-tag-' + escapeHtml((l.status || 'new').toLowerCase()) + '">' +
+            '<td><span class="table-tag table-tag-' + statusSafe + '">' +
               escapeHtml(l.status || 'new') + '</span></td>' +
             '<td>' + escapeHtml(formatDate(l.created_at)) + '</td>' +
           '</tr>'
@@ -1673,9 +1676,14 @@
             updateStats();
             return null;
           }
-          return r.json().then(function (data) {
-            return { ok: r.ok, data: data };
-          });
+          return r.json().then(
+            function (data) {
+              return { ok: r.ok, data: data };
+            },
+            function () {
+              return { ok: r.ok, data: null };
+            }
+          );
         })
         .then(function (res) {
           if (!res) return;
@@ -1707,9 +1715,14 @@
             updateStats();
             return null;
           }
-          return r.json().then(function (data) {
-            return { ok: r.ok, data: data };
-          });
+          return r.json().then(
+            function (data) {
+              return { ok: r.ok, data: data };
+            },
+            function () {
+              return { ok: r.ok, data: null };
+            }
+          );
         })
         .then(function (res) {
           if (!res) return;
@@ -1746,6 +1759,16 @@
         navToggle.addEventListener('click', function () {
           var open = navLinks.classList.toggle('open');
           navToggle.setAttribute('aria-expanded', String(open));
+        });
+
+        // Close mobile menu when a link is clicked
+        $$('a', navLinks).forEach(function (a) {
+          a.addEventListener('click', function () {
+            if (window.innerWidth < 900) {
+              navLinks.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
         });
       }
     }

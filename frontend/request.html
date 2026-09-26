@@ -16,9 +16,13 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236c3bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
 
-  <!-- ============================================================
-       SANGAM.AI — REQUEST PAGE STYLES (self-contained)
-       ============================================================ -->
+  <script>
+    window.SANGAM_CONFIG = {
+      API_BASE: window.location.origin,
+      APP_NAME: 'Sangam.ai'
+    };
+  </script>
+
   <style>
   /* ---------- 1. DESIGN TOKENS ---------- */
   :root {
@@ -277,7 +281,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM) ---------- */
+  /* ---------- 6. FLOATING GLASS NAVBAR (SLIM - MATCHING INDEX) ---------- */
   .navbar {
     position: fixed;
     top: 16px;
@@ -285,29 +289,46 @@
     transform: translateX(-50%);
     z-index: 1000;
     width: calc(100% - 32px);
-    max-width: 1320px;
+    max-width: 1200px;
     transition: all var(--t-base);
   }
 
   .navbar-inner {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 12px 12px 12px 20px;
-    background: rgba(15, 10, 25, 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    gap: 16px;
+    padding: 10px 10px 10px 16px;
+    background: rgba(15, 10, 25, 0.72);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
   }
 
+  .navbar-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent,
+      rgba(167, 139, 250, 0.6),
+      rgba(236, 72, 153, 0.4),
+      transparent);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
   .navbar.scrolled .navbar-inner {
-    background: rgba(10, 5, 18, 0.9);
-    border-color: rgba(139, 92, 246, 0.2);
+    background: rgba(10, 5, 18, 0.92);
+    border-color: rgba(139, 92, 246, 0.25);
     box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.4),
-      0 0 60px rgba(108, 59, 255, 0.1);
+      0 12px 44px rgba(0, 0, 0, 0.45),
+      0 0 80px rgba(108, 59, 255, 0.12);
   }
 
   .logo {
@@ -325,71 +346,114 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px; height: 34px;
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     background: var(--grad-primary);
     color: #fff;
     box-shadow: var(--glow-sm);
     transition: all var(--t-base);
   }
   .logo-mark svg { width: 17px; height: 17px; }
-  .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); box-shadow: var(--glow-md); }
+  .logo:hover .logo-mark { transform: rotate(-6deg) scale(1.06); box-shadow: var(--glow-md); }
   .logo-dot { color: var(--brand-400); }
 
   .nav-links {
     display: flex;
     align-items: center;
     gap: 2px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: 12px;
   }
+
   .nav-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 9px 14px;
+    position: relative;
+    padding: 9px 16px;
     font-size: 14px;
     font-weight: 500;
     color: var(--text-3);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
-    position: relative;
-  }
-  .nav-links a:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
-  .nav-links a.active { color: var(--text-1); }
-  .nav-links a.active::after {
-    content: '';
-    position: absolute;
-    left: 14px; right: 14px; bottom: 3px;
-    height: 2px;
-    border-radius: var(--r-full);
-    background: var(--grad-primary);
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
   }
 
-  .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .nav-link-muted {
-    font-size: 13.5px;
-    color: var(--text-4);
-    padding: 8px 12px;
-    border-radius: var(--r-full);
+  .nav-links a:hover { color: var(--text-1); background: rgba(139, 92, 246, 0.1); }
+  .nav-links a.active { color: var(--text-1); background: rgba(139, 92, 246, 0.1); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
   }
-  .nav-link-muted:hover { color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
+
+  .nav-login {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-3);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: all var(--t-base);
+  }
+  .nav-login:hover { color: var(--text-1); background: rgba(255, 255, 255, 0.05); }
+
+  .nav-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 45%, #06b6d4 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    overflow: hidden;
+    isolation: isolate;
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 6px 20px rgba(108, 59, 255, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+  .nav-cta:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 12px 34px rgba(139, 92, 246, 0.6),
+      0 0 60px rgba(6, 182, 212, 0.4);
+  }
+  .nav-cta svg { width: 14px; height: 14px; transition: transform var(--t-base); }
+  .nav-cta:hover svg { transform: translateX(4px); }
 
   .nav-toggle {
     display: none;
-    width: 40px; height: 40px;
-    border-radius: var(--r-full);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 4px;
     transition: background var(--t-base);
+    flex-shrink: 0;
   }
   .nav-toggle:hover { background: rgba(255, 255, 255, 0.05); }
   .nav-toggle span {
     display: block;
-    width: 18px; height: 2px;
+    width: 18px;
+    height: 2px;
     background: var(--text-1);
-    border-radius: var(--r-full);
+    border-radius: 999px;
     transition: all var(--t-base);
     transform-origin: center;
   }
@@ -397,13 +461,14 @@
   .nav-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     .navbar { top: 12px; }
     .nav-toggle { display: flex; }
     .nav-links {
       position: fixed;
-      top: 92px;
-      left: 16px; right: 16px;
+      top: 76px;
+      left: 16px;
+      right: 16px;
       flex-direction: column;
       align-items: stretch;
       gap: 4px;
@@ -412,17 +477,24 @@
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--border-1);
-      border-radius: var(--r-lg);
+      border-radius: 22px;
       transform: translateY(-20px);
       opacity: 0;
       pointer-events: none;
       transition: all var(--t-base);
+      z-index: 1001;
+      margin: 0;
     }
     .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .nav-links a { padding: 12px 16px; font-size: 15px; }
-    .nav-links a.active::after { display: none; }
-    .nav-links a.active { background: rgba(139, 92, 246, 0.12); }
-    .nav-link-muted { display: none; }
+    .nav-links a { padding: 14px 18px; font-size: 15px; border-radius: 14px; }
+    .nav-login { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .navbar-inner { padding: 8px 8px 8px 12px; gap: 10px; }
+    .logo span:last-child { display: none; }
+    .nav-cta span { display: none; }
+    .nav-cta { padding: 10px; }
   }
 
   /* ---------- 7. PAGE BACK BUTTON ---------- */
@@ -1149,12 +1221,46 @@
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
   }
+
+  /* ---------- 21. TOAST ---------- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 14px 24px;
+    border-radius: var(--r-full);
+    background: rgba(10, 5, 18, 0.98);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-2);
+    color: var(--text-1);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 48px);
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  .toast.success { border-color: rgba(16, 185, 129, 0.4); }
+  .toast.success svg { color: #10b981; }
+  .toast.error { border-color: rgba(248, 113, 113, 0.4); }
+  .toast.error svg { color: #f87171; }
+  .toast svg { width: 18px; height: 18px; flex-shrink: 0; }
   </style>
 </head>
 
 <body>
 
-  <!-- ==================== NAVBAR (SLIM) ==================== -->
+  <!-- ==================== NAVBAR (SLIM - MATCHING INDEX) ==================== -->
   <header class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="logo" aria-label="Sangam.ai home">
@@ -1167,19 +1273,21 @@
         <span>Sangam<span class="logo-dot">.ai</span></span>
       </a>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="request.html" class="active">Get Started</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="request.html" class="active">Get Started</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="nav-link-muted">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">
-          Sign up
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="register.html" class="nav-cta">
+          <span>Sign up free</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -1605,21 +1713,27 @@
     </div>
   </footer>
 
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg id="toastIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+    <span id="toastMessage">Notification</span>
+  </div>
+
   <!-- ==================== SCRIPTS ==================== -->
+  <script src="js/api.js"></script>
   <script>
   (function () {
     'use strict';
 
-    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-    function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+    /* ----------------------------------------------------------
+       CONFIG
+       ---------------------------------------------------------- */
+    var API_BASE = (window.SANGAM_CONFIG && window.SANGAM_CONFIG.API_BASE) || '';
+    var TOTAL_STEPS = 6;
 
-    function escapeHtml(s) {
-      return String(s == null ? '' : s)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
-    /* Icon name → emoji map */
+    /* Icon name → emoji map for services */
     var ICON_MAP = {
       'message-circle': '💬',
       'instagram': '📷',
@@ -1632,15 +1746,11 @@
       'database': '🗂️',
       'workflow': '⚙️',
       'book-open': '📚',
-      'bot': '🤖'
+      'bot': '🤖',
+      'zap': '⚡'
     };
 
-    function resolveIcon(icon) {
-      if (!icon) return '🤖';
-      if (icon.length <= 4) return icon;
-      return ICON_MAP[icon] || '🤖';
-    }
-
+    /* Fallback services if API fails */
     var FALLBACK_SERVICES = [
       { name: 'WhatsApp AI', slug: 'whatsapp-ai', icon: '💬' },
       { name: 'Instagram AI', slug: 'instagram-ai', icon: '📷' },
@@ -1653,11 +1763,60 @@
       { name: 'Custom AI Agent', slug: 'custom', icon: '⚡' }
     ];
 
-    var TOTAL_STEPS = 6;
-    var currentStep = 1;
-    var services = [];
+    /* ----------------------------------------------------------
+       STATE
+       ---------------------------------------------------------- */
+    var state = {
+      currentStep: 1,
+      services: []
+    };
 
-    /* ---------- Alert / error helpers ---------- */
+    /* ----------------------------------------------------------
+       DOM HELPERS
+       ---------------------------------------------------------- */
+    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+    function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function resolveIcon(icon) {
+      if (!icon) return '🤖';
+      if (icon.length <= 4) return icon;
+      return ICON_MAP[icon] || '🤖';
+    }
+
+    /* ----------------------------------------------------------
+       TOAST
+       ---------------------------------------------------------- */
+    var toastTimer = null;
+    function showToast(message, type) {
+      var toast = $('#toast');
+      var toastIcon = $('#toastIcon');
+      var toastMessage = $('#toastMessage');
+      if (!toast || !toastMessage) return;
+
+      toastMessage.textContent = message;
+      toast.className = 'toast show ' + (type || 'success');
+
+      if (toastIcon) {
+        toastIcon.innerHTML = type === 'error'
+          ? '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'
+          : '<path d="M20 6 9 17l-5-5"/>';
+      }
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    /* ----------------------------------------------------------
+       ERROR / ALERT HANDLING
+       ---------------------------------------------------------- */
     function setError(field, msg) {
       var el = document.querySelector('[data-error-for="' + field + '"]');
       if (el) el.textContent = msg || '';
@@ -1680,22 +1839,74 @@
       if (el) el.hidden = true;
     }
 
-    /* ---------- Stepper ---------- */
+    /* ----------------------------------------------------------
+       VALIDATION HELPERS
+       ---------------------------------------------------------- */
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || ''));
+    }
+
+    function isValidUrl(v) {
+      return /^https?:\/\/.+\..+/.test(String(v || ''));
+    }
+
+    function val(id) {
+      var el = document.getElementById(id);
+      return el ? String(el.value || '') : '';
+    }
+
+    /* ----------------------------------------------------------
+       NAVBAR
+       ---------------------------------------------------------- */
+    function initNavbar() {
+      var navbar = $('#navbar');
+      if (navbar) {
+        var onScroll = function () {
+          if (window.scrollY > 20) navbar.classList.add('scrolled');
+          else navbar.classList.remove('scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      var navToggle = $('#navToggle');
+      var navLinks = $('#navLinks');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+          var open = navLinks.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', String(open));
+        });
+
+        // Close mobile menu when clicking a link
+        $$('a', navLinks).forEach(function (a) {
+          a.addEventListener('click', function () {
+            if (window.innerWidth < 960) {
+              navLinks.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    }
+
+    /* ----------------------------------------------------------
+       STEPPER
+       ---------------------------------------------------------- */
     function updateStepper() {
-      var pct = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
-      var fill = $('#stepperFill');
+      var pct = ((state.currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
+      var fill = document.getElementById('stepperFill');
       if (fill) fill.style.width = pct + '%';
 
       $$('.step-dot').forEach(function (dot) {
         var n = parseInt(dot.getAttribute('data-step'), 10);
-        dot.classList.toggle('active', n === currentStep);
-        dot.classList.toggle('done', n < currentStep);
+        dot.classList.toggle('active', n === state.currentStep);
+        dot.classList.toggle('done', n < state.currentStep);
       });
     }
 
     function goToStep(n) {
       if (n < 1 || n > TOTAL_STEPS) return;
-      currentStep = n;
+      state.currentStep = n;
 
       $$('.form-step').forEach(function (fs) {
         var stepNum = parseInt(fs.getAttribute('data-step'), 10);
@@ -1707,35 +1918,55 @@
 
       if (n === 6) renderReview();
 
-      var section = $('#requestSection');
+      var section = document.getElementById('requestSection');
       if (section) {
         var y = section.getBoundingClientRect().top + window.pageYOffset - 100;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }
 
-    /* ---------- Validation ---------- */
+    /* ----------------------------------------------------------
+       PER-STEP VALIDATION
+       ---------------------------------------------------------- */
     function validateStep(n) {
       clearAllErrors();
       var ok = true;
 
       if (n === 1) {
-        var fullName = ($('#fullName') || {}).value || '';
-        var email = ($('#email') || {}).value || '';
-        var phone = ($('#phone') || {}).value || '';
-        var businessName = ($('#businessName') || {}).value || '';
-        var industry = ($('#industry') || {}).value || '';
-        var location = ($('#location') || {}).value || '';
-        var website = ($('#website') || {}).value || '';
+        var fullName = val('fullName');
+        var email = val('email');
+        var phone = val('phone');
+        var businessName = val('businessName');
+        var industry = val('industry');
+        var location = val('location');
+        var website = val('website');
 
-        if (fullName.trim().length < 2) { setError('fullName', 'Please enter your full name.'); ok = false; }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('email', 'Enter a valid email address.'); ok = false; }
-        if (phone.trim().length < 5) { setError('phone', 'Enter a valid phone number.'); ok = false; }
-        if (businessName.trim().length < 2) { setError('businessName', 'Business name is required.'); ok = false; }
-        if (!industry) { setError('industry', 'Please select an industry.'); ok = false; }
-        if (location.trim().length < 2) { setError('location', 'Location is required.'); ok = false; }
-        if (website && !/^https?:\/\/.+\..+/.test(website)) {
-          setError('website', 'Enter a valid URL (starting with http:// or https://).');
+        if (fullName.trim().length < 2) {
+          setError('fullName', 'Please enter your full name.');
+          ok = false;
+        }
+        if (!isValidEmail(email)) {
+          setError('email', 'Enter a valid email address.');
+          ok = false;
+        }
+        if (phone.trim().length < 5) {
+          setError('phone', 'Enter a valid phone number.');
+          ok = false;
+        }
+        if (businessName.trim().length < 2) {
+          setError('businessName', 'Business name is required.');
+          ok = false;
+        }
+        if (!industry) {
+          setError('industry', 'Please select an industry.');
+          ok = false;
+        }
+        if (location.trim().length < 2) {
+          setError('location', 'Location is required.');
+          ok = false;
+        }
+        if (website && !isValidUrl(website)) {
+          setError('website', 'Enter a valid URL (http:// or https://).');
           ok = false;
         }
       }
@@ -1749,7 +1980,7 @@
       }
 
       if (n === 3) {
-        var req = ($('#requirements') || {}).value || '';
+        var req = val('requirements');
         if (req.trim().length < 10) {
           setError('requirements', 'Please describe your needs (at least 10 characters).');
           ok = false;
@@ -1767,29 +1998,39 @@
       return ok;
     }
 
-    /* ---------- Services picker ---------- */
+    /* ----------------------------------------------------------
+       SERVICES PICKER
+       ---------------------------------------------------------- */
     function renderServices(list) {
-      var wrap = $('#servicesPicker');
+      var wrap = document.getElementById('servicesPicker');
       if (!wrap) return;
 
-      if (!list || !list.length) list = FALLBACK_SERVICES;
+      if (!Array.isArray(list) || !list.length) {
+        list = FALLBACK_SERVICES;
+      }
 
-      wrap.innerHTML = list.map(function (s) {
-        var icon = resolveIcon(s.icon);
-        return (
-          '<label class="service-tile">' +
-            '<input type="checkbox" name="services" value="' + escapeHtml(s.slug || s.name) + '" />' +
-            '<span class="service-tile-body">' +
-              '<span class="service-tile-icon">' + icon + '</span>' +
-              '<span class="service-tile-name">' + escapeHtml(s.name) + '</span>' +
-              '<span class="service-tile-check" aria-hidden="true">' +
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+      var html = list
+        .map(function (s) {
+          var icon = resolveIcon(s.icon);
+          var slug = s.slug || s.name;
+          return (
+            '<label class="service-tile">' +
+              '<input type="checkbox" name="services" value="' + escapeHtml(slug) + '" />' +
+              '<span class="service-tile-body">' +
+                '<span class="service-tile-icon">' + icon + '</span>' +
+                '<span class="service-tile-name">' + escapeHtml(s.name) + '</span>' +
+                '<span class="service-tile-check" aria-hidden="true">' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+                '</span>' +
               '</span>' +
-            '</span>' +
-          '</label>'
-        );
-      }).join('');
+            '</label>'
+          );
+        })
+        .join('');
 
+      wrap.innerHTML = html;
+
+      // Clear error on any check
       $$('#servicesPicker input[type="checkbox"]').forEach(function (cb) {
         cb.addEventListener('change', function () {
           var any = $$('#servicesPicker input[type="checkbox"]:checked').length > 0;
@@ -1799,51 +2040,76 @@
     }
 
     function loadServices() {
-      fetch('/api/services')
-        .then(function (r) {
-          if (!r.ok) throw new Error('bad');
-          return r.json();
-        })
-        .then(function (data) {
-          services = (Array.isArray(data) && data.length) ? data : FALLBACK_SERVICES;
-          renderServices(services);
+      var promise;
+
+      if (window.api && typeof window.api.getServices === 'function') {
+        promise = window.api.getServices();
+      } else {
+        promise = fetch(API_BASE + '/api/services', {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        }).then(function (r) {
+          return r.json().then(
+            function (data) { return { ok: r.ok, status: r.status, data: data }; },
+            function () { return { ok: r.ok, status: r.status, data: null }; }
+          );
+        }).catch(function () {
+          return { ok: false, status: 0, data: null };
+        });
+      }
+
+      promise
+        .then(function (res) {
+          if (res && res.ok && Array.isArray(res.data) && res.data.length) {
+            state.services = res.data;
+          } else {
+            state.services = FALLBACK_SERVICES;
+          }
+          renderServices(state.services);
         })
         .catch(function () {
-          services = FALLBACK_SERVICES;
-          renderServices(services);
+          state.services = FALLBACK_SERVICES;
+          renderServices(state.services);
         });
     }
 
-    /* ---------- Form data + review ---------- */
+    /* ----------------------------------------------------------
+       COLLECT FORM DATA
+       ---------------------------------------------------------- */
     function getFormData() {
       var servicesChecked = $$('#servicesPicker input[type="checkbox"]:checked')
         .map(function (cb) { return cb.value; });
+
       var channelsChecked = $$('#channelsGroup input[type="checkbox"]:checked')
         .map(function (cb) { return cb.value; });
-      var method = document.querySelector('input[name="contactMethod"]:checked');
+
+      var methodEl = document.querySelector('input[name="contactMethod"]:checked');
 
       return {
-        fullName: ($('#fullName') || {}).value || '',
-        email: ($('#email') || {}).value || '',
-        phone: ($('#phone') || {}).value || '',
-        businessName: ($('#businessName') || {}).value || '',
-        industry: ($('#industry') || {}).value || '',
-        location: ($('#location') || {}).value || '',
-        website: ($('#website') || {}).value || '',
+        fullName: val('fullName'),
+        email: val('email'),
+        phone: val('phone'),
+        businessName: val('businessName'),
+        industry: val('industry'),
+        location: val('location'),
+        website: val('website'),
         services: servicesChecked,
-        requirements: ($('#requirements') || {}).value || '',
-        employees: ($('#employees') || {}).value || '',
-        messagesPerDay: ($('#messagesPerDay') || {}).value || '',
-        callsPerDay: ($('#callsPerDay') || {}).value || '',
-        currentCrm: ($('#currentCrm') || {}).value || '',
+        requirements: val('requirements'),
+        employees: val('employees'),
+        messagesPerDay: val('messagesPerDay'),
+        callsPerDay: val('callsPerDay'),
+        currentCrm: val('currentCrm'),
         channels: channelsChecked,
-        contactMethod: method ? method.value : ''
+        contactMethod: methodEl ? methodEl.value : ''
       };
     }
 
+    /* ----------------------------------------------------------
+       REVIEW RENDER
+       ---------------------------------------------------------- */
     function renderReview() {
       var d = getFormData();
-      var card = $('#reviewCard');
+      var card = document.getElementById('reviewCard');
       if (!card) return;
 
       var methodLabels = {
@@ -1863,12 +2129,13 @@
       }
 
       function listRow(label, arr) {
-        var v = (arr && arr.length) ? arr.join(', ') : '—';
+        var v = arr && arr.length ? arr.join(', ') : '—';
         return row(label, v);
       }
 
       card.innerHTML =
-        '<div class="review-block"><h3>Business</h3>' +
+        '<div class="review-block">' +
+          '<h3>Business</h3>' +
           row('Name', d.fullName) +
           row('Email', d.email) +
           row('Phone', d.phone) +
@@ -1877,28 +2144,35 @@
           row('Location', d.location) +
           row('Website', d.website) +
         '</div>' +
-        '<div class="review-block"><h3>AI Employees</h3>' +
+        '<div class="review-block">' +
+          '<h3>AI Employees</h3>' +
           listRow('Selected', d.services) +
         '</div>' +
-        '<div class="review-block"><h3>Requirements</h3>' +
+        '<div class="review-block">' +
+          '<h3>Requirements</h3>' +
           '<p class="review-text">' + (d.requirements ? escapeHtml(d.requirements) : '—') + '</p>' +
         '</div>' +
-        '<div class="review-block"><h3>Scale</h3>' +
+        '<div class="review-block">' +
+          '<h3>Scale</h3>' +
           row('Employees', d.employees) +
           row('Messages / day', d.messagesPerDay) +
           row('Calls / day', d.callsPerDay) +
           row('Current CRM', d.currentCrm) +
           listRow('Channels', d.channels) +
         '</div>' +
-        '<div class="review-block"><h3>Contact</h3>' +
+        '<div class="review-block">' +
+          '<h3>Contact</h3>' +
           row('Preferred method', methodLabels[d.contactMethod] || d.contactMethod) +
         '</div>';
     }
 
-    /* ---------- Submit ---------- */
+    /* ----------------------------------------------------------
+       SUBMISSION
+       ---------------------------------------------------------- */
     function submitForm(e) {
       e.preventDefault();
 
+      // Re-validate all critical steps
       for (var i = 1; i <= 5; i++) {
         if (!validateStep(i)) {
           goToStep(i);
@@ -1908,7 +2182,7 @@
       }
 
       var payload = getFormData();
-      var btn = $('#submitBtn');
+      var btn = document.getElementById('submitBtn');
       var label = btn ? btn.querySelector('.btn-label') : null;
       var spinner = btn ? btn.querySelector('.btn-spinner') : null;
       var arrow = btn ? btn.querySelector('.btn-arrow') : null;
@@ -1920,40 +2194,54 @@
 
       hideAlert();
 
-      fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-        .then(function (r) {
+      var promise;
+
+      if (window.api && typeof window.api.createOrder === 'function') {
+        promise = window.api.createOrder(payload);
+      } else {
+        promise = fetch(API_BASE + '/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (r) {
           return r.json().then(
-            function (data) {
-              return { ok: r.ok, status: r.status, data: data };
-            },
-            function () {
-              return { ok: r.ok, status: r.status, data: null };
-            }
+            function (data) { return { ok: r.ok, status: r.status, data: data }; },
+            function () { return { ok: r.ok, status: r.status, data: null }; }
           );
-        })
+        }).catch(function (err) {
+          return { ok: false, status: 0, data: null, networkError: true, error: err };
+        });
+      }
+
+      promise
         .then(function (res) {
           if (!res.ok) {
             throw new Error((res.data && res.data.error) || 'Submission failed.');
           }
-          var orderNum = (res.data && res.data.order_number) || 'SGM-' + Math.floor(10000 + Math.random() * 90000);
+
+          var orderNum =
+            (res.data && res.data.order_number) ||
+            'SGM-' + Math.floor(10000 + Math.random() * 90000);
+
           showSuccess(orderNum);
+          showToast('Request submitted successfully!', 'success');
         })
         .catch(function (err) {
-          var msg = err && err.message ? err.message : '';
+          var msg = (err && err.message) || 'Something went wrong. Please try again.';
+
+          // If it's a network error and we don't have a backend, still show success in demo mode
           var isNetwork = /Failed to fetch|NetworkError|Load failed/i.test(msg);
 
-          /* Demo fallback when backend isn't running */
           if (isNetwork) {
             var demoNum = 'SGM-' + Math.floor(10000 + Math.random() * 90000);
             showSuccess(demoNum);
+            showToast('Demo mode: request submitted.', 'success');
             return;
           }
 
-          showAlert(msg || 'Something went wrong. Please try again.', 'error');
+          showAlert(msg, 'error');
+          showToast(msg, 'error');
+
           if (btn) btn.disabled = false;
           if (label) label.textContent = 'Submit request';
           if (spinner) spinner.hidden = true;
@@ -1962,11 +2250,11 @@
     }
 
     function showSuccess(orderNumber) {
-      var form = $('#requestForm');
-      var stepper = $('#stepper');
-      var section = $('#requestSection');
-      var success = $('#successView');
-      var orderEl = $('#orderNumber');
+      var form = document.getElementById('requestForm');
+      var stepper = document.getElementById('stepper');
+      var section = document.getElementById('requestSection');
+      var success = document.getElementById('successView');
+      var orderEl = document.getElementById('orderNumber');
 
       if (form) form.hidden = true;
       if (stepper) stepper.hidden = true;
@@ -1978,7 +2266,9 @@
       }
     }
 
-    /* ---------- Wiring ---------- */
+    /* ----------------------------------------------------------
+       NAVIGATION WIRING
+       ---------------------------------------------------------- */
     function wireNav() {
       $$('[data-next]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -1996,52 +2286,33 @@
       });
     }
 
+    /* ----------------------------------------------------------
+       CONTACT METHOD — clear error on change
+       ---------------------------------------------------------- */
     function wireContactMethods() {
       $$('input[name="contactMethod"]').forEach(function (r) {
-        r.addEventListener('change', function () { setError('contactMethod', ''); });
+        r.addEventListener('change', function () {
+          setError('contactMethod', '');
+        });
       });
     }
 
+    /* ----------------------------------------------------------
+       CHARACTER COUNTER FOR REQUIREMENTS
+       ---------------------------------------------------------- */
     function wireCharCounter() {
-      var ta = $('#requirements');
-      var counter = $('#reqCount');
+      var ta = document.getElementById('requirements');
+      var counter = document.getElementById('reqCount');
       if (!ta || !counter) return;
+
       ta.addEventListener('input', function () {
         counter.textContent = String(ta.value.length);
       });
     }
 
-    function wireNavbar() {
-      var navbar = $('#navbar');
-      if (navbar) {
-        var onScroll = function () {
-          if (window.scrollY > 20) navbar.classList.add('scrolled');
-          else navbar.classList.remove('scrolled');
-        };
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-      }
-
-      var navToggle = $('#navToggle');
-      var navLinks = $('#navLinks');
-      if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function () {
-          var open = navLinks.classList.toggle('open');
-          navToggle.setAttribute('aria-expanded', String(open));
-        });
-
-        // Close mobile menu when a link is clicked
-        $$('a', navLinks).forEach(function (a) {
-          a.addEventListener('click', function () {
-            if (window.innerWidth < 900) {
-              navLinks.classList.remove('open');
-              navToggle.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
-      }
-    }
-
+    /* ----------------------------------------------------------
+       URL PARAM PREFILL
+       ---------------------------------------------------------- */
     function applyUrlParams() {
       try {
         var params = new URLSearchParams(window.location.search);
@@ -2049,43 +2320,54 @@
         var service = params.get('service');
 
         if (plan) {
-          var alertBox = $('#formAlert');
+          var alertBox = document.getElementById('formAlert');
           if (alertBox) {
             alertBox.className = 'auth-alert info';
-            alertBox.textContent = 'You selected the "' + plan + '" plan. Fill in your details and we\'ll tailor the setup.';
+            alertBox.textContent =
+              'You selected the "' + plan + '" plan. Fill in your details and we\'ll tailor the setup.';
             alertBox.hidden = false;
           }
         }
 
         if (service) {
+          // Wait for services to render, then check the matching tile
           var attempts = 0;
           var check = setInterval(function () {
             attempts++;
             var cb = document.querySelector('#servicesPicker input[value="' + service + '"]');
-            if (cb) { cb.checked = true; clearInterval(check); }
-            if (attempts > 20) clearInterval(check);
+            if (cb) {
+              cb.checked = true;
+              clearInterval(check);
+            }
+            if (attempts > 30) clearInterval(check);
           }, 100);
         }
       } catch (e) { /* silent */ }
     }
 
+    /* ----------------------------------------------------------
+       YEAR AUTO-FILL
+       ---------------------------------------------------------- */
     function initYear() {
-      var el = $('#year');
-      if (el) el.textContent = String(new Date().getFullYear());
+      var el = document.getElementById('year');
+      if (el) {
+        el.textContent = String(new Date().getFullYear());
+      }
     }
 
-    /* ---------- Boot ---------- */
+    /* ----------------------------------------------------------
+       BOOT
+       ---------------------------------------------------------- */
     function init() {
-      document.documentElement.classList.add('js-ready');
-      wireNavbar();
+      initYear();
+      initNavbar();
       loadServices();
       wireNav();
       wireContactMethods();
       wireCharCounter();
       updateStepper();
-      initYear();
 
-      var form = $('#requestForm');
+      var form = document.getElementById('requestForm');
       if (form) form.addEventListener('submit', submitForm);
 
       applyUrlParams();

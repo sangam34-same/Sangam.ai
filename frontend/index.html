@@ -4,22 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Sangam.ai — AI Employees for Modern Businesses</title>
+  <title>Sangam.ai — AI Automation for Modern Businesses</title>
   <meta name="description" content="Sangam.ai deploys AI employees that automate conversations, bookings, support and workflows across WhatsApp, Instagram, email and voice — 24/7." />
   <meta name="theme-color" content="#0a0512" />
   <link rel="canonical" href="https://sangam.ai/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Sangam.ai — AI Employees for Modern Businesses" />
+  <meta property="og:title" content="Sangam.ai — AI Automation for Modern Businesses" />
   <meta property="og:description" content="Automate conversations, bookings, support and workflows with AI that works 24/7." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="icon" type="image/png" href="images/logo.png" />
 
-  <!-- Site config -->
+  <!-- Tailwind CSS (for the hero) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8B5CF6',
+              violet: '#6D28D9',
+              accent: '#A855F7',
+              dark: '#07070d',
+              card: '#0f101d'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
   <script>
     window.SANGAM_CONFIG = {
       API_BASE: window.location.origin,
@@ -112,7 +135,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-padding-top: 120px;
+    scroll-padding-top: 100px;
   }
 
   body {
@@ -165,8 +188,8 @@
   }
   .container-tight { max-width: var(--container-tight); }
 
-  .section { padding: 120px 0; position: relative; }
-  .section-sm { padding: 80px 0; }
+  .section { padding: 80px 0; position: relative; }
+  .section-sm { padding: 56px 0; }
 
   .theme-light {
     background: var(--cream);
@@ -177,8 +200,8 @@
   .theme-light p { color: var(--ltext-2); }
 
   @media (max-width: 768px) {
-    .section { padding: 80px 0; }
-    .section-sm { padding: 60px 0; }
+    .section { padding: 56px 0; }
+    .section-sm { padding: 40px 0; }
     .container { padding: 0 20px; }
   }
 
@@ -319,8 +342,8 @@
   html:not(.js-ready) .reveal { opacity: 1; transform: none; }
   html.js-ready .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
   html.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -334,7 +357,7 @@
     font-family: inherit;
     font-size: 15px;
     font-weight: 600;
-    padding: 13px 26px;
+    padding: 12px 24px;
     border-radius: var(--r-full);
     border: 1px solid transparent;
     cursor: pointer;
@@ -347,7 +370,7 @@
   .btn svg { width: 17px; height: 17px; transition: transform var(--t-base); flex-shrink: 0; }
   .btn:hover svg { transform: translateX(3px); }
   .btn-sm { padding: 9px 18px; font-size: 13.5px; }
-  .btn-lg { padding: 16px 32px; font-size: 16px; }
+  .btn-lg { padding: 15px 28px; font-size: 16px; }
   .btn-block { width: 100%; }
 
   .btn-primary {
@@ -384,7 +407,7 @@
   }
 
   /* ============================================================
-     NAVBAR — Slim, clean, uncluttered
+     NAVBAR
      ============================================================ */
   .navbar {
     position: fixed;
@@ -435,7 +458,6 @@
       0 0 80px rgba(108, 59, 255, 0.12);
   }
 
-  /* ---------- Back button ---------- */
   .nav-back {
     display: inline-flex;
     align-items: center;
@@ -457,16 +479,9 @@
     transform: translateX(-2px);
   }
 
-  .nav-back svg {
-    width: 16px;
-    height: 16px;
-  }
+  .nav-back svg { width: 16px; height: 16px; }
+  .nav-back[hidden] { display: none; }
 
-  .nav-back[hidden] {
-    display: none;
-  }
-
-  /* ---------- Brand ---------- */
   .logo {
     display: inline-flex;
     align-items: center;
@@ -508,12 +523,12 @@
   .logo-text { color: var(--text-1); }
   .logo-dot { color: var(--brand-400); }
 
-  /* ---------- Nav links ---------- */
   .nav-links {
     display: flex;
     align-items: center;
     gap: 2px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: 12px;
   }
 
   .nav-links a {
@@ -559,7 +574,6 @@
     box-shadow: 0 0 10px rgba(139, 92, 246, 0.9);
   }
 
-  /* ---------- Right actions ---------- */
   .nav-actions {
     display: flex;
     align-items: center;
@@ -581,45 +595,90 @@
     background: rgba(255, 255, 255, 0.05);
   }
 
+  /* Unique Sign up free button */
   .nav-cta {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 10px 18px;
+    padding: 10px 20px;
+    font-family: inherit;
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     color: #fff;
     border-radius: 999px;
-    background: var(--grad-primary);
+    background:
+      linear-gradient(135deg, #a855f7 0%, #6366f1 45%, #06b6d4 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    overflow: hidden;
+    isolation: isolate;
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 6px 20px rgba(108, 59, 255, 0.35);
-    transition: all var(--t-base);
-    position: relative;
-    text-decoration: none;
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 6px 20px rgba(108, 59, 255, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 80%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 2;
   }
 
   .nav-cta::after {
     content: '';
     position: absolute;
-    inset: -3px;
+    inset: -2px;
     border-radius: inherit;
-    background: var(--grad-primary);
+    background:
+      conic-gradient(from 0deg,
+        rgba(168, 85, 247, 0.9),
+        rgba(99, 102, 241, 0.9),
+        rgba(6, 182, 212, 0.9),
+        rgba(236, 72, 153, 0.9),
+        rgba(168, 85, 247, 0.9));
     opacity: 0;
-    filter: blur(14px);
+    filter: blur(10px);
     z-index: -1;
-    transition: opacity var(--t-base);
+    transition: opacity 0.4s ease;
+    animation: ctaHaloSpin 6s linear infinite;
+  }
+
+  @keyframes ctaHaloSpin {
+    to { transform: rotate(360deg); }
   }
 
   .nav-cta:hover {
-    transform: translateY(-2px);
+    background-position: 100% 50%;
+    transform: translateY(-2px) scale(1.02);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      0 10px 40px rgba(139, 92, 246, 0.6);
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 12px 34px rgba(139, 92, 246, 0.6),
+      0 0 60px rgba(6, 182, 212, 0.4);
   }
 
-  .nav-cta:hover::after { opacity: 0.7; }
+  .nav-cta:hover::before { left: 120%; }
+  .nav-cta:hover::after { opacity: 1; }
+  .nav-cta:active { transform: translateY(0) scale(0.98); }
+
+  .nav-cta > * { position: relative; z-index: 3; }
 
   .nav-cta svg {
     width: 14px;
@@ -627,9 +686,8 @@
     transition: transform var(--t-base);
   }
 
-  .nav-cta:hover svg { transform: translateX(3px); }
+  .nav-cta:hover svg { transform: translateX(4px); }
 
-  /* ---------- Mobile toggle ---------- */
   .nav-toggle {
     display: none;
     width: 40px;
@@ -713,328 +771,53 @@
     .nav-cta { padding: 10px; }
   }
 
-  /* ---------- HERO ---------- */
-  .hero {
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero-new {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 180px 0 100px;
+    min-height: auto;
+    padding: 116px 0 40px;
     overflow: hidden;
+    background: #07070d;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -20%; left: 50%;
-    transform: translateX(-50%);
-    width: 120%; height: 70%;
-    background: radial-gradient(ellipse at center bottom,
-      rgba(139, 92, 246, 0.38) 0%, rgba(108, 59, 255, 0.15) 30%, transparent 70%);
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
+
+  .hero-new .bg-grid-mesh {
+    background-size: 48px 48px;
     background-image:
-      linear-gradient(to right, rgba(139, 92, 246, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(139, 92, 246, 0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(circle at 50% 60%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(circle at 50% 60%, black 20%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+      linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   }
 
-  .hero-brand {
-    position: absolute;
-    top: 110px;
-    right: 40px;
-    z-index: 3;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 18px 10px 10px;
-    border-radius: var(--r-full);
-    background: rgba(15, 10, 25, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(108, 59, 255, 0.15);
-    transition: all var(--t-base);
+  .hero-new .brain-glow {
+    animation: brainBreathe 4.5s ease-in-out infinite alternate;
   }
-  .hero-brand:hover {
-    border-color: var(--brand-500);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(139, 92, 246, 0.4);
-    transform: translateY(-2px);
-  }
-  .hero-brand img {
-    width: 44px; height: 44px;
-    object-fit: contain;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 4px;
-  }
-  .hero-brand-text { display: flex; flex-direction: column; gap: 2px; }
-  .hero-brand-text strong {
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text-1);
-  }
-  .hero-brand-text span {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    color: var(--brand-300);
-    letter-spacing: 0.05em;
-  }
-  @media (max-width: 900px) {
-    .hero-brand { top: 90px; right: 20px; padding: 8px 14px 8px 8px; }
-    .hero-brand img { width: 38px; height: 38px; }
-    .hero-brand-text span { display: none; }
-  }
-  @media (max-width: 500px) { .hero-brand { display: none; } }
-
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  @media (max-width: 1024px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+  @keyframes brainBreathe {
+    0% {
+      box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.3), inset 0 0 18px rgba(139, 92, 246, 0.15);
+    }
+    100% {
+      box-shadow: 0 0 60px 4px rgba(139, 92, 246, 0.55), inset 0 0 25px rgba(168, 85, 247, 0.3);
+    }
   }
 
-  .hero-content { max-width: 600px; }
-  @media (max-width: 1024px) { .hero-content { margin: 0 auto; } }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    border-radius: var(--r-full);
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--brand-300);
-    margin-bottom: 32px;
+  .hero-new .subnode-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .hero-badge-icon {
-    width: 8px; height: 8px;
-    border-radius: 2px;
-    background: var(--brand-400);
-    box-shadow: 0 0 12px var(--brand-400);
-    transform: rotate(45deg);
+  .hero-new .subnode-card:hover {
+    transform: translateY(-2px) scale(1.05);
   }
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(40px, 5.5vw, 76px);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.035em;
-    margin-bottom: 26px;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(16px, 1.7vw, 19px);
-    color: var(--text-2);
-    line-height: 1.65;
-    margin-bottom: 40px;
-    max-width: 560px;
-  }
-  @media (max-width: 1024px) { .hero-subtitle { margin-left: auto; margin-right: auto; } }
-
-  .hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 56px;
-  }
-  @media (max-width: 1024px) { .hero-cta { justify-content: center; } }
-
-  .hero-trust {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
-  }
-  @media (max-width: 1024px) { .hero-trust { justify-content: center; } }
-
-  .trust-item { display: flex; flex-direction: column; gap: 3px; }
-  .trust-item strong {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-  .trust-item span {
-    font-size: 11px;
-    color: var(--text-4);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 600;
-  }
-  .trust-divider { width: 1px; height: 34px; background: var(--border-1); }
-
-  /* ---------- HERO VISUAL — uniform icons, s.ai hub ---------- */
-  .hero-visual {
-    position: relative;
-    width: 100%;
-    max-width: 560px;
-    aspect-ratio: 1 / 1.05;
-    margin: 0 auto;
-  }
-
-  .hero-visual svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  .trace {
-    fill: none;
-    stroke: rgba(167, 139, 250, 0.3);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .trace-light {
-    fill: none;
-    stroke: url(#lightGrad);
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 100 2000;
-    stroke-dashoffset: 100;
-    filter:
-      drop-shadow(0 0 6px rgba(236, 72, 153, 1))
-      drop-shadow(0 0 14px rgba(167, 139, 250, 0.9))
-      drop-shadow(0 0 28px rgba(139, 92, 246, 0.5));
-    animation: travelOut 5.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  }
-
-  .trace-light.t1 { animation-delay: 0s; }
-  .trace-light.t2 { animation-delay: 0.6s; }
-  .trace-light.t3 { animation-delay: 1.2s; }
-  .trace-light.t4 { animation-delay: 1.8s; }
-  .trace-light.t5 { animation-delay: 2.4s; }
-  .trace-light.t6 { animation-delay: 3.0s; }
-  .trace-light.t7 { animation-delay: 3.6s; }
-  .trace-light.t8 { animation-delay: 4.2s; }
-
-  @keyframes travelOut {
-    0%   { stroke-dashoffset: 100; opacity: 0; }
-    8%   { opacity: 1; }
-    35%  { stroke-dashoffset: 0; opacity: 1; }
-    60%  { opacity: 0; }
-    100% { stroke-dashoffset: 0; opacity: 0; }
-  }
-
-  .node-flash {
-    opacity: 0;
-    animation: nodeFlash 5.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  }
-  .node-flash.n1 { animation-delay: 0.35s; }
-  .node-flash.n2 { animation-delay: 0.95s; }
-  .node-flash.n3 { animation-delay: 1.55s; }
-  .node-flash.n4 { animation-delay: 2.15s; }
-  .node-flash.n5 { animation-delay: 2.75s; }
-  .node-flash.n6 { animation-delay: 3.35s; }
-  .node-flash.n7 { animation-delay: 3.95s; }
-  .node-flash.n8 { animation-delay: 4.55s; }
-
-  @keyframes nodeFlash {
-    0%, 12%, 100% { opacity: 0; }
-    16%           { opacity: 0.85; }
-    22%           { opacity: 0; }
-  }
-
-  .hub-glow {
-    fill: url(#hubGlow);
-    opacity: 0.85;
-    animation: hubGlowPulse 4s ease-in-out infinite;
-  }
-  @keyframes hubGlowPulse {
-    0%, 100% { opacity: 0.6; }
-    50%      { opacity: 1; }
-  }
-
-  .hub-rect {
-    fill: #16102e;
-    stroke: rgba(196, 181, 253, 0.75);
-    stroke-width: 1.6;
-  }
-
-  .hub-ring {
-    fill: none;
-    stroke: url(#hubRingGrad);
-    stroke-width: 2;
-    stroke-linecap: round;
-    transform-origin: 360px 380px;
-    animation: hubRingSpin 10s linear infinite;
-    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.9));
-  }
-  @keyframes hubRingSpin { to { transform: rotate(360deg); } }
-
-  .hub-wordmark {
-    font-family: var(--font-display);
-    font-size: 56px;
-    font-weight: 800;
-    letter-spacing: -0.05em;
-    text-anchor: middle;
-    dominant-baseline: middle;
-    fill: #ffffff;
-  }
-  .hub-wordmark-dot { fill: var(--brand-400); }
-
-  .node-rect {
-    fill: #17102c;
-    stroke: rgba(196, 181, 253, 0.35);
-    stroke-width: 1.3;
-    transition: all var(--t-base);
-  }
-  .node-group { cursor: pointer; }
-  .node-group:hover .node-rect {
-    stroke: rgba(196, 181, 253, 0.9);
-    fill: #1e1640;
-    filter: drop-shadow(0 0 22px rgba(139, 92, 246, 0.6));
-  }
-
-  .node-icon {
-    stroke: rgba(255, 255, 255, 0.92);
-    stroke-width: 1.6;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .node-icon-fill {
-    fill: rgba(255, 255, 255, 0.92);
-    stroke: none;
-  }
-
-  @media (max-width: 1024px) { .hero-visual { max-width: 480px; } }
-  @media (max-width: 640px) { .hero-visual { max-width: 360px; } }
-
-  /* ---------- LIGHT SECTION ---------- */
+  /* ============================================================
+     LIGHT SECTION — with premium chat automation visual
+     ============================================================ */
   .theme-light { position: relative; overflow: hidden; }
   .light-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 24px;
     align-items: stretch;
-    margin-top: 56px;
+    margin-top: 36px;
   }
   @media (max-width: 900px) { .light-grid { grid-template-columns: 1fr; } }
 
@@ -1042,53 +825,130 @@
     position: relative;
     border-radius: var(--r-xl);
     overflow: hidden;
-    background: linear-gradient(160deg, #1a0d2e 0%, #0a0512 100%);
-    aspect-ratio: 4/5;
+    background: radial-gradient(circle at 50% 40%, #1f1235 0%, #0f0720 45%, #08040f 100%);
+    aspect-ratio: 4/3.4;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 32px;
+    padding: 28px;
     isolation: isolate;
   }
+
+  /* Ambient nebula glow (behind all) */
   .light-card-media::before {
     content: '';
     position: absolute;
-    top: 10%; left: 50%;
-    transform: translateX(-50%);
-    width: 60%; height: 60%;
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; height: 80%;
     background: radial-gradient(circle,
-      rgba(167, 139, 250, 0.8) 0%,
-      rgba(236, 72, 153, 0.6) 30%,
-      transparent 70%);
-    filter: blur(60px);
-    animation: nebulaFlow 8s ease-in-out infinite;
+      rgba(167, 139, 250, 0.55) 0%,
+      rgba(236, 72, 153, 0.35) 30%,
+      transparent 65%);
+    filter: blur(70px);
+    animation: nebulaFlow 9s ease-in-out infinite;
     z-index: 0;
+    pointer-events: none;
   }
+
+  /* Bottom gradient to keep text legible */
   .light-card-media::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(10, 5, 18, 0.95), transparent 60%);
-    z-index: 1;
+    background: linear-gradient(to top, rgba(8, 4, 15, 0.98) 0%, rgba(8, 4, 15, 0.6) 32%, transparent 62%);
+    z-index: 2;
+    pointer-events: none;
   }
-  @keyframes nebulaFlow {
-    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
-    50%      { transform: translateX(-50%) scale(1.15); opacity: 1; }
-  }
-  .light-card-media > * { position: relative; z-index: 2; color: #fff; }
 
+  @keyframes nebulaFlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+    50%      { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  }
+
+  /* Text sits above visual */
+  .light-card-media > * { position: relative; z-index: 4; color: #fff; }
+
+  /* ============================================================
+     PREMIUM ANIMATED VISUAL — Neural network of AI agents
+     ============================================================ */
+  .chat-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* SVG layer: connections, orbits, nodes */
+  .chat-visual svg.neural-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Rotating conic shimmer — subtle premium sweep */
+  .chat-visual::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      rgba(167, 139, 250, 0.10) 15%,
+      rgba(236, 72, 153, 0.10) 30%,
+      transparent 45%,
+      transparent 100%
+    );
+    animation: chatSweepSpin 24s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes chatSweepSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Tiny traveling pulses along links (rendered with SVG <animateMotion>) */
+
+  /* Ambient floating particles */
+  .chat-sparkle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(196, 181, 253, 0.95);
+    box-shadow: 0 0 10px rgba(196, 181, 253, 1);
+    animation: sparkleTwinkle 4s ease-in-out infinite;
+  }
+  .chat-sparkle.s1 { top: 14%; left: 82%; animation-delay: 0s; }
+  .chat-sparkle.s2 { top: 24%; left: 12%; animation-delay: 0.7s; }
+  .chat-sparkle.s3 { top: 62%; left: 88%; animation-delay: 1.4s; }
+  .chat-sparkle.s4 { top: 78%; left: 22%; animation-delay: 2.1s; }
+  .chat-sparkle.s5 { top: 42%; left: 6%; animation-delay: 2.8s; }
+  .chat-sparkle.s6 { top: 58%; left: 48%; animation-delay: 3.5s; }
+
+  @keyframes sparkleTwinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.7); }
+    50%      { opacity: 1; transform: scale(1.35); }
+  }
+
+  /* ============================================================
+     Light card title + link (top-most layer)
+     ============================================================ */
   .light-card-title {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
     color: #fff;
+    max-width: 92%;
   }
   .light-card-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 14px;
     font-weight: 600;
     color: var(--brand-300);
@@ -1096,12 +956,12 @@
   .light-card-link svg { width: 15px; height: 15px; }
 
   .light-card-body {
-    padding: 40px 40px 40px 0;
+    padding: 24px 32px 24px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  @media (max-width: 900px) { .light-card-body { padding: 20px 0 0; } }
+  @media (max-width: 900px) { .light-card-body { padding: 4px 0 0; } }
 
   .light-card-body h3 {
     font-family: var(--font-display);
@@ -1109,14 +969,14 @@
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     color: var(--ltext-1);
   }
   .light-card-body p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15.5px;
+    line-height: 1.65;
     color: var(--ltext-2);
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
 
   .feature-tags {
@@ -1129,11 +989,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 18px;
+    padding: 12px 16px;
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(17, 16, 20, 0.08);
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     color: var(--ltext-1);
     transition: all var(--t-base);
@@ -1144,33 +1004,33 @@
     box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
   }
   .feature-tag-icon {
-    width: 32px; height: 32px;
+    width: 30px; height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 9px;
     background: var(--grad-primary);
     color: #fff;
     flex-shrink: 0;
   }
-  .feature-tag-icon svg { width: 16px; height: 16px; }
+  .feature-tag-icon svg { width: 15px; height: 15px; }
 
   /* ---------- SECTION HEAD ---------- */
-  .section-head { text-align: center; max-width: 780px; margin: 0 auto 64px; }
+  .section-head { text-align: center; max-width: 780px; margin: 0 auto 40px; }
   .section-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--brand-300);
-    padding: 8px 16px;
+    padding: 6px 14px;
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--r-full);
     background: rgba(139, 92, 246, 0.08);
-    margin-bottom: 24px;
+    margin-bottom: 18px;
   }
   .section-eyebrow::before {
     content: '';
@@ -1181,25 +1041,25 @@
   }
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(32px, 5vw, 64px);
+    font-size: clamp(30px, 4.4vw, 52px);
     font-weight: 800;
-    line-height: 1.05;
+    line-height: 1.08;
     letter-spacing: -0.03em;
-    margin-bottom: 22px;
+    margin-bottom: 16px;
   }
   .section-subtitle {
-    font-size: clamp(16px, 1.7vw, 19px);
+    font-size: clamp(15px, 1.6vw, 17px);
     color: var(--text-2);
-    line-height: 1.65;
+    line-height: 1.6;
     max-width: 620px;
     margin: 0 auto;
   }
 
   /* ---------- BENTO ---------- */
-  .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+  .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .bento-item {
     position: relative;
-    padding: 32px 28px;
+    padding: 28px 24px;
     border-radius: var(--r-lg);
     background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--border-1);
@@ -1207,7 +1067,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 260px;
+    min-height: 220px;
   }
   .bento-item::before {
     content: '';
@@ -1240,29 +1100,29 @@
     .bento-1, .bento-2, .bento-3, .bento-4, .bento-5 { grid-column: span 1; }
   }
   .bento-icon {
-    width: 46px; height: 46px;
+    width: 44px; height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 14px;
+    border-radius: 13px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(108, 59, 255, 0.08));
     border: 1px solid rgba(139, 92, 246, 0.3);
     color: var(--brand-300);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     flex-shrink: 0;
   }
   .bento-icon svg { width: 22px; height: 22px; }
   .bento-item h3 {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     line-height: 1.3;
   }
-  .bento-item p { font-size: 14px; color: var(--text-3); line-height: 1.6; flex: 1; }
+  .bento-item p { font-size: 13.5px; color: var(--text-3); line-height: 1.6; flex: 1; }
   .bento-tag {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 3px 10px;
     font-size: 10.5px;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -1271,255 +1131,83 @@
     background: rgba(139, 92, 246, 0.12);
     border: 1px solid rgba(139, 92, 246, 0.25);
     border-radius: var(--r-full);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     align-self: flex-start;
-  }
-  .gpu-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    background: rgba(118, 185, 0, 0.1);
-    border: 1px solid rgba(118, 185, 0, 0.3);
-    border-radius: var(--r-sm);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #76b900;
-    margin-top: 16px;
-    align-self: flex-start;
-  }
-  .gpu-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: #76b900;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #76b900;
   }
 
-  /* ---------- GLOBE ---------- */
-  .globe-section { padding: 140px 0; position: relative; overflow: hidden; }
-  .globe {
-    position: relative;
-    width: 100%;
-    max-width: 720px;
-    aspect-ratio: 1;
-    margin: 60px auto 0;
-    perspective: 1000px;
-  }
-  .globe-dots {
-    position: absolute;
-    inset: 15%;
-    border-radius: 50%;
-    background-image: radial-gradient(circle, rgba(196, 181, 253, 0.7) 1px, transparent 1.5px);
-    background-size: 12px 12px;
-    mask-image: radial-gradient(circle, black 60%, transparent 72%);
-    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 72%);
-    animation: globeRotate 60s linear infinite;
-    opacity: 0.55;
-  }
-  @keyframes globeRotate { to { background-position: 400px 0; } }
-  .globe-ring {
-    position: absolute;
-    inset: 5%;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    background:
-      linear-gradient(transparent, transparent) padding-box,
-      conic-gradient(from 0deg,
-        transparent 0%,
-        rgba(139, 92, 246, 0) 20%,
-        rgba(139, 92, 246, 0.9) 45%,
-        rgba(236, 72, 153, 0.7) 50%,
-        rgba(139, 92, 246, 0.9) 55%,
-        rgba(139, 92, 246, 0) 80%,
-        transparent 100%) border-box;
-    transform: rotateX(72deg);
-    animation: orbitSpin 14s linear infinite;
-    filter: drop-shadow(0 0 24px rgba(139, 92, 246, 0.7));
-  }
-  @keyframes orbitSpin {
-    from { transform: rotateX(72deg) rotateZ(0deg); }
-    to   { transform: rotateX(72deg) rotateZ(360deg); }
-  }
-  .globe::after {
-    content: '';
-    position: absolute;
-    bottom: 10%; left: 50%;
-    transform: translateX(-50%);
-    width: 60%; height: 20%;
-    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.6), transparent 70%);
-    filter: blur(40px);
-    pointer-events: none;
-  }
-  .globe-ping {
-    position: absolute;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--brand-400);
-    box-shadow: 0 0 12px var(--brand-400);
-    animation: pingPulse 2s ease-out infinite;
-  }
-  .globe-ping::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 1px solid var(--brand-400);
-    animation: pingRipple 2s ease-out infinite;
-  }
-  @keyframes pingPulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.6; }
-  }
-  @keyframes pingRipple {
-    0%   { transform: scale(1); opacity: 1; }
-    100% { transform: scale(3); opacity: 0; }
-  }
-  .globe-stats {
+  /* ---------- WHY AUTOMATION ---------- */
+  .why-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 720px;
-    margin: 60px auto 0;
+    gap: 16px;
+    margin-top: 36px;
   }
-  @media (max-width: 640px) { .globe-stats { grid-template-columns: 1fr; gap: 16px; } }
-  .globe-stat {
-    text-align: center;
-    padding: 24px 16px;
+  @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+
+  .why-card {
+    padding: 26px 24px;
     border-radius: var(--r-lg);
     border: 1px solid var(--border-1);
     background: var(--surface-1);
     transition: all var(--t-base);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
   }
-  .globe-stat:hover {
+  .why-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.12), transparent 55%);
+    opacity: 0;
+    transition: opacity var(--t-base);
+    pointer-events: none;
+  }
+  .why-card:hover {
+    transform: translateY(-4px);
     border-color: var(--border-brand);
     background: var(--surface-2);
-    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
   }
-  .globe-stat strong {
-    display: block;
+  .why-card:hover::before { opacity: 1; }
+
+  .why-stat {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 800;
     letter-spacing: -0.03em;
     background: var(--grad-primary);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    line-height: 1;
   }
-  .globe-stat span {
-    font-size: 12.5px;
+  .why-card h4 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why-card p {
+    font-size: 13.5px;
     color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
+    line-height: 1.6;
   }
-
-  /* ---------- PLAYGROUND ---------- */
-  .playground {
-    padding: 40px;
-    border-radius: var(--r-xl);
-    border: 1px solid var(--border-1);
-    background: rgba(15, 10, 25, 0.55);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  @media (max-width: 640px) { .playground { padding: 24px 20px; } }
-  .playground-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-  .playground-tab {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-3);
-    border-radius: var(--r-full);
-    border: 1px solid var(--border-1);
-    background: transparent;
-    transition: all var(--t-base);
-    cursor: pointer;
-  }
-  .playground-tab svg { width: 15px; height: 15px; }
-  .playground-tab:hover { color: var(--text-1); border-color: var(--border-2); }
-  .playground-tab.active {
-    background: var(--grad-primary);
-    border-color: transparent;
-    color: #fff;
-    box-shadow: var(--glow-sm);
-  }
-  .playground-prompt {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 8px 8px 20px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-1);
-    margin-bottom: 20px;
-    transition: all var(--t-base);
-  }
-  .playground-prompt:focus-within {
-    border-color: var(--brand-500);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
-  }
-  .playground-prompt input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 15px;
-    color: var(--text-1);
-    padding: 12px 0;
-  }
-  .playground-prompt input::placeholder { color: var(--text-4); }
-  .playground-submit {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    background: var(--grad-primary);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--t-base);
-    flex-shrink: 0;
-  }
-  .playground-submit svg { width: 20px; height: 20px; }
-  .playground-submit:hover { transform: scale(1.06); box-shadow: var(--glow-md); }
-  .playground-output {
-    border-radius: var(--r-lg);
-    border: 1px dashed var(--border-2);
-    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 60%), rgba(0, 0, 0, 0.2);
-    aspect-ratio: 16/9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .playground-output-inner { text-align: center; padding: 24px; }
-  .playground-output-inner svg {
-    width: 48px; height: 48px;
-    color: var(--brand-400);
-    margin: 0 auto 16px;
-    animation: spin 8s linear infinite;
-  }
-  .playground-output-inner p { font-size: 14px; color: var(--text-3); font-family: var(--font-mono); }
 
   /* ---------- USE-CASE ---------- */
   .usecase-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-top: 56px;
+    gap: 16px;
+    margin-top: 36px;
   }
   @media (max-width: 900px) { .usecase-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .usecase-grid { grid-template-columns: 1fr; } }
   .usecase-card {
-    padding: 24px;
+    padding: 22px;
     border-radius: var(--r-lg);
     border: 1px solid var(--border-1);
     background: var(--surface-1);
@@ -1532,90 +1220,80 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
   }
   .usecase-card-icon {
-    width: 40px; height: 40px;
-    border-radius: 12px;
+    width: 38px; height: 38px;
+    border-radius: 11px;
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--brand-300);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-  .usecase-card-icon svg { width: 20px; height: 20px; }
+  .usecase-card-icon svg { width: 19px; height: 19px; }
   .usecase-card h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 6px; }
   .usecase-card p { font-size: 13px; color: var(--text-3); line-height: 1.55; }
 
-  /* ---------- PRICING ---------- */
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
-  .pricing-card {
-    padding: 36px 32px;
-    border-radius: var(--r-xl);
-    border: 1px solid var(--border-1);
-    background: rgba(255, 255, 255, 0.02);
-    display: flex;
-    flex-direction: column;
+  /* ---------- PROCESS ---------- */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     position: relative;
-    transition: all var(--t-base);
   }
-  .pricing-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-brand);
-    background: rgba(139, 92, 246, 0.04);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  }
-  .pricing-card.featured {
-    border-color: rgba(139, 92, 246, 0.5);
-    background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02));
-    box-shadow: var(--glow-md);
-  }
-  .pricing-badge-top {
+  .process-grid::before {
+    content: '';
     position: absolute;
-    top: 24px; right: 24px;
-    padding: 5px 12px;
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #fff;
-    background: var(--grad-primary);
-    border-radius: var(--r-full);
+    top: 32px; left: 5%; right: 5%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.4), transparent);
+    z-index: 0;
   }
-  .pricing-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-  .pricing-desc { font-size: 13.5px; color: var(--text-3); margin-bottom: 24px; line-height: 1.5; }
-  .pricing-price {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border-1);
-    margin-bottom: 24px;
+  @media (max-width: 900px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-grid::before { display: none; }
   }
-  .pricing-currency { font-size: 18px; color: var(--text-2); font-weight: 600; }
-  .pricing-amount {
-    font-family: var(--font-display);
-    font-size: 44px;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
+  @media (max-width: 500px) { .process-grid { grid-template-columns: 1fr; } }
+
+  .process-step {
+    position: relative;
+    padding: 24px 20px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-1);
+    background: var(--surface-1);
+    transition: all var(--t-base);
+    z-index: 1;
   }
-  .pricing-period { font-size: 13px; color: var(--text-3); margin-left: 4px; }
-  .pricing-specs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; flex: 1; }
-  .pricing-spec {
-    display: flex;
+  .process-step:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-brand);
+    background: var(--surface-2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  .process-num {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    font-size: 13.5px;
-    padding: 8px 0;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--grad-primary);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    margin-bottom: 14px;
+    box-shadow: var(--glow-sm);
   }
-  .pricing-spec:last-child { border-bottom: none; }
-  .pricing-spec-label { color: var(--text-3); }
-  .pricing-spec-value { color: var(--text-1); font-weight: 600; font-family: var(--font-mono); font-size: 12.5px; }
+  .process-step h3 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .process-step p { font-size: 13px; color: var(--text-3); line-height: 1.55; }
 
   /* ---------- FAQ ---------- */
-  .faq { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
   .faq-item {
     border-radius: var(--r-md);
     border: 1px solid var(--border-1);
@@ -1635,8 +1313,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 22px 26px;
-    font-size: 15.5px;
+    padding: 18px 22px;
+    font-size: 15px;
     font-weight: 500;
     text-align: left;
   }
@@ -1662,16 +1340,16 @@
   }
   .faq-item.open .faq-answer { max-height: 500px; }
   .faq-answer p {
-    padding: 0 26px 24px;
-    font-size: 14.5px;
-    line-height: 1.7;
+    padding: 0 22px 20px;
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--text-3);
   }
 
   /* ---------- CONTACT BANNER ---------- */
   .contact-banner {
     position: relative;
-    padding: 100px 40px;
+    padding: 64px 40px;
     border-radius: var(--r-xl);
     overflow: hidden;
     background: linear-gradient(180deg, #0a0512 0%, #1a0d2e 100%);
@@ -1707,88 +1385,125 @@
   .contact-banner-content { position: relative; z-index: 1; }
   .contact-banner h2 {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 44px);
+    font-size: clamp(26px, 3.4vw, 38px);
     font-weight: 800;
     letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 20px;
+    line-height: 1.15;
+    margin-bottom: 14px;
     color: #fff;
   }
   .contact-banner p {
-    font-size: 16px;
+    font-size: 15.5px;
     color: rgba(255, 255, 255, 0.65);
-    margin-bottom: 32px;
+    margin-bottom: 26px;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
-  @media (max-width: 640px) { .contact-banner { padding: 64px 24px; } }
+  @media (max-width: 640px) { .contact-banner { padding: 48px 24px; } }
 
-  /* ---------- PRODUCT GRID ---------- */
-  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  @media (max-width: 900px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .product-grid { grid-template-columns: 1fr; } }
-  .product-card {
+  /* ---------- AUTOMATION SERVICES GRID ---------- */
+  .automation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .automation-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .automation-grid { grid-template-columns: 1fr; } }
+
+  .automation-card {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding: 28px;
+    gap: 12px;
+    padding: 24px;
     border-radius: var(--r-lg);
     border: 1px solid var(--border-1);
     background: var(--surface-1);
     transition: all var(--t-base);
-    min-height: 200px;
+    min-height: 190px;
+    position: relative;
+    overflow: hidden;
   }
-  .product-card:hover {
+  .automation-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.6), transparent);
+    opacity: 0;
+    transition: opacity var(--t-base);
+  }
+  .automation-card:hover {
     transform: translateY(-4px);
     border-color: var(--border-brand);
     background: var(--surface-2);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 92, 246, 0.15);
   }
-  .product-card-icon {
-    width: 40px; height: 40px;
-    border-radius: 12px;
-    background: rgba(236, 72, 153, 0.1);
-    border: 1px solid rgba(236, 72, 153, 0.25);
+  .automation-card:hover::before { opacity: 1; }
+
+  .automation-icon {
+    width: 44px; height: 44px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(108, 59, 255, 0.08));
+    border: 1px solid rgba(139, 92, 246, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-pink);
+    color: var(--brand-300);
+    transition: all var(--t-base);
   }
-  .product-card-icon svg { width: 20px; height: 20px; }
-  .product-card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
-  .product-card p { font-size: 13.5px; color: var(--text-3); line-height: 1.55; flex: 1; }
-  .product-card-link {
+  .automation-icon svg { width: 22px; height: 22px; }
+  .automation-card:hover .automation-icon {
+    transform: scale(1.06) rotate(-4deg);
+    border-color: var(--brand-500);
+    box-shadow: var(--glow-sm);
+  }
+
+  .automation-card h4 {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .automation-card p {
+    font-size: 13px;
+    color: var(--text-3);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .automation-card-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     color: var(--brand-400);
+    margin-top: auto;
   }
-  .product-card-link svg { width: 14px; height: 14px; transition: transform var(--t-base); }
-  .product-card:hover .product-card-link svg { transform: translateX(4px); }
+  .automation-card-link svg { width: 14px; height: 14px; transition: transform var(--t-base); }
+  .automation-card:hover .automation-card-link svg { transform: translateX(4px); }
 
   /* ---------- FOOTER ---------- */
   .footer {
     border-top: 1px solid var(--border-1);
-    padding: 64px 0 40px;
-    margin-top: 100px;
+    padding: 56px 0 28px;
+    margin-top: 64px;
     background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02));
   }
   .footer-top {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
-    gap: 40px;
-    margin-bottom: 48px;
+    gap: 32px;
+    margin-bottom: 36px;
   }
   @media (max-width: 1000px) { .footer-top { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
-  .footer-brand .logo { margin-bottom: 18px; }
-  .footer-brand p { font-size: 13.5px; color: var(--text-3); line-height: 1.65; max-width: 320px; margin-bottom: 20px; }
+  .footer-brand .logo { margin-bottom: 14px; }
+  .footer-brand p { font-size: 13.5px; color: var(--text-3); line-height: 1.6; max-width: 320px; margin-bottom: 16px; }
   .footer-socials { display: flex; gap: 10px; }
   .footer-social {
-    width: 36px; height: 36px;
+    width: 34px; height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1804,19 +1519,19 @@
     background: rgba(139, 92, 246, 0.1);
     transform: translateY(-2px);
   }
-  .footer-social svg { width: 16px; height: 16px; }
+  .footer-social svg { width: 15px; height: 15px; }
   .footer-col h4 {
     font-family: var(--font-display);
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-1);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
-  .footer-col a { display: block; font-size: 13.5px; color: var(--text-3); padding: 6px 0; transition: color var(--t-base); }
+  .footer-col a { display: block; font-size: 13px; color: var(--text-3); padding: 5px 0; transition: color var(--t-base); }
   .footer-col a:hover { color: var(--brand-400); }
-  .footer-newsletter p { font-size: 13.5px; color: var(--text-3); margin-bottom: 16px; }
+  .footer-newsletter p { font-size: 13px; color: var(--text-3); margin-bottom: 14px; }
   .newsletter-form {
     display: flex;
     gap: 8px;
@@ -1842,7 +1557,7 @@
   }
   .newsletter-form input::placeholder { color: var(--text-4); }
   .newsletter-submit {
-    width: 38px; height: 38px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     background: var(--grad-primary);
     color: #fff;
@@ -1859,7 +1574,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--border-1);
     flex-wrap: wrap;
   }
@@ -1907,10 +1622,11 @@
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-        <a href="services.html"><span>Products</span></a>
+        <a href="#services"><span>Services</span></a>
+        <a href="#use-cases"><span>Use Cases</span></a>
         <a href="pricing.html"><span>Pricing</span></a>
-        <a href="services.html"><span>Resources</span></a>
-        <a href="contact.html"><span>Partners</span></a>
+        <a href="#faq"><span>FAQ</span></a>
+        <a href="contact.html"><span>Contact</span></a>
       </nav>
 
       <div class="nav-actions">
@@ -1932,210 +1648,569 @@
   <main>
 
     <!-- ==================== HERO ==================== -->
-    <section class="hero">
-      <a href="index.html" class="hero-brand" aria-label="Sangam.ai">
-        <img src="images/logo.png" alt="Sangam.ai" onerror="this.style.display='none'" />
-        <span class="hero-brand-text">
-          <strong>Sangam.ai</strong>
-          <span>AI CORE · ONLINE</span>
-        </span>
-      </a>
+    <section class="hero-new relative text-slate-100 flex flex-col justify-center">
 
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <div class="hero-badge reveal">
-            <span class="hero-badge-icon"></span>
-            Edge Inference
+      <div class="absolute inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-grid-mesh opacity-70"></div>
+        <div class="absolute top-1/4 left-1/4 w-[550px] h-[550px] bg-purple-900/10 rounded-full blur-[140px]"></div>
+        <div class="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-indigo-900/15 rounded-full blur-[160px]"></div>
+        <div class="absolute top-1/3 right-1/4 w-[480px] h-[480px] bg-purple-600/10 rounded-full blur-[130px]"></div>
+      </div>
+
+      <div class="relative z-10 max-w-[1720px] mx-auto px-6 lg:px-12 w-full flex-1 flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+          <!-- Left Column -->
+          <div class="lg:col-span-5 flex flex-col justify-center max-w-2xl">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-6 w-fit backdrop-blur-md">
+              <span class="text-purple-400">✦</span>
+              <span class="">AI AUTOMATION</span>
+            </div>
+
+            <h1 class="text-5xl sm:text-6xl xl:text-[62px] font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-6">
+              AI Employees<br>
+              that automate<br>
+              your business.
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-400 font-normal leading-relaxed mb-8 max-w-xl">
+              Sangam.ai deploys AI employees that answer WhatsApp, Instagram, email and phone — 24/7. Bookings, CRM updates, follow-ups and escalations, handled end to end. Set up in days, not months.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 mb-10">
+              <a href="request.html" class="inline-flex items-center space-x-2.5 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-[0_0_30px_rgba(124,58,237,0.45)] hover:shadow-[0_0_40px_rgba(124,58,237,0.65)] transition duration-200">
+                <span class="">Get started</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+                </svg>
+              </a>
+              <a href="contact.html" class="inline-flex items-center px-6 py-3 rounded-full text-base font-semibold text-slate-200 bg-[#121320]/80 hover:bg-[#1a1c30] border border-slate-700/60 hover:border-slate-500 transition duration-200 backdrop-blur-sm">
+                Book a demo
+              </a>
+            </div>
+
+            <!-- Metrics Row -->
+            <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-800/80 max-w-lg">
+              <div>
+                <div class="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1">24/7</div>
+                <div class="text-[11px] font-mono tracking-wider uppercase text-slate-400 font-medium">ALWAYS ON</div>
+              </div>
+              <div>
+                <div class="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1">&lt; 5s</div>
+                <div class="text-[11px] font-mono tracking-wider uppercase text-slate-400 font-medium">RESPONSE</div>
+              </div>
+              <div>
+                <div class="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1">40+</div>
+                <div class="text-[11px] font-mono tracking-wider uppercase text-slate-400 font-medium">INTEGRATIONS</div>
+              </div>
+            </div>
           </div>
-          <h1 class="hero-title reveal" data-delay="100">
-            AI Employees<br />
-            <span class="gradient-text">at the edge of your business.</span>
-          </h1>
-          <p class="hero-subtitle reveal" data-delay="200">
-            Sangam.ai deploys AI that answers WhatsApp, Instagram, email and phone — 24/7.
-            Bookings, CRM updates, follow-ups and escalations, handled end to end.
-            Powered by the same inference stack used by global infrastructure companies.
-          </p>
-          <div class="hero-cta reveal" data-delay="300">
-            <a href="request.html" class="btn btn-primary btn-lg">
-              Get started
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </a>
-            <a href="contact.html" class="btn btn-secondary btn-lg">Book a demo</a>
+
+          <!-- Right Column: Automation Hub -->
+          <div class="lg:col-span-7 flex items-center justify-center w-full relative">
+            <div class="relative w-full max-w-[760px] aspect-[1.3/1] select-none flex items-center justify-center">
+
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-purple-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] bg-indigo-500/12 rounded-full blur-[60px] pointer-events-none"></div>
+
+              <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" fill="none" viewBox="0 0 1000 780">
+                <defs>
+                  <filter height="300%" id="bold-photon-glow" width="300%" x="-100%" y="-100%">
+                    <feGaussianBlur in="SourceGraphic" result="blur1" stdDeviation="5"></feGaussianBlur>
+                    <feGaussianBlur in="SourceGraphic" result="blur2" stdDeviation="1.8"></feGaussianBlur>
+                    <feMerge>
+                      <feMergeNode in="blur1"></feMergeNode>
+                      <feMergeNode in="blur2"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+                  <radialGradient cx="50%" cy="50%" id="pulseVioletGrad" r="50%">
+                    <stop offset="0%" stop-color="#ffffff"></stop>
+                    <stop offset="35%" stop-color="#e9d5ff"></stop>
+                    <stop offset="70%" stop-color="#c084fc"></stop>
+                    <stop offset="100%" stop-color="#9333ea" stop-opacity="0"></stop>
+                  </radialGradient>
+                  <radialGradient cx="50%" cy="50%" id="pulseCyanGrad" r="50%">
+                    <stop offset="0%" stop-color="#ffffff"></stop>
+                    <stop offset="35%" stop-color="#bae6fd"></stop>
+                    <stop offset="70%" stop-color="#38bdf8"></stop>
+                    <stop offset="100%" stop-color="#0284c7" stop-opacity="0"></stop>
+                  </radialGradient>
+                  <linearGradient id="busGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45"></stop>
+                    <stop offset="50%" stop-color="#818cf8" stop-opacity="0.65"></stop>
+                    <stop offset="100%" stop-color="#c084fc" stop-opacity="0.45"></stop>
+                  </linearGradient>
+                </defs>
+
+                <g opacity="0.65" stroke="#1d2138" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                  <path d="M 200,145 L 90,145 L 90,390 L 90,635 L 200,635" stroke-dasharray="4 6"></path>
+                  <path d="M 800,145 L 910,145 L 910,390 L 910,635 L 800,635" stroke-dasharray="4 6"></path>
+                  <path d="M 200,109 L 500,75 L 800,109" stroke-dasharray="4 6"></path>
+                  <path d="M 200,671 L 500,705 L 800,671" stroke-dasharray="4 6"></path>
+                  <circle cx="500" cy="390" r="145" stroke="#1f2442" stroke-dasharray="2 6" stroke-width="1"></circle>
+                  <circle cx="500" cy="390" r="265" stroke="#171a30" stroke-dasharray="3 7" stroke-width="1"></circle>
+                </g>
+
+                <g stroke="#2c3254" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                  <path d="M 500,305 L 500,110"></path>
+                  <path d="M 575,335 L 685,335 L 770,250 L 770,140"></path>
+                  <path d="M 585,390 L 875,390"></path>
+                  <path d="M 575,445 L 685,445 L 770,530 L 770,640"></path>
+                  <path d="M 500,475 L 500,670"></path>
+                  <path d="M 425,445 L 315,445 L 230,530 L 230,640"></path>
+                  <path d="M 415,390 L 125,390"></path>
+                  <path d="M 425,335 L 315,335 L 230,250 L 230,140"></path>
+                </g>
+
+                <g opacity="0.75" stroke="url(#busGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                  <path d="M 500,305 L 500,110" stroke-dasharray="14 10"></path>
+                  <path d="M 575,335 L 685,335 L 770,250 L 770,140"></path>
+                  <path d="M 585,390 L 875,390" stroke-dasharray="20 12"></path>
+                  <path d="M 575,445 L 685,445 L 770,530 L 770,640"></path>
+                  <path d="M 500,475 L 500,670" stroke-dasharray="14 10"></path>
+                  <path d="M 425,445 L 315,445 L 230,530 L 230,640"></path>
+                  <path d="M 415,390 L 125,390" stroke-dasharray="20 12"></path>
+                  <path d="M 425,335 L 315,335 L 230,250 L 230,140"></path>
+                </g>
+
+                <g fill="#0f1122" stroke="#8b5cf6" stroke-width="1.5">
+                  <circle cx="500" cy="205" r="3"></circle>
+                  <circle cx="685" cy="335" r="3"></circle>
+                  <circle cx="685" cy="445" r="3"></circle>
+                  <circle cx="500" cy="575" r="3"></circle>
+                  <circle cx="315" cy="445" r="3"></circle>
+                  <circle cx="315" cy="335" r="3"></circle>
+                </g>
+
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseVioletGrad)" r="7"><animateMotion calcMode="linear" dur="2.1s" path="M 500,305 L 500,110" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.1s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.1s" path="M 500,305 L 500,110" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.1s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseVioletGrad)" r="7"><animateMotion calcMode="linear" dur="2.5s" path="M 575,335 L 685,335 L 770,250 L 770,140" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.5s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.5s" path="M 575,335 L 685,335 L 770,250 L 770,140" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.5s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseCyanGrad)" r="7"><animateMotion calcMode="linear" dur="2.3s" path="M 585,390 L 875,390" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.3s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.3s" path="M 585,390 L 875,390" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.3s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseCyanGrad)" r="7"><animateMotion calcMode="linear" dur="2.6s" path="M 575,445 L 685,445 L 770,530 L 770,640" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.6s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.6s" path="M 575,445 L 685,445 L 770,530 L 770,640" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.6s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseVioletGrad)" r="7"><animateMotion calcMode="linear" dur="2.2s" path="M 500,475 L 500,670" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.2s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.2s" path="M 500,475 L 500,670" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.2s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseVioletGrad)" r="7"><animateMotion calcMode="linear" dur="2.6s" path="M 425,445 L 315,445 L 230,530 L 230,640" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.6s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.6s" path="M 425,445 L 315,445 L 230,530 L 230,640" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.6s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseCyanGrad)" r="7"><animateMotion calcMode="linear" dur="2.3s" path="M 415,390 L 125,390" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.3s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.3s" path="M 415,390 L 125,390" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.3s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+                <g filter="url(#bold-photon-glow)">
+                  <circle fill="url(#pulseCyanGrad)" r="7"><animateMotion calcMode="linear" dur="2.5s" path="M 425,335 L 315,335 L 230,250 L 230,140" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.5s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                  <circle fill="#ffffff" r="3"><animateMotion calcMode="linear" dur="2.5s" path="M 425,335 L 315,335 L 230,250 L 230,140" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" dur="2.5s" keyTimes="0;0.12;0.88;1" repeatCount="indefinite" values="0;1;1;0"></animate></circle>
+                </g>
+              </svg>
+
+              <!-- Central Chip -->
+              <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center">
+                <div class="relative p-2">
+                  <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <span class="w-1.5 h-3 bg-gradient-to-b from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-b from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-b from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-b from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                  </div>
+                  <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <span class="w-1.5 h-3 bg-gradient-to-t from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-t from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-t from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-1.5 h-3 bg-gradient-to-t from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                  </div>
+                  <div class="absolute top-1/2 -left-1.5 -translate-y-1/2 flex flex-col space-y-2">
+                    <span class="w-3 h-1.5 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                  </div>
+                  <div class="absolute top-1/2 -right-1.5 -translate-y-1/2 flex flex-col space-y-2">
+                    <span class="w-3 h-1.5 bg-gradient-to-l from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-l from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-l from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                    <span class="w-3 h-1.5 bg-gradient-to-l from-indigo-400 to-purple-500 rounded-sm shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                  </div>
+
+                  <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-[26px] bg-gradient-to-b from-[#16172c] via-[#0d0e1d] to-[#070712] border-2 border-purple-500/50 brain-glow flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(124,58,237,0.35)] backdrop-blur-xl">
+                    <div class="absolute inset-1.5 rounded-[20px] border border-purple-400/20 pointer-events-none"></div>
+                    <div class="mb-1 text-purple-400">
+                      <svg class="w-8 h-8 drop-shadow-[0_0_14px_rgba(168,85,247,0.9)]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z"></path>
+                      </svg>
+                    </div>
+                    <div class="text-2xl sm:text-[30px] font-extrabold tracking-tight text-white flex items-center">
+                      s<span class="text-purple-400">.ai</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subnodes -->
+              <div class="absolute top-[5%] left-[50%] -translate-x-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-[#25D366]/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(37,211,102,0.22)] flex items-center justify-center group-hover:border-[#25D366] group-hover:shadow-[0_0_28px_rgba(37,211,102,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-[#25D366] drop-shadow-[0_0_10px_rgba(37,211,102,0.85)]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.05 7.42C8.86 7.42 8.56 7.49 8.31 7.76C8.06 8.04 7.34 8.71 7.34 10.07C7.34 11.43 8.33 12.74 8.47 12.93C8.61 13.12 10.41 15.89 13.15 17.07C15.43 18.05 15.9 17.85 16.39 17.81C16.88 17.76 17.98 17.15 18.21 16.51C18.44 15.87 18.44 15.31 18.37 15.2C18.3 15.09 18.11 15.02 17.83 14.88C17.55 14.74 16.18 14.07 15.92 13.98C15.67 13.88 15.48 13.84 15.3 14.12C15.11 14.4 14.58 15.02 14.42 15.2C14.26 15.39 14.09 15.41 13.81 15.27C13.53 15.13 12.64 14.84 11.58 13.89C10.76 13.16 10.21 12.26 10.05 11.98C9.89 11.71 10.03 11.56 10.17 11.42C10.3 11.29 10.46 11.08 10.6 10.92C10.74 10.76 10.79 10.64 10.88 10.45C10.97 10.27 10.92 10.11 10.85 9.97C10.79 9.83 10.23 8.45 10 7.89C9.77 7.35 9.54 7.42 9.37 7.41C9.21 7.41 9.05 7.42 9.05 7.42Z"></path>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-emerald-300 transition-colors">WhatsApp</span>
+              </div>
+
+              <div class="absolute top-[14%] right-[20%] -translate-y-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-pink-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(236,72,153,0.22)] flex items-center justify-center group-hover:border-pink-400 group-hover:shadow-[0_0_28px_rgba(236,72,153,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_10px_rgba(236,72,153,0.85)]" fill="none" viewBox="0 0 24 24">
+                    <defs>
+                      <linearGradient id="igIconGrad" x1="0%" x2="100%" y1="100%" y2="0%">
+                        <stop offset="0%" stop-color="#f59e0b"></stop>
+                        <stop offset="30%" stop-color="#ec4899"></stop>
+                        <stop offset="70%" stop-color="#d946ef"></stop>
+                        <stop offset="100%" stop-color="#8b5cf6"></stop>
+                      </linearGradient>
+                    </defs>
+                    <rect height="19" rx="5.5" stroke="url(#igIconGrad)" stroke-width="2.2" width="19" x="2.5" y="2.5"></rect>
+                    <circle cx="12" cy="12" r="4.2" stroke="url(#igIconGrad)" stroke-width="2.2"></circle>
+                    <circle cx="17.2" cy="6.8" fill="#ec4899" r="1.2"></circle>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-pink-300 transition-colors">Instagram</span>
+              </div>
+
+              <div class="absolute top-[50%] right-[9%] -translate-y-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-blue-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(59,130,246,0.22)] flex items-center justify-center group-hover:border-blue-400 group-hover:shadow-[0_0_28px_rgba(59,130,246,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.85)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <rect height="18" rx="3.5" ry="3.5" width="18" x="3" y="4"></rect>
+                    <line x1="16" x2="16" y1="2" y2="6"></line>
+                    <line x1="8" x2="8" y1="2" y2="6"></line>
+                    <line x1="3" x2="21" y1="10" y2="10"></line>
+                    <circle cx="8" cy="14" fill="currentColor" r="1"></circle>
+                    <circle cx="12" cy="14" fill="currentColor" r="1"></circle>
+                    <circle class="animate-pulse" cx="16" cy="14" fill="#38bdf8" r="1.5" stroke="#38bdf8"></circle>
+                    <circle cx="8" cy="17.5" fill="currentColor" r="1"></circle>
+                    <circle cx="12" cy="17.5" fill="currentColor" r="1"></circle>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-blue-300 transition-colors">Bookings</span>
+              </div>
+
+              <div class="absolute bottom-[6%] right-[20%] z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-cyan-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(6,182,212,0.22)] flex items-center justify-center group-hover:border-cyan-400 group-hover:shadow-[0_0_28px_rgba(6,182,212,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.85)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" viewBox="0 0 24 24">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                    <polyline points="16 7 22 7 22 13"></polyline>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-cyan-300 transition-colors">Escalations</span>
+              </div>
+
+              <div class="absolute bottom-[2%] left-[50%] -translate-x-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-indigo-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(99,102,241,0.22)] flex items-center justify-center group-hover:border-indigo-400 group-hover:shadow-[0_0_28px_rgba(99,102,241,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400 drop-shadow-[0_0_10px_rgba(99,102,241,0.85)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    <path d="M19 18l2 2-2 2" stroke="#38bdf8" stroke-width="1.8"></path>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-indigo-300 transition-colors">CRM Sync</span>
+              </div>
+
+              <div class="absolute bottom-[6%] left-[20%] z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-amber-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(245,158,11,0.22)] flex items-center justify-center group-hover:border-amber-400 group-hover:shadow-[0_0_28px_rgba(245,158,11,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.85)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <rect height="15" rx="3" width="20" x="2" y="4.5"></rect>
+                    <path d="m22 6.5-10 7L2 6.5"></path>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-amber-300 transition-colors">Email</span>
+              </div>
+
+              <div class="absolute top-[50%] left-[9%] -translate-y-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-blue-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(59,130,246,0.22)] flex items-center justify-center group-hover:border-blue-400 group-hover:shadow-[0_0_28px_rgba(59,130,246,0.5)]">
+                  <svg class="w-6 h-6 sm:w-7 sm:h-7 text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.85)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    <path d="M14.5 4.5a6 6 0 0 1 5 5" stroke="#38bdf8" stroke-width="1.8"></path>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-blue-300 transition-colors">Voice AI</span>
+              </div>
+
+              <div class="absolute top-[14%] left-[20%] -translate-y-1/2 z-20 flex flex-col items-center group cursor-default">
+                <div class="subnode-card w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#121420]/80 backdrop-blur-md border border-purple-500/40 shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(168,85,247,0.22)] flex items-center justify-center group-hover:border-purple-400 group-hover:shadow-[0_0_28px_rgba(168,85,247,0.5)]">
+                  <svg class="w-7 h-7 sm:w-8 sm:h-8 text-purple-400 drop-shadow-[0_0_10px_rgba(192,132,252,0.85)]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 1.5L14.2 8.8L21.5 11L14.2 13.2L12 20.5L9.8 13.2L2.5 11L9.8 8.8L12 1.5Z"></path>
+                    <circle cx="12" cy="11" fill="#ffffff" r="1.5"></circle>
+                  </svg>
+                </div>
+                <span class="mt-1.5 text-[11px] font-medium text-slate-300 tracking-wide group-hover:text-purple-300 transition-colors">AI Chatbot</span>
+              </div>
+
+            </div>
           </div>
-          <div class="hero-trust reveal" data-delay="400">
-            <div class="trust-item"><strong>24/7</strong><span>Always on</span></div>
-            <div class="trust-divider"></div>
-            <div class="trust-item"><strong>&lt; 5s</strong><span>Response</span></div>
-            <div class="trust-divider"></div>
-            <div class="trust-item"><strong>160+</strong><span>Edge locations</span></div>
-          </div>
-        </div>
-
-        <!-- ============ HERO VISUAL ============ -->
-        <div class="hero-visual reveal" data-delay="200" aria-hidden="true">
-          <svg viewBox="0 0 720 760" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="lightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0"/>
-                <stop offset="30%" stop-color="#c4b5fd" stop-opacity="0.5"/>
-                <stop offset="50%" stop-color="#f5d0fe" stop-opacity="1"/>
-                <stop offset="70%" stop-color="#c4b5fd" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="hubGlow" cx="50%" cy="50%" r="65%">
-                <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.5"/>
-                <stop offset="50%" stop-color="#8b5cf6" stop-opacity="0.18"/>
-                <stop offset="100%" stop-color="#6c3bff" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="nodeFlash" cx="50%" cy="50%" r="55%">
-                <stop offset="0%" stop-color="#f5d0fe" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
-              </radialGradient>
-              <linearGradient id="hubRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#c4b5fd" stop-opacity="0"/>
-                <stop offset="30%"  stop-color="#c4b5fd" stop-opacity="1"/>
-                <stop offset="50%"  stop-color="#ec4899" stop-opacity="1"/>
-                <stop offset="70%"  stop-color="#c4b5fd" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-
-            <!-- Top center → Spark -->
-            <path class="trace" d="M 360 300 L 360 130" />
-            <path class="trace-light t1" pathLength="100" d="M 360 300 L 360 130" />
-            <circle class="node-flash n1" cx="360" cy="85" r="70" fill="url(#nodeFlash)" />
-
-            <!-- Top-left → Phone -->
-            <path class="trace" d="M 280 300 L 200 200 L 160 200" />
-            <path class="trace-light t2" pathLength="100" d="M 280 300 L 200 200 L 160 200" />
-            <circle class="node-flash n2" cx="130" cy="190" r="80" fill="url(#nodeFlash)" />
-
-            <!-- Top-right → Instagram -->
-            <path class="trace" d="M 440 300 L 520 200 L 560 200" />
-            <path class="trace-light t3" pathLength="100" d="M 440 300 L 520 200 L 560 200" />
-            <circle class="node-flash n3" cx="590" cy="190" r="80" fill="url(#nodeFlash)" />
-
-            <!-- Left middle → Chat -->
-            <path class="trace" d="M 280 380 L 130 380" />
-            <path class="trace-light t4" pathLength="100" d="M 280 380 L 130 380" />
-            <circle class="node-flash n4" cx="100" cy="380" r="70" fill="url(#nodeFlash)" />
-
-            <!-- Right middle → Calendar -->
-            <path class="trace" d="M 440 380 L 590 380" />
-            <path class="trace-light t5" pathLength="100" d="M 440 380 L 590 380" />
-            <circle class="node-flash n5" cx="620" cy="380" r="70" fill="url(#nodeFlash)" />
-
-            <!-- Bottom-left → Email -->
-            <path class="trace" d="M 280 460 L 200 560 L 160 560" />
-            <path class="trace-light t6" pathLength="100" d="M 280 460 L 200 560 L 160 560" />
-            <circle class="node-flash n6" cx="130" cy="570" r="80" fill="url(#nodeFlash)" />
-
-            <!-- Bottom-right → Analytics -->
-            <path class="trace" d="M 440 460 L 520 560 L 560 560" />
-            <path class="trace-light t7" pathLength="100" d="M 440 460 L 520 560 L 560 560" />
-            <circle class="node-flash n7" cx="590" cy="570" r="80" fill="url(#nodeFlash)" />
-
-            <!-- Bottom center → CRM -->
-            <path class="trace" d="M 360 460 L 360 630" />
-            <path class="trace-light t8" pathLength="100" d="M 360 460 L 360 630" />
-            <circle class="node-flash n8" cx="360" cy="675" r="70" fill="url(#nodeFlash)" />
-
-            <!-- Hub -->
-            <circle class="hub-glow" cx="360" cy="380" r="150" />
-            <rect class="hub-rect" x="270" y="290" width="180" height="180" rx="48" />
-            <circle class="hub-ring" cx="360" cy="380" r="72" stroke-dasharray="130 330" />
-            <text class="hub-wordmark" x="360" y="384">s<tspan class="hub-wordmark-dot">.</tspan>ai</text>
-
-            <!-- Nodes -->
-            <g class="node-group">
-              <rect class="node-rect" x="320" y="45" width="80" height="80" rx="20" />
-              <g transform="translate(360, 85)">
-                <path class="node-icon-fill" d="M 0 -12 L 3 -3 L 12 0 L 3 3 L 0 12 L -3 3 L -12 0 L -3 -3 Z" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="55" y="115" width="150" height="150" rx="32" />
-              <g class="node-icon" transform="translate(130, 190)">
-                <path d="M -12 -14 C -8 -14 -3 -12 0 -9 C 2 -7 3 -4 2 -1 L 1 2 C 0 3 -1 4 -2 4 L -6 6 C -4 10 4 18 8 20 L 10 16 C 10 15 11 14 12 13 L 15 12 C 18 11 21 12 23 14 C 26 17 28 22 28 26 C 28 27 27 28 26 28 L 20 28 C 19 28 18 27 18 26 L 18 22 C 18 21 17 20 16 20 L 14 19 C 13 19 12 19 11 20 L 9 22 C 7 24 4 22 1 20 C -2 18 -4 15 -6 12 C -8 9 -10 6 -10 3 C -10 1 -9 0 -8 -1 L -6 -3 C -5 -4 -5 -5 -5 -6 L -6 -10 C -6 -11 -7 -12 -8 -12 Z" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="515" y="115" width="150" height="150" rx="32" />
-              <g class="node-icon" transform="translate(590, 190)">
-                <rect x="-13" y="-13" width="26" height="26" rx="7" />
-                <circle cx="0" cy="0" r="6" />
-                <circle cx="8.5" cy="-8.5" r="1.3" class="node-icon-fill" stroke="none" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="45" y="305" width="110" height="150" rx="28" />
-              <g class="node-icon" transform="translate(100, 380)">
-                <path d="M -13 -12 C -13 -16 -9 -18 -5 -18 L 11 -18 C 15 -18 18 -15 18 -12 L 18 0 C 18 3 15 6 11 6 L 3 6 L -5 12 L -6 6 L -11 6 C -14 6 -16 4 -16 1 Z" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="565" y="305" width="110" height="150" rx="28" />
-              <g class="node-icon" transform="translate(620, 380)">
-                <rect x="-13" y="-12" width="26" height="24" rx="3" />
-                <line x1="-8" y1="-17" x2="-8" y2="-12" />
-                <line x1="8" y1="-17" x2="8" y2="-12" />
-                <line x1="-13" y1="-5" x2="13" y2="-5" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="55" y="495" width="150" height="150" rx="32" />
-              <g class="node-icon" transform="translate(130, 570)">
-                <rect x="-15" y="-11" width="30" height="22" rx="2.5" />
-                <path d="M -15 -8 L 0 2 L 15 -8" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="515" y="495" width="150" height="150" rx="32" />
-              <g class="node-icon" transform="translate(590, 570)">
-                <polyline points="-13,10 -3,0 3,6 13,-7" />
-                <polyline points="-13,-7 -13,13 13,13" />
-              </g>
-            </g>
-
-            <g class="node-group">
-              <rect class="node-rect" x="320" y="635" width="80" height="80" rx="20" />
-              <g class="node-icon" transform="translate(360, 675)">
-                <ellipse cx="0" cy="-7" rx="11" ry="3.5" />
-                <path d="M -11 -7 L -11 0 C -11 2 -6 3.5 0 3.5 C 6 3.5 11 2 11 0 L 11 -7" />
-                <path d="M -11 0 L -11 7 C -11 9 -6 10.5 0 10.5 C 6 10.5 11 9 11 7 L 11 0" />
-              </g>
-            </g>
-
-          </svg>
         </div>
       </div>
     </section>
 
-    <!-- ==================== LIGHT SECTION ==================== -->
+    <!-- ==================== LIGHT SECTION (with neural network visual) ==================== -->
     <section class="section theme-light">
       <div class="container">
         <div class="section-head">
-          <span class="section-eyebrow">Edge Performance</span>
+          <span class="section-eyebrow">AI Automation</span>
           <h2 class="section-title">
-            Use AI faster and more efficiently — right inside your business.
+            Use AI to answer customers faster — right inside your business.
           </h2>
           <p class="section-subtitle">
-            Sub-second responses, 160+ edge locations, and inference that runs
-            closer to your customers than any cloud-only solution.
+            Sub-5-second responses, 40+ integrations, and AI that runs closer to your
+            customers than any cloud-only chatbot.
           </p>
         </div>
 
         <div class="light-grid">
+          <!-- MEDIA CARD with neural network visual -->
           <div class="light-card-media">
+            <!-- Neural network visualization -->
+            <div class="chat-visual" aria-hidden="true">
+
+              <svg class="neural-svg" viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <!-- Gradients for nodes -->
+                  <radialGradient id="nodeWhatsApp" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#34e07a"/>
+                    <stop offset="60%" stop-color="#25D366"/>
+                    <stop offset="100%" stop-color="#128c7e"/>
+                  </radialGradient>
+                  <radialGradient id="nodeInstagram" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#fbbf24"/>
+                    <stop offset="35%" stop-color="#ec4899"/>
+                    <stop offset="75%" stop-color="#d946ef"/>
+                    <stop offset="100%" stop-color="#8b5cf6"/>
+                  </radialGradient>
+                  <radialGradient id="nodeAI" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#c4b5fd"/>
+                    <stop offset="55%" stop-color="#8b5cf6"/>
+                    <stop offset="100%" stop-color="#5b21b6"/>
+                  </radialGradient>
+                  <radialGradient id="nodeCalendar" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#60a5fa"/>
+                    <stop offset="60%" stop-color="#3b82f6"/>
+                    <stop offset="100%" stop-color="#1e40af"/>
+                  </radialGradient>
+                  <radialGradient id="nodeCRM" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#818cf8"/>
+                    <stop offset="60%" stop-color="#6366f1"/>
+                    <stop offset="100%" stop-color="#4338ca"/>
+                  </radialGradient>
+                  <radialGradient id="nodeVoice" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#67e8f9"/>
+                    <stop offset="60%" stop-color="#06b6d4"/>
+                    <stop offset="100%" stop-color="#0e7490"/>
+                  </radialGradient>
+
+                  <!-- Soft outer glow for nodes -->
+                  <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+                    <feMerge>
+                      <feMergeNode in="blur"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+
+                  <!-- Particle glow -->
+                  <filter id="particleGlow" x="-200%" y="-200%" width="500%" height="500%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur"></feGaussianBlur>
+                    <feMerge>
+                      <feMergeNode in="blur"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- ===== Subtle orbit rings around AI hub ===== -->
+                <circle cx="200" cy="170" r="55" fill="none" stroke="rgba(167,139,250,0.15)" stroke-width="0.8" stroke-dasharray="2 5"/>
+                <circle cx="200" cy="170" r="95" fill="none" stroke="rgba(167,139,250,0.09)" stroke-width="0.8" stroke-dasharray="3 7"/>
+                <circle cx="200" cy="170" r="135" fill="none" stroke="rgba(167,139,250,0.05)" stroke-width="0.8" stroke-dasharray="2 9"/>
+
+                <!-- ===== Dashed connection lines (default state) ===== -->
+                <g stroke="rgba(167,139,250,0.18)" stroke-width="1" stroke-dasharray="3 4" fill="none">
+                  <line x1="200" y1="170" x2="70" y2="70"/>
+                  <line x1="200" y1="170" x2="330" y2="70"/>
+                  <line x1="200" y1="170" x2="330" y2="170"/>
+                  <line x1="200" y1="170" x2="330" y2="270"/>
+                  <line x1="200" y1="170" x2="70" y2="270"/>
+                  <line x1="200" y1="170" x2="70" y2="170"/>
+                </g>
+
+                <!-- ===== Animated traveling packets (SVG animateMotion) ===== -->
+                <!-- WhatsApp → AI -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="2.8s" repeatCount="indefinite" path="M 70,70 L 200,170" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/>
+                  <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#c4b5fd" filter="url(#particleGlow)">
+                  <animateMotion dur="2.8s" repeatCount="indefinite" path="M 70,70 L 200,170" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/>
+                  <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- Instagram → AI -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="3.4s" begin="0.6s" repeatCount="indefinite" path="M 330,70 L 200,170"/>
+                  <animate attributeName="opacity" dur="3.4s" begin="0.6s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#f9a8d4" filter="url(#particleGlow)">
+                  <animateMotion dur="3.4s" begin="0.6s" repeatCount="indefinite" path="M 330,70 L 200,170"/>
+                  <animate attributeName="opacity" dur="3.4s" begin="0.6s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- AI → Calendar -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="2.6s" begin="1.2s" repeatCount="indefinite" path="M 200,170 L 330,170"/>
+                  <animate attributeName="opacity" dur="2.6s" begin="1.2s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#60a5fa" filter="url(#particleGlow)">
+                  <animateMotion dur="2.6s" begin="1.2s" repeatCount="indefinite" path="M 200,170 L 330,170"/>
+                  <animate attributeName="opacity" dur="2.6s" begin="1.2s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- AI → CRM -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="3.1s" begin="1.8s" repeatCount="indefinite" path="M 200,170 L 330,270"/>
+                  <animate attributeName="opacity" dur="3.1s" begin="1.8s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#818cf8" filter="url(#particleGlow)">
+                  <animateMotion dur="3.1s" begin="1.8s" repeatCount="indefinite" path="M 200,170 L 330,270"/>
+                  <animate attributeName="opacity" dur="3.1s" begin="1.8s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- Voice → AI -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="2.9s" begin="0.3s" repeatCount="indefinite" path="M 70,170 L 200,170"/>
+                  <animate attributeName="opacity" dur="2.9s" begin="0.3s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#67e8f9" filter="url(#particleGlow)">
+                  <animateMotion dur="2.9s" begin="0.3s" repeatCount="indefinite" path="M 70,170 L 200,170"/>
+                  <animate attributeName="opacity" dur="2.9s" begin="0.3s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- AI → Email -->
+                <circle r="3.5" fill="#ffffff" filter="url(#particleGlow)">
+                  <animateMotion dur="3.3s" begin="2.2s" repeatCount="indefinite" path="M 200,170 L 70,270"/>
+                  <animate attributeName="opacity" dur="3.3s" begin="2.2s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+                <circle r="2" fill="#fbbf24" filter="url(#particleGlow)">
+                  <animateMotion dur="3.3s" begin="2.2s" repeatCount="indefinite" path="M 200,170 L 70,270"/>
+                  <animate attributeName="opacity" dur="3.3s" begin="2.2s" repeatCount="indefinite" keyTimes="0;0.1;0.85;1" values="0;1;1;0"/>
+                </circle>
+
+                <!-- ===== Central AI hub (pulsing) ===== -->
+                <!-- Outer aura -->
+                <circle cx="200" cy="170" r="32" fill="url(#nodeAI)" opacity="0.18">
+                  <animate attributeName="r" dur="3.5s" repeatCount="indefinite" values="30;38;30"/>
+                  <animate attributeName="opacity" dur="3.5s" repeatCount="indefinite" values="0.25;0.08;0.25"/>
+                </circle>
+
+                <!-- Core circle -->
+                <circle cx="200" cy="170" r="22" fill="url(#nodeAI)" filter="url(#nodeGlow)"/>
+
+                <!-- Sparkle icon in center -->
+                <g transform="translate(200, 170)" fill="#ffffff">
+                  <path d="M 0,-9 L 2,-2 L 9,0 L 2,2 L 0,9 L -2,2 L -9,0 L -2,-2 Z" opacity="0.98"/>
+                </g>
+
+                <!-- ===== Peripheral nodes (each with its brand icon) ===== -->
+
+                <!-- WhatsApp (top-left) -->
+                <g transform="translate(70, 70)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(37,211,102,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeWhatsApp)"/>
+                  <g transform="translate(-6.5, -6.5)" fill="#ffffff">
+                    <path d="M10.5 1.7a8.8 8.8 0 0 0-7.5 13.2L1.9 19.5l4.7-1.2a8.8 8.8 0 1 0 3.9-16.6zm0 1.5a7.3 7.3 0 0 1 3.7 13.6 7.3 7.3 0 0 1-3.7 1 7.3 7.3 0 0 1-3.6-.9l-.3-.2-2.8.7.8-2.7-.2-.3a7.3 7.3 0 0 1 6.1-11.2zm-3.4 3.4c-.2 0-.5 0-.7.3-.3.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.7 2.7 4.2 3.7 2.1.9 2.5.7 3 .7.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.5-.3-.3-.2-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.1-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.5-1.4-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4z" opacity="0.95"/>
+                  </g>
+                </g>
+
+                <!-- Instagram (top-right) -->
+                <g transform="translate(330, 70)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(236,72,153,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeInstagram)"/>
+                  <g transform="translate(-6.5, -6.5)" fill="none" stroke="#ffffff" stroke-width="1.6">
+                    <rect x="0.5" y="0.5" width="11" height="11" rx="3"/>
+                    <circle cx="6" cy="6" r="2.6"/>
+                    <circle cx="9" cy="3" r="0.6" fill="#ffffff"/>
+                  </g>
+                </g>
+
+                <!-- Calendar (right) -->
+                <g transform="translate(330, 170)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(59,130,246,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeCalendar)"/>
+                  <g transform="translate(-6.5, -6.5)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="0.5" y="1" width="11" height="10.5" rx="1.8"/>
+                    <line x1="0.5" y1="4" x2="11.5" y2="4"/>
+                    <line x1="3" y1="0" x2="3" y2="2"/>
+                    <line x1="9" y1="0" x2="9" y2="2"/>
+                  </g>
+                </g>
+
+                <!-- CRM (bottom-right) -->
+                <g transform="translate(330, 270)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(99,102,241,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeCRM)"/>
+                  <g transform="translate(-6.5, -6.5)" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="6" cy="2.5" rx="5.5" ry="1.8"/>
+                    <path d="M0.5 2.5v8c0 1 2.5 1.8 5.5 1.8s5.5-0.8 5.5-1.8v-8"/>
+                    <path d="M0.5 6.5c0 1 2.5 1.8 5.5 1.8s5.5-0.8 5.5-1.8"/>
+                  </g>
+                </g>
+
+                <!-- Email (bottom-left) -->
+                <g transform="translate(70, 270)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeInstagram)" opacity="0.0"/>
+                  <circle r="13" fill="#fbbf24"/>
+                  <g transform="translate(-6.5, -6.5)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="0.5" y="1.5" width="11" height="9" rx="1.5"/>
+                    <path d="M0.5 3 L6 7 L11.5 3"/>
+                  </g>
+                </g>
+
+                <!-- Voice AI (left) -->
+                <g transform="translate(70, 170)">
+                  <circle r="20" fill="rgba(15,10,25,0.9)" stroke="rgba(6,182,212,0.5)" stroke-width="1.5" filter="url(#nodeGlow)"/>
+                  <circle r="13" fill="url(#nodeVoice)"/>
+                  <g transform="translate(-6.5, -6.5)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 1.5a1.5 1.5 0 0 0-1.5 1.5v4a1.5 1.5 0 0 0 3 0V3a1.5 1.5 0 0 0-1.5-1.5z"/>
+                    <path d="M7.5 5v1a3.5 3.5 0 0 1-7 0V5"/>
+                    <line x1="4" y1="9.5" x2="4" y2="11"/>
+                    <line x1="2.5" y1="11" x2="5.5" y2="11"/>
+                  </g>
+                </g>
+
+                <!-- ===== Label under AI hub ===== -->
+                <!-- (handled by light-card-title below the visual) -->
+              </svg>
+
+              <!-- Ambient sparkles -->
+              <div class="chat-sparkle s1"></div>
+              <div class="chat-sparkle s2"></div>
+              <div class="chat-sparkle s3"></div>
+              <div class="chat-sparkle s4"></div>
+              <div class="chat-sparkle s5"></div>
+              <div class="chat-sparkle s6"></div>
+            </div>
+
             <h3 class="light-card-title">
-              Try Sangam Edge AI: Speed Up Conversations, Reduce Latency.
+              Try Sangam AI: Automate Conversations, Reduce Response Time.
             </h3>
             <a href="request.html" class="light-card-link">
               Start free
@@ -2144,11 +2219,11 @@
           </div>
 
           <div class="light-card-body">
-            <h3>Real-time inference with global reach.</h3>
+            <h3>Real-time automation with global reach.</h3>
             <p>
               Your AI employees process conversations, phone calls and CRM updates
-              with sub-second latency from the nearest edge region — not from a
-              distant data center. Every response is fast, local and consistent.
+              with sub-second latency — replying instantly, booking appointments,
+              and syncing every lead. No waiting, no missed messages, no follow-up chaos.
             </p>
 
             <div class="feature-tags">
@@ -2156,25 +2231,25 @@
                 <span class="feature-tag-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </span>
-                Text generation
+                Auto-replies
               </div>
               <div class="feature-tag">
                 <span class="feature-tag-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
                 </span>
-                Speech recognition
+                Voice handling
               </div>
               <div class="feature-tag">
                 <span class="feature-tag-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
                 </span>
-                Image generation
+                Booking automation
               </div>
               <div class="feature-tag">
                 <span class="feature-tag-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
                 </span>
-                Image classification
+                CRM sync
               </div>
             </div>
           </div>
@@ -2182,250 +2257,196 @@
       </div>
     </section>
 
-    <!-- ==================== BENTO ==================== -->
-    <section class="section">
+    <!-- ==================== SERVICES ==================== -->
+    <section class="section" id="services">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Platform</span>
+          <span class="section-eyebrow">Services</span>
           <h2 class="section-title">
-            Unleash your AI application's <span class="gradient-text">full potential</span>.
+            Every AI employee you need to <span class="gradient-text">automate your business</span>.
           </h2>
           <p class="section-subtitle">
-            Every layer built for scale — from edge routing to dedicated GPU inference, storage and security.
+            From WhatsApp replies to voice calls and CRM updates — pick the AI employees that fit your workflow.
           </p>
         </div>
 
         <div class="bento">
           <div class="bento-item bento-1 reveal">
             <div class="bento-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <h3>Low-latency global network</h3>
-            <p>160+ edge locations and sub-30ms global average latency. Your AI employee responds from the closest region — always.</p>
+            <h3>WhatsApp AI Agent</h3>
+            <p>Answers enquiries, books appointments and qualifies leads on WhatsApp — 24/7, in your customer's language.</p>
           </div>
 
           <div class="bento-item bento-2 reveal" data-delay="100">
-            <span class="bento-tag">AI Potential</span>
+            <span class="bento-tag">Most Popular</span>
             <div class="bento-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
-            <h3>Single end-point for every AI task</h3>
-            <p>One API for chat, voice, image and text workflows. Automated infrastructure management, autoscaling, and unified observability — so your team ships instead of babysitting servers.</p>
+            <h3>Voice AI Receptionist</h3>
+            <p>Handles inbound calls 24/7, books appointments, routes urgent calls to your team, and sends you a full call summary with context and next steps.</p>
           </div>
 
           <div class="bento-item bento-3 reveal" data-delay="200">
             <div class="bento-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
             </div>
-            <h3>Data privacy &amp; security</h3>
-            <p>Enterprise-grade encryption, per-tenant isolation and audit logs.</p>
+            <h3>Email AI Agent</h3>
+            <p>Reads, sorts and drafts replies to business emails.</p>
           </div>
 
           <div class="bento-item bento-4 reveal" data-delay="300">
             <div class="bento-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
             </div>
-            <h3>Unlimited object storage</h3>
-            <p>S3-compatible storage for training data, logs and RAG knowledge bases.</p>
+            <h3>CRM Automation</h3>
+            <p>Every enquiry, call and booking logged to your CRM automatically.</p>
           </div>
 
           <div class="bento-item bento-5 reveal" data-delay="400">
-            <span class="bento-tag">NVIDIA Powered</span>
+            <span class="bento-tag">Custom</span>
             <div class="bento-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><rect x="7" y="7" width="10" height="10" rx="1"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
             </div>
-            <h3>NVIDIA L40S &amp; H100 GPUs</h3>
-            <p>Dedicated hardware acceleration for real-time AI inference at scale.</p>
-            <span class="gpu-badge">NVIDIA PARTNER</span>
+            <h3>Custom AI Agents</h3>
+            <p>Bespoke AI employees trained on your business logic, tools and workflows.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== GLOBE ==================== -->
-    <section class="section globe-section" id="why">
+    <!-- ==================== WHY AUTOMATION ==================== -->
+    <section class="section" id="why">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Global Network</span>
+          <span class="section-eyebrow">Why Automation</span>
           <h2 class="section-title">
-            A truly global network for <span class="gradient-text">lightning-fast inference</span>.
+            Why businesses choose <span class="gradient-text">Sangam AI automation</span>.
           </h2>
           <p class="section-subtitle">
-            Edge routing across continents, so every conversation, call and booking gets a response in milliseconds.
+            Real, measurable impact — measured by the businesses running our AI employees every day.
           </p>
         </div>
 
-        <div class="globe" aria-hidden="true">
-          <div class="globe-dots"></div>
-          <div class="globe-ring"></div>
-          <div class="globe-ping" style="top: 30%; left: 25%;"></div>
-          <div class="globe-ping" style="top: 55%; left: 65%; animation-delay: 0.6s;"></div>
-          <div class="globe-ping" style="top: 40%; left: 75%; animation-delay: 1.2s;"></div>
-          <div class="globe-ping" style="top: 65%; left: 40%; animation-delay: 1.8s;"></div>
-          <div class="globe-ping" style="top: 25%; left: 55%; animation-delay: 0.3s;"></div>
-        </div>
-
-        <div class="globe-stats">
-          <div class="globe-stat"><strong>160+</strong><span>Edge locations</span></div>
-          <div class="globe-stat"><strong>&lt;30ms</strong><span>Global average</span></div>
-          <div class="globe-stat"><strong>99.99%</strong><span>Uptime SLA</span></div>
+        <div class="why-grid">
+          <div class="why-card reveal">
+            <div class="why-stat">80%</div>
+            <h4>Fewer missed messages</h4>
+            <p>Every enquiry, DM and call answered in seconds — even at 3 AM.</p>
+          </div>
+          <div class="why-card reveal" data-delay="100">
+            <div class="why-stat">4h+</div>
+            <h4>Saved per employee, daily</h4>
+            <p>Stop manually replying, logging leads and booking appointments.</p>
+          </div>
+          <div class="why-card reveal" data-delay="200">
+            <div class="why-stat">2.3×</div>
+            <h4>Faster lead follow-up</h4>
+            <p>Every new lead gets a reply in under 5 seconds — automatically.</p>
+          </div>
+          <div class="why-card reveal" data-delay="300">
+            <div class="why-stat">40+</div>
+            <h4>Native integrations</h4>
+            <p>WhatsApp, Instagram, Gmail, Google Calendar, HubSpot, Zoho, Notion and more.</p>
+          </div>
+          <div class="why-card reveal" data-delay="400">
+            <div class="why-stat">24/7</div>
+            <h4>Always on</h4>
+            <p>Your AI employees work nights, weekends and holidays — without extra pay.</p>
+          </div>
+          <div class="why-card reveal" data-delay="500">
+            <div class="why-stat">7 days</div>
+            <h4>Typical go-live</h4>
+            <p>From signed up to a live AI employee handling real customers.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== PLAYGROUND ==================== -->
-    <section class="section">
+    <!-- ==================== USE CASES ==================== -->
+    <section class="section" id="use-cases">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Playground</span>
-          <h2 class="section-title">Experience it <span class="gradient-text">now</span>.</h2>
+          <span class="section-eyebrow">Use Cases</span>
+          <h2 class="section-title">Built for <span class="gradient-text">your industry</span>.</h2>
           <p class="section-subtitle">
-            Try the same AI stack your business would use — text, image, voice and avatar.
+            Every AI employee is trained on the workflows of your business — not generic templates.
           </p>
-        </div>
-
-        <div class="playground reveal">
-          <div class="playground-tabs" role="tablist">
-            <button type="button" class="playground-tab active" role="tab" aria-selected="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-              Text
-            </button>
-            <button type="button" class="playground-tab" role="tab" aria-selected="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              Image
-            </button>
-            <button type="button" class="playground-tab" role="tab" aria-selected="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
-              Avatar
-            </button>
-            <button type="button" class="playground-tab" role="tab" aria-selected="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-              Speech
-            </button>
-          </div>
-
-          <div class="playground-prompt">
-            <input type="text" placeholder="Describe what you want your AI employee to do…"
-              value="A white rabbit on a black Harley Davidson riding down a desert road" aria-label="Prompt" />
-            <button type="button" class="playground-submit" aria-label="Run prompt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-
-          <div class="playground-output">
-            <div class="playground-output-inner">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/></svg>
-              <p>Output preview · Generated in 340ms from the nearest edge</p>
-            </div>
-          </div>
         </div>
 
         <div class="usecase-grid">
           <div class="usecase-card">
-            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg></div>
-            <h4>IT &amp; Technology</h4>
-            <p>Generative apps, chatbots, data augmentation.</p>
+            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+            <h4>Healthcare &amp; Clinics</h4>
+            <p>Appointment booking, patient FAQs, reminders.</p>
           </div>
           <div class="usecase-card">
             <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div>
-            <h4>Retail</h4>
-            <p>Smart grocery, real-time user behaviour analysis.</p>
-          </div>
-          <div class="usecase-card">
-            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/><path d="m3 12 1-6h16l1 6M8 6v6M16 6v6"/></svg></div>
-            <h4>Automotive</h4>
-            <p>Fast response, advanced driver assistance.</p>
-          </div>
-          <div class="usecase-card">
-            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div>
-            <h4>Gaming</h4>
-            <p>AI content &amp; map generation, real-time analytics.</p>
-          </div>
-          <div class="usecase-card">
-            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
-            <h4>Hospitality</h4>
-            <p>Accommodation recommendations, inventory management.</p>
+            <h4>Retail &amp; E-commerce</h4>
+            <p>Order status, product Q&amp;A, abandoned carts.</p>
           </div>
           <div class="usecase-card">
             <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l6-4 6 4v12M10 4v16"/></svg></div>
-            <h4>Manufacturing</h4>
-            <p>Real-time defect detection, predictive maintenance.</p>
+            <h4>Real Estate</h4>
+            <p>Property enquiries, viewings, lead qualification.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/><path d="m3 12 1-6h16l1 6M8 6v6M16 6v6"/></svg></div>
+            <h4>Travel &amp; Hospitality</h4>
+            <p>Bookings, itineraries, check-in support.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l6-4 6 4v12M10 4v16"/></svg></div>
+            <h4>Professional Services</h4>
+            <p>Client intake, scheduling, follow-ups.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
+            <h4>Education</h4>
+            <p>Admissions, course info, student support.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== PRICING ==================== -->
+    <!-- ==================== PROCESS ==================== -->
     <section class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Pricing</span>
+          <span class="section-eyebrow">How It Works</span>
           <h2 class="section-title">
-            Use dedicated GPUs to <span class="gradient-text">scale custom models</span> and production apps.
+            From signed up to <span class="gradient-text">live AI</span> in days.
           </h2>
-          <p class="section-subtitle">
-            Tiered inference endpoints — from a single region to a global fleet of NVIDIA L40S GPUs.
-          </p>
         </div>
 
-        <div class="pricing-grid">
-          <article class="pricing-card">
-            <h3 class="pricing-name">Starter</h3>
-            <p class="pricing-desc">For small teams piloting AI automation.</p>
-            <div class="pricing-price">
-              <span class="pricing-currency">€</span>
-              <span class="pricing-amount">2.40</span>
-              <span class="pricing-period">/ hour</span>
-            </div>
-            <div class="pricing-specs">
-              <div class="pricing-spec"><span class="pricing-spec-label">CPU</span><span class="pricing-spec-value">16 vCPU</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">GPU memory</span><span class="pricing-spec-value">48 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">RAM</span><span class="pricing-spec-value">32 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">Region</span><span class="pricing-spec-value">1 edge</span></div>
-            </div>
-            <a href="request.html" class="btn btn-secondary btn-block">Order Now</a>
-          </article>
-
-          <article class="pricing-card featured">
-            <span class="pricing-badge-top">Popular</span>
-            <h3 class="pricing-name">Growth</h3>
-            <p class="pricing-desc">For scaling teams with production workloads.</p>
-            <div class="pricing-price">
-              <span class="pricing-currency">€</span>
-              <span class="pricing-amount">9.30</span>
-              <span class="pricing-period">/ hour</span>
-            </div>
-            <div class="pricing-specs">
-              <div class="pricing-spec"><span class="pricing-spec-label">CPU</span><span class="pricing-spec-value">48 vCPU</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">GPU memory</span><span class="pricing-spec-value">96 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">RAM</span><span class="pricing-spec-value">128 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">Region</span><span class="pricing-spec-value">Multi-edge</span></div>
-            </div>
-            <a href="request.html" class="btn btn-primary btn-block">Order Now</a>
-          </article>
-
-          <article class="pricing-card">
-            <h3 class="pricing-name">Balanced</h3>
-            <p class="pricing-desc">Optimized balance of cost &amp; performance.</p>
-            <div class="pricing-price">
-              <span class="pricing-currency">€</span>
-              <span class="pricing-amount">4.70</span>
-              <span class="pricing-period">/ hour</span>
-            </div>
-            <div class="pricing-specs">
-              <div class="pricing-spec"><span class="pricing-spec-label">CPU</span><span class="pricing-spec-value">24 vCPU</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">GPU memory</span><span class="pricing-spec-value">48 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">RAM</span><span class="pricing-spec-value">64 GB</span></div>
-              <div class="pricing-spec"><span class="pricing-spec-label">Region</span><span class="pricing-spec-value">2 edges</span></div>
-            </div>
-            <a href="request.html" class="btn btn-secondary btn-block">Order Now</a>
-          </article>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <div class="process-num">01</div>
+            <h3>Discovery call</h3>
+            <p>We map your workflows, tools and biggest time-wasters in 30 minutes.</p>
+          </div>
+          <div class="process-step reveal" data-delay="100">
+            <div class="process-num">02</div>
+            <h3>Build &amp; train</h3>
+            <p>Your AI employee is configured, connected and trained on your business data.</p>
+          </div>
+          <div class="process-step reveal" data-delay="200">
+            <div class="process-num">03</div>
+            <h3>Test with you</h3>
+            <p>You approve how it handles real conversations before it goes live.</p>
+          </div>
+          <div class="process-step reveal" data-delay="300">
+            <div class="process-num">04</div>
+            <h3>Launch &amp; optimize</h3>
+            <p>Go live, monitor, and refine weekly as your AI gets smarter.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ==================== FAQ ==================== -->
-    <section class="section">
+    <section class="section" id="faq">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-eyebrow">FAQ</span>
@@ -2434,24 +2455,28 @@
 
         <div class="faq">
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">What is AI inference?<span class="faq-toggle"></span></button>
-            <div class="faq-answer"><p>AI inference is the phase where a trained model produces real-time predictions or responses. It runs every time your AI employee replies to a customer, transcribes a call, or extracts a booking request.</p></div>
+            <button class="faq-question" aria-expanded="false">What can Sangam.ai automate for my business?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>Customer enquiries, appointment bookings, lead qualification, CRM updates, follow-ups, email replies, and inbound phone calls — all handled by AI, end to end.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">What is the difference between AI inference at the edge vs cloud?<span class="faq-toggle"></span></button>
-            <div class="faq-answer"><p>Cloud inference processes requests in a central data center, adding latency and cost. Edge inference runs closer to your customers, giving sub-second responses, lower bandwidth cost, and better resilience.</p></div>
+            <button class="faq-question" aria-expanded="false">Which channels do you support?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>WhatsApp, Instagram DM, Facebook Messenger, email, website chat, and voice (phone calls). You can mix and match based on where your customers are.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">What are the benefits of Sangam Edge AI for end users?<span class="faq-toggle"></span></button>
-            <div class="faq-answer"><p>Faster responses, more natural conversations, better multilingual support, and consistent uptime — even during traffic spikes.</p></div>
+            <button class="faq-question" aria-expanded="false">How fast can I get live?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>Most AI employees go live within 5–7 days of your discovery call. Custom builds can take 2–4 weeks depending on complexity.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">Is Sangam suitable for AIoT systems?<span class="faq-toggle"></span></button>
-            <div class="faq-answer"><p>Yes. Our agents integrate with IoT gateways, smart home devices and industrial systems — responding locally while syncing with your central CRM.</p></div>
+            <button class="faq-question" aria-expanded="false">Does it speak my customers' language?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>Yes. Sangam AI auto-detects and replies in over 40 languages including English, Nepali, Hindi, Arabic, and Spanish.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">Why NVIDIA L40S GPUs?<span class="faq-toggle"></span></button>
-            <div class="faq-answer"><p>L40S GPUs offer an excellent balance of AI inference performance, cost and memory — ideal for real-time conversational AI at scale.</p></div>
+            <button class="faq-question" aria-expanded="false">What if the AI doesn't know the answer?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>It escalates to your team instantly with the full conversation context — so a human can step in without the customer repeating anything.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">Can I cancel anytime?<span class="faq-toggle"></span></button>
+            <div class="faq-answer"><p>Yes. Cancel anytime from your dashboard. No long-term contracts unless you're on a Custom plan.</p></div>
           </div>
         </div>
       </div>
@@ -2462,7 +2487,7 @@
       <div class="container">
         <div class="contact-banner reveal">
           <div class="contact-banner-content">
-            <h2>Contact us to discuss your project.</h2>
+            <h2>Ready to automate your business?</h2>
             <p>Tell us what you want to automate. We'll send back a scoped plan and a live demo within 24 hours.</p>
             <a href="contact.html" class="btn btn-primary btn-lg">
               Talk to an expert
@@ -2473,50 +2498,81 @@
       </div>
     </section>
 
-    <!-- ==================== PRODUCT GRID ==================== -->
+    <!-- ==================== ALL SERVICES GRID ==================== -->
     <section class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-eyebrow">Ecosystem</span>
-          <h2 class="section-title">Explore <span class="gradient-text">other Sangam products</span>.</h2>
+          <span class="section-eyebrow">All Services</span>
+          <h2 class="section-title">Explore <span class="gradient-text">all automation services</span>.</h2>
+          <p class="section-subtitle">
+            Everything you need to run customer conversations, bookings and workflows on autopilot.
+          </p>
         </div>
 
-        <div class="product-grid">
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z"/></svg></span>
-            <h4>AI GPU Infrastructure</h4>
-            <p>Dedicated GPUs for custom model deployment and fine-tuning.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        <div class="automation-grid">
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <h4>WhatsApp AI Agent</h4>
+            <p>Instant replies, bookings and support on WhatsApp — 24/7.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg></span>
-            <h4>AI PU Infrastructure</h4>
-            <p>Purpose-built AI processing units for ultra-low-latency inference.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+            </span>
+            <h4>Instagram AI Agent</h4>
+            <p>Auto-reply to DMs, comments and story mentions.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
-            <h4>Container as a Service</h4>
-            <p>Deploy microservices and AI agents without managing servers.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <h4>AI Voice Receptionist</h4>
+            <p>Answers calls, books appointments, routes important calls.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h6l-1 8 9-12h-6z"/></svg></span>
-            <h4>FastEdge</h4>
-            <p>Sub-millisecond edge functions for real-time routing and enrichment.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </span>
+            <h4>Email AI Agent</h4>
+            <p>Reads, sorts and drafts replies to business emails.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg></span>
-            <h4>Managed Kubernetes</h4>
-            <p>Production-grade K8s with zero-downtime upgrades and autoscaling.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </span>
+            <h4>Appointment Booking Agent</h4>
+            <p>Checks calendars, books appointments, sends confirmations.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
-          <a href="services.html" class="product-card">
-            <span class="product-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v6c0 1.66 4 3 9 3s9-1.34 9-3V6M3 12v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/></svg></span>
-            <h4>Object Storage</h4>
-            <p>S3-compatible storage for training data, logs and RAG knowledge.</p>
-            <span class="product-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+            </span>
+            <h4>Website AI Chatbot</h4>
+            <p>Trained on your knowledge base — chat that converts.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </a>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+            </span>
+            <h4>Lead Generation Agent</h4>
+            <p>Finds, qualifies and nurtures leads automatically.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </a>
+          <a href="services.html" class="automation-card">
+            <span class="automation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+            </span>
+            <h4>CRM Automation</h4>
+            <p>Auto-updates contacts, tags and pipeline movement.</p>
+            <span class="automation-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
@@ -2550,19 +2606,19 @@
         </div>
 
         <div class="footer-col">
-          <h4>Products</h4>
-          <a href="services.html">AI Agents</a>
+          <h4>Services</h4>
+          <a href="services.html">WhatsApp AI</a>
           <a href="services.html">Voice AI</a>
+          <a href="services.html">Instagram AI</a>
+          <a href="services.html">Email AI</a>
           <a href="services.html">CRM Automation</a>
-          <a href="services.html">Workflow Automation</a>
-          <a href="services.html">Edge Inference</a>
         </div>
 
         <div class="footer-col">
           <h4>Resources</h4>
-          <a href="#">Status Page</a>
+          <a href="#faq">FAQ</a>
+          <a href="#use-cases">Use Cases</a>
           <a href="#">API Docs</a>
-          <a href="#">Looking Glass</a>
           <a href="#">Security</a>
           <a href="#">Blog</a>
         </div>
@@ -2604,7 +2660,6 @@
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
   <script>
-    /* Preloader state machine (page-specific) */
     (function () {
       'use strict';
 
@@ -2621,15 +2676,8 @@
         } catch (e) { /* ignore */ }
 
         preloader.setAttribute('data-state', 'ring');
-
-        setTimeout(function () {
-          preloader.setAttribute('data-state', 'morph');
-        }, 1000);
-
-        setTimeout(function () {
-          preloader.setAttribute('data-state', 'brand');
-        }, 1500);
-
+        setTimeout(function () { preloader.setAttribute('data-state', 'morph'); }, 1000);
+        setTimeout(function () { preloader.setAttribute('data-state', 'brand'); }, 1500);
         setTimeout(function () {
           preloader.classList.add('done');
           document.documentElement.classList.add('js-ready');
@@ -2645,7 +2693,6 @@
     })();
   </script>
 
-  <!-- Emergency fallback (if anything above fails) -->
   <script>
     setTimeout(function () {
       var p = document.getElementById('preloader');
